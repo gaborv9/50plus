@@ -85,7 +85,7 @@
         <div class="row">
             <div class="col-lg-12" id="content">
                 <h1>Hier ist deine tolle Pinnwand</h1>
-                Layout ist auch noch nicht fertig und die Datenbank noch.
+                Layout ist noch nicht fertig und die Datenbank fehlt noch + die ganzen Implementierungen eben.
             </div>
         </div>
     </div>
