@@ -124,7 +124,8 @@ public final class site_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <div class=\"row\">\n");
       out.write("            <div class=\"col-lg-12\" id=\"content\">\n");
       out.write("                <h1>Hier ist deine tolle Pinnwand</h1>\n");
-      out.write("\n");
+      out.write("                Gruppen+Forschung sind noch nicht gemacht.\n");
+      out.write("                Layout ist auch noch nicht fertig und die Datenbank(voraussichtlich kommt eine) fehlt auch noch.\n");
       out.write("            </div>\n");
       out.write("        </div>\n");
       out.write("    </div>\n");
