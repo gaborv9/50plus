@@ -58,13 +58,13 @@
                         <a href="/50plus/site.jsp">Pinnwand</a>
                     </li>
                     <li>
-                        <a href="/50plus/Forschung.jsp">Gruppen</a>
+                        <a href="/50plus/Gruppen.jsp">Gruppen</a>
                     </li>
                     <li>
                         <a href="/50plus/Freunde.jsp">Freunde</a>
                     </li>
                     <li>
-                        <a href="/50plus/Gruppen.jsp">Forschung</a>
+                        <a href="/50plus/Forschung.jsp">Forschung</a>
                     </li>
 
                     <form class="form-signin" method="post" action="Suche" role="form">
@@ -82,10 +82,10 @@
         <!-- /.container -->
     </nav>
 
-    <!-- Page Content -->
+    <!-- Page Contentrrr -->
     <div class="container">
         <div class="row">
-            <div class="col-lg-12" id="content">
+            <div class="col-lg-12" id="content"> 
                 
               <jsp:include page="/Forschung" flush="true"/>
             </div>

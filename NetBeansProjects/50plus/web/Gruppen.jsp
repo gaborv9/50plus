@@ -58,13 +58,13 @@
                         <a href="/50plus/site.jsp">Pinnwand</a>
                     </li>
                     <li>
-                        <a href="/50plus/Forschung.jsp">Gruppen</a>
+                        <a href="/50plus/Gruppen.jsp">Gruppen</a>
                     </li>
                     <li>
                         <a href="/50plus/Freunde.jsp">Freunde</a>
                     </li>
                     <li>
-                        <a href="/50plus/Gruppen.jsp">Forschung</a>
+                        <a href="/50plus/Forschung.jsp">Forschung</a>
                     </li>
 
                     <form class="form-signin" method="post" action="Suche" role="form">
