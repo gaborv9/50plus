@@ -1,6 +1,10 @@
 <%-- 
     Document   : Forschung
+<<<<<<< HEAD
     Created on : 22.11.2014, 15:37:13
+=======
+    Created on : 23.11.2014, 14:44:02
+>>>>>>> a3839b44b5e931756fd4e542da5ca8c70d4bf728
     Author     : master
 --%>
 
@@ -82,7 +86,11 @@
         <!-- /.container -->
     </nav>
 
+<<<<<<< HEAD
     <!-- Page Content -->
+=======
+    <!-- Page Contentrrr -->
+>>>>>>> a3839b44b5e931756fd4e542da5ca8c70d4bf728
     <div class="container">
         <div class="row">
             <div class="col-lg-12" id="content"> 
@@ -100,4 +108,8 @@
     <script src="js/bootstrap.min.js"></script>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> a3839b44b5e931756fd4e542da5ca8c70d4bf728
