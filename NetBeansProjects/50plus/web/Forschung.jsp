@@ -55,7 +55,7 @@
 
                 <ul class="nav navbar-nav">
                         <li>
-                        <a href="/50plus/site.jsp">Pinnwand</a>
+                        <a href="/50plus/Pinnwand.jsp">Pinnwand</a>
                     </li>
                     <li>
                         <a href="/50plus/Gruppen.jsp">Gruppen</a>

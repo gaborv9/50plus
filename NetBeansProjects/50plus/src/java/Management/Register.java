@@ -88,7 +88,7 @@ public class Register extends HttpServlet {
         p.setVorname(vorname);
         p.setNachname(nachname);
         p.setPW(password);
-        Management a=new Management();
+        PersonManagement a=new PersonManagement();
         
         
         response.setContentType("text/html");

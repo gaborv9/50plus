@@ -24,6 +24,10 @@
         <servlet-name>Forschung</servlet-name>
         <servlet-class>Management.Forschung</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Management</servlet-name>
+        <servlet-class>Management.Management</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Register</servlet-name>
         <url-pattern>/Register</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>Forschung</servlet-name>
         <url-pattern>/Forschung</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Management</servlet-name>
+        <url-pattern>/Management</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

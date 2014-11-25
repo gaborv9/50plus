@@ -1,5 +1,5 @@
 <%-- 
-    Document   : site
+    Document   : Pinnwand
     Created on : 22.11.2014, 15:37:13
     Author     : master
 --%>
@@ -16,6 +16,9 @@
         <meta name="author" content="">
 
         <title>50plus</title>
+
+
+
         <!-- Bootstrap core CSS -->
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -27,7 +30,7 @@
         <script src="dist/docs/assets/js/ie-emulation-modes-warning.js"></script>
         <!-- Bootstrap Core CSS -->
         <link href="dist/css/bootstrap.min.css" rel="stylesheet">
- 
+
         <link href="dist/css/logo-nav.css" rel="stylesheet">
 
     </head>
@@ -53,7 +56,7 @@
 
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="/50plus/site.jsp">Pinnwand</a>
+                        <a href="/50plus/Pinnwand.jsp">Pinnwand</a>
                     </li>
                     <li>
                         <a href="/50plus/Forschung.jsp">Gruppen</a>
@@ -64,6 +67,7 @@
                     <li>
                         <a href="/50plus/Gruppen.jsp">Forschung</a>
                     </li>
+
 
                     <form class="form-signin" method="post" action="Suche" role="form">
                         <div class="form-group">
@@ -85,17 +89,29 @@
         <div class="row">
             <div class="col-lg-12" id="content">
                 <h1>Hier ist deine tolle Pinnwand</h1>
+                   <div class="btn-group">
+                    <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">TestRollenvergabe <span class="caret"></span></button>
+                    <ul class="dropdown-menu" method="get" action="Management">
+                        <li><a href="/50plus/Management?role=1">Admin(1)</a></li>
+                        <li><a href="/50plus/Management?role=2">Forscher(2)</a></li>
+                        <li><a href="/50plus/Management?role=3">User(3)</a></li>
+                    </ul>
+                </div>
                 Layout ist noch nicht fertig und die Datenbank fehlt noch + die ganzen Implementierungen eben.
+
+             
             </div>
         </div>
     </div>
+
+
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="dist/js/jquery-1.11.1.js"></script>  
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script> 
 
 </body>
 </html>
