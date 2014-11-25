@@ -90,10 +90,9 @@ public class Register extends HttpServlet {
         p.setPW(password);
         PersonManagement a=new PersonManagement();
         
-        
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        if (a.add(p)==0){
+        if (a.add(username)==0){
             out.println("username schon vorhanden");
          
         }

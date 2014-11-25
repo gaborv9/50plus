@@ -73,7 +73,7 @@ public class Management extends HttpServlet {
             out.println(role);
         }
         
-       // a.setRole("username", role);
+       // a.setRole("username", role); wirft derzeit natuerlich 0pointerexception
         
         processRequest(request, response);
     }
