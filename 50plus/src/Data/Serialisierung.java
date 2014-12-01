@@ -1,4 +1,4 @@
- 
+
 package Data;
 
 import Personen.Person;
