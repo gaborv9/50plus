@@ -13,8 +13,8 @@ public class PersonManagement {
         ser.getPersonbyid(username).setRole(role);
     }
 
-    public int add(String username) {
-        if (ser.speicherePerson(ser.getPersonbyid(username)) == 0) {
+    public int add(Person a) {
+        if (ser.speicherePerson(a) == 0) {
             return 0; //username existiert bereits
         } else {
             return 1; //Hat geklappt

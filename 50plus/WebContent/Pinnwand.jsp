@@ -98,9 +98,13 @@
                         <li><a href="/50plus/Management?role=3">User(3)</a></li>
                     </ul>
                 </div>
-                Layout ist noch nicht fertig und die Datenbank fehlt noch + die ganzen Implementierungen eben.
-
-             
+                TODO:
+                Layout ist noch nicht fertig, laut Übungsleiter nun besser doch keine Datenbank.
+                Zustandsspeicherung bzw. "Usererkennung" fehlt, synchroner Zugriff muss erarbeitet/bedacht werden.
+                Pinnwand:missing
+                Suche+Ergebnisse:missing
+                Usereingabe prüfen:missing
+                Testfälle:missing           
             </div>
         </div>
     </div>

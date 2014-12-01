@@ -88,20 +88,23 @@ public class Register extends HttpServlet {
         p.setVorname(vorname);
         p.setNachname(nachname);
         p.setPW(password);
-        PersonManagement a=new PersonManagement();
+        PersonManagement a= new PersonManagement();
         
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-        if (a.add(username)==0){
+        if (a.add(p)==0){
             out.println("username schon vorhanden");
-         
+            out.println( "<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
         }
-
+        else{
+        out.println( "<a href=\"/50plus/index.jsp\">Sie haben sich erfolgreich registriert,"
+        		+ "Hier klicken um zur Startseite zurückzukommen</a>");
         out.println(username);
         out.println(password);
         out.println(vorname);
         out.println(nachname);
         out.println(datum);
+        }
         
       //  processRequest(request, response);
     }

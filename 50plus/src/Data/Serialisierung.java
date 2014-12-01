@@ -106,6 +106,7 @@ public class Serialisierung {
             //Kanäle werden geschlossen
             output.close();
             out.close();
+            return 1;
         }
         catch (IOException ex) {
            System.out.println("Konnte Datei nicht erstellen oder existiert bereits " + ex);
