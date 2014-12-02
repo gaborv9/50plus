@@ -7,10 +7,13 @@ package Management;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Data.Serialisierung;
 
 /**
  *
@@ -73,11 +76,23 @@ public class Login extends HttpServlet {
         
         String username= request.getParameter("username");
         String password= request.getParameter("password");
-
-         response.setContentType("text/html");
-         PrintWriter out = response.getWriter();
-         out.println(username);
-         out.println(password);
+        
+        Serialisierung a = new Serialisierung();
+        if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW())){
+        	 response.setContentType("text/html");
+             PrintWriter out = response.getWriter();
+             out.println("alles klar, weiterleiten zur Seite");
+             
+        }
+        else{
+        	 response.setContentType("text/html");
+             PrintWriter out = response.getWriter();
+             out.println(username);
+             out.println(password);
+             out.println("falsche Eingabe");
+             
+        }
+        
         //processRequest(request, response);
     }
 

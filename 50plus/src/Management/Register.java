@@ -97,54 +97,54 @@ public class Register extends HttpServlet {
 		String password = request.getParameter("passwort");
 		String vorname = request.getParameter("vorname");
 		String nachname = request.getParameter("nachname");
-		String year = request.getParameter("datum1");
+		String year = request.getParameter("datum3");
 		String month = request.getParameter("datum2");
-		String day = request.getParameter("datum3");
+		String day = request.getParameter("datum1");
 
 		PersonManagement a = new PersonManagement();
 		Person p = new User();
-
+		int fc = 0; // failcheck
 		if (p.setID(username) == 0) {
 			out.println("Username darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-		} else {
-			p.setID(username);
+			fc = 1;
 		}
-	
-
 		if (p.setVorname(vorname) == 0) {
 			out.println("Vorname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-		} else {
-			p.setVorname(vorname);
+			fc = 1;
+
 		}
 		if (p.setNachname(nachname) == 0) {
 			out.println("Nachname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-		} else {
-			p.setNachname(nachname);
+			fc = 1;
 		}
 		if (p.setPW(password) == 0) {
 			out.println("Passwort darf nicht mehr als 25 oder weniger als 6 Zeichen haben");
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-		} else {
-			p.setPW(password);
+			fc = 1;
 		}
-		if (p.setDatum(year,month,day) == 0) {
+		if (p.setDatum(year, month, day) == 0) {
 			out.println("Sie müssen alt genug sein und ein korrektes Datum eingeben!");
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-		} else {
-			p.setDatum(year,month,day);
+			fc = 1;
 		}
-	 
+
 		if (a.add(p) == 0) {
 			out.println("username schon vorhanden");
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+			fc = 1;
 		} else {
 			out.println("<a href=\"/50plus/index.jsp\"> Hier klicken um zur Startseite zurückzukommen</a>");
 		}
-		
-		//Bessere Darstellung wäre gut, funktionieren tut es mal.
+
+		if (fc == 1) {
+			a.delete(username);
+		}
+
+		// Bessere Darstellung wäre gut, funktionieren tut es mal. Mit einem
+		// direkten Forward könnte man gleich auf die Index-Seite verweisen.
 
 		// processRequest(request, response);
 	}

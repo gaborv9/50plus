@@ -74,13 +74,13 @@
                  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                  <ul class="nav navbar-nav">
                     <li>
-                       <input type="geburtsdatum" class="form-control" name="datum1" placeholder="YYYY"required>
+                       <input type="geburtsdatum" class="form-control" name="datum1" placeholder="DD"required>
                     </li>
                     <li>
                         <input type="geburtsdatum" class="form-control" name="datum2" placeholder="MM"required>
                     </li>
                     <li>
-                       <input type="geburtsdatum" class="form-control" name="datum3" placeholder="DD"required>
+                       <input type="geburtsdatum" class="form-control" name="datum3" placeholder="YYYY"required>
                     </li>
  				</ul>
             </div>

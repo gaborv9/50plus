@@ -121,10 +121,9 @@ public abstract class Person implements Serializable {
 			GregorianCalendar gebdate = new GregorianCalendar();
 			gebdate.setLenient(false);
 			gebdate.set(GregorianCalendar.YEAR, yeari);
-			gebdate.set(GregorianCalendar.MONTH, monthi);
+			gebdate.set(GregorianCalendar.MONTH, monthi-1); //Weil die doofen Programmierer beim Monat eine Ausnahme machen und bei 0 anfangen.. Hier die Ausgabe noch checken.
 			gebdate.set(GregorianCalendar.DAY_OF_MONTH, dayi);
-			if (now.get(GregorianCalendar.YEAR)
-					- gebdate.get(GregorianCalendar.YEAR) < 49) {
+			if ((now.get(GregorianCalendar.YEAR) - gebdate.get(GregorianCalendar.YEAR)) < 49) {
 				return 0;
 			}
 			else{
