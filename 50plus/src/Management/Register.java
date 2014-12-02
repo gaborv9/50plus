@@ -18,105 +18,145 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * 
  * @author master
  */
 public class Register extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Register</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Register at " + request.getContextPath() + "</h1>");
-           
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+	/**
+	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+	 * methods.
+	 * 
+	 * @param request
+	 *            servlet request
+	 * @param response
+	 *            servlet response
+	 * @throws ServletException
+	 *             if a servlet-specific error occurs
+	 * @throws IOException
+	 *             if an I/O error occurs
+	 */
+	protected void processRequest(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		try (PrintWriter out = response.getWriter()) {
+			/* TODO output your page here. You may use following sample code. */
+			out.println("<!DOCTYPE html>");
+			out.println("<html>");
+			out.println("<head>");
+			out.println("<title>Servlet Register</title>");
+			out.println("</head>");
+			out.println("<body>");
+			out.println("<h1>Servlet Register at " + request.getContextPath()
+					+ "</h1>");
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+			out.println("</body>");
+			out.println("</html>");
+		}
+	}
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-     
-        String username= request.getParameter("nutzername");
-        String password= request.getParameter("passwort");
-        String vorname= request.getParameter("vorname");
-        String nachname= request.getParameter("nachname");
-        String datum= request.getParameter("datum");
-        
-        Person p = new User();
-        p.setID(username);
-        p.setVorname(vorname);
-        p.setNachname(nachname);
-        p.setPW(password);
-        PersonManagement a= new PersonManagement();
-        
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        if (a.add(p)==0){
-            out.println("username schon vorhanden");
-            out.println( "<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-        }
-        else{
-        out.println( "<a href=\"/50plus/index.jsp\">Sie haben sich erfolgreich registriert,"
-        		+ "Hier klicken um zur Startseite zurückzukommen</a>");
-        out.println(username);
-        out.println(password);
-        out.println(vorname);
-        out.println(nachname);
-        out.println(datum);
-        }
-        
-      //  processRequest(request, response);
-    }
+	// <editor-fold defaultstate="collapsed"
+	// desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+	/**
+	 * Handles the HTTP <code>GET</code> method.
+	 * 
+	 * @param request
+	 *            servlet request
+	 * @param response
+	 *            servlet response
+	 * @throws ServletException
+	 *             if a servlet-specific error occurs
+	 * @throws IOException
+	 *             if an I/O error occurs
+	 */
+	@Override
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		processRequest(request, response);
+	}
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+	/**
+	 * Handles the HTTP <code>POST</code> method.
+	 * 
+	 * @param request
+	 *            servlet request
+	 * @param response
+	 *            servlet response
+	 * @throws ServletException
+	 *             if a servlet-specific error occurs
+	 * @throws IOException
+	 *             if an I/O error occurs
+	 */
+	@Override
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+
+		String username = request.getParameter("nutzername");
+		String password = request.getParameter("passwort");
+		String vorname = request.getParameter("vorname");
+		String nachname = request.getParameter("nachname");
+		String year = request.getParameter("datum1");
+		String month = request.getParameter("datum2");
+		String day = request.getParameter("datum3");
+
+		PersonManagement a = new PersonManagement();
+		Person p = new User();
+
+		if (p.setID(username) == 0) {
+			out.println("Username darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
+			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+		} else {
+			p.setID(username);
+		}
+	
+
+		if (p.setVorname(vorname) == 0) {
+			out.println("Vorname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
+			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+		} else {
+			p.setVorname(vorname);
+		}
+		if (p.setNachname(nachname) == 0) {
+			out.println("Nachname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
+			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+		} else {
+			p.setNachname(nachname);
+		}
+		if (p.setPW(password) == 0) {
+			out.println("Passwort darf nicht mehr als 25 oder weniger als 6 Zeichen haben");
+			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+		} else {
+			p.setPW(password);
+		}
+		if (p.setDatum(year,month,day) == 0) {
+			out.println("Sie müssen alt genug sein und ein korrektes Datum eingeben!");
+			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+		} else {
+			p.setDatum(year,month,day);
+		}
+	 
+		if (a.add(p) == 0) {
+			out.println("username schon vorhanden");
+			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+		} else {
+			out.println("<a href=\"/50plus/index.jsp\"> Hier klicken um zur Startseite zurückzukommen</a>");
+		}
+		
+		//Bessere Darstellung wäre gut, funktionieren tut es mal.
+
+		// processRequest(request, response);
+	}
+
+	/**
+	 * Returns a short description of the servlet.
+	 * 
+	 * @return a String containing servlet description
+	 */
+	@Override
+	public String getServletInfo() {
+		return "Short description";
+	}// </editor-fold>
 
 }

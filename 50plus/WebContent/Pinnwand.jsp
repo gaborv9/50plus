@@ -54,7 +54,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
+		
                 <ul class="nav navbar-nav">
                     <li>
                         <a href="/50plus/Pinnwand.jsp">Pinnwand</a>
@@ -103,8 +103,8 @@
                 Zustandsspeicherung bzw. "Usererkennung" fehlt, synchroner Zugriff muss erarbeitet/bedacht werden.
                 Pinnwand:missing
                 Suche+Ergebnisse:missing
-                Usereingabe prüfen:missing
-                Testfälle:missing           
+                Testfälle:missing         
+                
             </div>
         </div>
     </div>

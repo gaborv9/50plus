@@ -71,7 +71,18 @@
 
             <div class="form-group">
                 <label for="Geburtsdatum">Geburtsdatum</label>
-                <input type="geburtsdatum" class="form-control" name="datum" placeholder="Geburtsdatum"required>
+                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                 <ul class="nav navbar-nav">
+                    <li>
+                       <input type="geburtsdatum" class="form-control" name="datum1" placeholder="YYYY"required>
+                    </li>
+                    <li>
+                        <input type="geburtsdatum" class="form-control" name="datum2" placeholder="MM"required>
+                    </li>
+                    <li>
+                       <input type="geburtsdatum" class="form-control" name="datum3" placeholder="DD"required>
+                    </li>
+ 				</ul>
             </div>
 
             <div class="checkbox">
