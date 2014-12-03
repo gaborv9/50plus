@@ -59,7 +59,7 @@
 				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 				<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
-
+				<li><a href="/50plus/Login?logout=true">Logout</a></li>
 				<form class="form-signin" method="post" action="Suche" role="form">
 					<div class="form-group">
 						<input type="suche" class="form-control" name="suche"
@@ -87,8 +87,15 @@
 				out.println((String) session.getAttribute("user")
 						+ " surft hier gerade");
 			%>
-			//Hier wird noch eine Ueberpruefung kommen, ob der Surfende Admin oder Forscher ist, da nur Forscher Zugriff haben.
-			 <jsp:include page="/Forschung" flush="true"/>
+			<%
+				if (session.getAttribute("user") == null) {
+
+					response.sendRedirect("index.jsp");
+				}
+			%>
+			//Hier wird noch eine Ueberpruefung kommen, ob der Surfende Admin
+			oder Forscher ist, da nur Forscher Zugriff haben.
+			<jsp:include page="/Forschung" flush="true" />
 		</div>
 	</div>
 </div>

@@ -61,6 +61,9 @@
 				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 				<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+				<li><a href="/50plus/Login?logout=true">Logout</a></li>
+
+
 
 				<form class="form-signin" method="post" action="Suche" role="form">
 					<div class="form-group">
@@ -97,14 +100,19 @@
 						href="/50plus/Management?role=3&user=<%=(String) session.getAttribute("user")%>">User(3)</a></li>
 				</ul>
 			</div>
-		    Synchroner Zugriff muss erarbeitet/bedacht werden.
-			Pinnwand:missing 
-			Suche+Ergebnisse:missing
-			Testfälle:missing
-			Pinnwand.java, mir fällt gerade auf, dass ein eigenes Servlet für die Pinnwand vl. nicht so schlecht wäre.
-			Andererseits wird die Pinnwand nun keine besonderen Funktionen benötigen, hm..
-			Zustand speichern: work in progress, scheint erstmal zu funktionieren.
-
+			Synchroner Zugriff muss erarbeitet/bedacht werden. Pinnwand:missing
+			Suche+Ergebnisse:missing Testfälle:missing Pinnwand.java, mir fällt
+			gerade auf, dass ein eigenes Servlet für die Pinnwand vl. nicht so
+			schlecht wäre. Andererseits wird die Pinnwand nun keine besonderen
+			Funktionen benötigen, hm.. Zustand speichern: work in progress,
+			scheint erstmal zu funktionieren.
+				<%
+		        	if (session.getAttribute("user")==null){
+				 
+					response.sendRedirect("index.jsp");
+		        	}
+				
+			%>
 		</div>
 	</div>
 </div>

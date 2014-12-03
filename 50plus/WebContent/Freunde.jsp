@@ -59,7 +59,7 @@
 				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 				<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
-
+				<li><a href="/50plus/Login?logout=true">Logout</a></li>
 				<form class="form-signin" method="post" action="Suche" role="form">
 					<div class="form-group">
 						<input type="suche" class="form-control" name="suche"
@@ -82,6 +82,14 @@
 		<div class="col-lg-12" id="content">
 			<%
 				out.println((String) session.getAttribute("user") + " surft hier gerade");
+			  /*  HttpSession session1=request.getSession(false);  
+		        if(session1==null){  */
+		        	
+		        	if (session.getAttribute("user")==null){
+				 
+					response.sendRedirect("index.jsp");
+		        	}
+				
 			%>
 
 
