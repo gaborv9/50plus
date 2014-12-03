@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Data.Serialisierung;
 
@@ -79,10 +80,9 @@ public class Login extends HttpServlet {
         
         Serialisierung a = new Serialisierung();
         if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW())){
-        	 response.setContentType("text/html");
-             PrintWriter out = response.getWriter();
-             out.println("alles klar, weiterleiten zur Seite");
-             
+        	 HttpSession session = request.getSession();
+             session.setAttribute("user", username);
+             response.sendRedirect("Pinnwand.jsp");
         }
         else{
         	 response.setContentType("text/html");

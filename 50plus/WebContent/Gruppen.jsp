@@ -54,18 +54,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <ul class="nav navbar-nav">
-                        <li>
-                        <a href="/50plus/Pinnwand.jsp">Pinnwand</a>
-                    </li>
-                    <li>
-                        <a href="/50plus/Gruppen.jsp">Gruppen</a>
-                    </li>
-                    <li>
-                        <a href="/50plus/Freunde.jsp">Freunde</a>
-                    </li>
-                    <li>
-                        <a href="/50plus/Forschung.jsp">Forschung</a>
-                    </li>
+                <li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
+				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
+				<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
 
                     <form class="form-signin" method="post" action="Suche" role="form">
                         <div class="form-group">
@@ -87,7 +79,9 @@
         <div class="row">
             <div class="col-lg-12" id="content">
                 
-              <jsp:include page="/Gruppen" flush="true"/>
+              <%
+				out.println((String) session.getAttribute("user") + " surft hier gerade");
+			%>
             </div>
         </div>
     </div>
