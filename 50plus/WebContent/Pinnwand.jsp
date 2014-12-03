@@ -2,7 +2,7 @@
     Document   : Pinnwand
     Created on : 22.11.2014, 15:37:13
     Author     : master
-    test test test
+    test test
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
