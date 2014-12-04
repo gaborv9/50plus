@@ -80,20 +80,30 @@ public class Suche extends HttpServlet {
          String suche= request.getParameter("suche");
          
          ArrayList<Person> perliste = new ArrayList<Person>();
-         ArrayList<Gruppen> grpliste = new ArrayList<Gruppen>();
+         ArrayList<Gruppe> grpliste = new ArrayList<Gruppe>();
          perliste = Serialisierung.getPersonList();
          //int zaehler = perliste.size();
          ArrayList<Person> gefperliste;
+         ArrayList<Gruppe> gefgrpliste;
          
          for(Person test: perliste){
         	 if(test.getID().equals(suche)) gefperliste.add(test); 
          }
+         for(Gruppe test: grpliste){
+        	 if(test.getName().equals(suche)) gefgrpliste.add(test);
+         }
          
-       
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println(suche);
- 
+         
+         response.setContentType("text/html");
+         PrintWriter out = response.getWriter();
+         out.println("Personen: ");
+         for(Person test: gefperliste){
+        	 out.println(test.getID()+" "+test.getVorname()+" "+test.getNachname());
+         }
+         out.println("Gruppen: ");
+         for(Gruppe test: gefgrpliste){
+        	 out.println(test.getName());
+         }
        // processRequest(request, response);
     }
 

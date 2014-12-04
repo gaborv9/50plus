@@ -38,9 +38,9 @@ public class Serialisierung {
                 System.out.println(ex.getMessage());
             }
         }
-	if (file.length() ==0){
+        if (file.length() ==0){
            return liste;
-	}
+        }
         try {
             //Eingabestrom der zur Datei führt wird geöffnet
             FileInputStream in = new FileInputStream(pfad);
