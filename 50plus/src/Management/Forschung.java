@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author master
+ * test_gabor
  */
 public class Forschung extends HttpServlet {
 
