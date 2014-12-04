@@ -5,10 +5,14 @@
  */
 package Management;
 
+import Data.Serialisierung;
 import Personen.Person;
 import Personen.User;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -73,8 +77,18 @@ public class Suche extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        
          String suche= request.getParameter("suche");
+         
+         ArrayList<Person> perliste = new ArrayList<Person>();
+         ArrayList<Gruppen> grpliste = new ArrayList<Gruppen>();
+         perliste = Serialisierung.getPersonList();
+         //int zaehler = perliste.size();
+         ArrayList<Person> gefperliste;
+         
+         for(Person test: perliste){
+        	 if(test.getID().equals(suche)) gefperliste.add(test); 
+         }
+         
        
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();

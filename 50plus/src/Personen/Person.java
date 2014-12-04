@@ -1,6 +1,7 @@
 package Personen;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public abstract class Person implements Serializable {
@@ -11,6 +12,32 @@ public abstract class Person implements Serializable {
 	public String id; // username eindeutig
 	public String pw;
 	public GregorianCalendar datum;
+	public ArrayList<Person> freunde;
+	
+	/**
+	 * 
+	 * @return freunde
+	 * Alle Freunde der Person zurueckgeben
+	 */
+	public ArrayList<Person> getFreunde(){
+		return freunde;
+	}
+	
+	/**
+	 * 
+	 * @param zufuegen
+	 * Person, welche als Freund hinzugefuegt werden soll
+	 * @return 1 oder 0
+	 * 1 = Freund wurde erfolgreich hinzugefuegt
+	 * 0 = Freund bereits enthalten
+	 */
+	public int setFreunde(Person zufuegen){
+		for(Person test: freunde){
+			if(test.equals(zufuegen)) return 0;
+		}
+		freunde.add(zufuegen);
+		return 1;
+	}
 
 	/**
 	 * @param role
