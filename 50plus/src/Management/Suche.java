@@ -73,37 +73,43 @@ public class Suche extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+    @SuppressWarnings({ "unused", "null" })
+	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
          String suche= request.getParameter("suche");
-         
+         Serialisierung a = new Serialisierung();
          ArrayList<Person> perliste = new ArrayList<Person>();
-         ArrayList<Gruppe> grpliste = new ArrayList<Gruppe>();
-         perliste = Serialisierung.getPersonList();
+         //ArrayList<Gruppe> grpliste = new ArrayList<Gruppe>();
+         perliste = a.getPersonList();
+         //grpliste = a.getGruppenList();
          //int zaehler = perliste.size();
-         ArrayList<Person> gefperliste;
-         ArrayList<Gruppe> gefgrpliste;
+         ArrayList<Person> gefperliste = null;
+         //ArrayList<Gruppe> gefgrpliste;
          
          for(Person test: perliste){
         	 if(test.getID().equals(suche)) gefperliste.add(test); 
          }
-         for(Gruppe test: grpliste){
+        /* for(Gruppe test: grpliste){
         	 if(test.getName().equals(suche)) gefgrpliste.add(test);
-         }
+         }*/
          
          
          response.setContentType("text/html");
          PrintWriter out = response.getWriter();
          out.println("Personen: ");
-         for(Person test: gefperliste){
-        	 out.println(test.getID()+" "+test.getVorname()+" "+test.getNachname());
-         }
-         out.println("Gruppen: ");
-         for(Gruppe test: gefgrpliste){
+       	 if(gefperliste==null) out.println("Keine Treffer!");
+       	 else{
+       		 for(Person test: gefperliste){
+       			 out.println(test.getID()+" "+test.getVorname()+" "+test.getNachname());
+       		 }
+       	 }
+       		 out.println("Gruppen: ");
+       	 
+         /*for(Gruppe test: gefgrpliste){
         	 out.println(test.getName());
-         }
+         }*/
        // processRequest(request, response);
     }
 
