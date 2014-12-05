@@ -107,7 +107,7 @@ public class Login extends HttpServlet {
 		if ((a.getPersonbyid(username) != null)
 				&& password.equals(a.getPersonbyid(username).getPW())) {
 			HttpSession session = request.getSession();
-			session.setAttribute("user", username);
+			session.setAttribute("username", username);
 			response.sendRedirect("Pinnwand.jsp");
 		} else {
 			response.setContentType("text/html");

@@ -81,11 +81,11 @@
 	<div class="row">
 		<div class="col-lg-12" id="content">
 			<%
-				out.println((String) session.getAttribute("user") + " surft hier gerade");
+				out.println((String) session.getAttribute("username") + " surft hier gerade");
 			  /*  HttpSession session1=request.getSession(false);  
 		        if(session1==null){  */
 		        	
-		        	if (session.getAttribute("user")==null){
+		        	if (session.getAttribute("username")==null){
 				 
 					response.sendRedirect("index.jsp");
 		        	}

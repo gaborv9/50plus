@@ -51,7 +51,7 @@
 
             <div class="form-group">
                 <label for="Nutzername">Nutzername</label>
-                <input type="nutzername" class="form-control" name="nutzername" placeholder="Nutzername" required>
+                <input type="nutzername" class="form-control" name="username" placeholder="Nutzername" required>
             </div>
 
             <div class="form-group">

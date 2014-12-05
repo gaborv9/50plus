@@ -93,21 +93,50 @@
 				</button>
 				<ul class="dropdown-menu" method="get" action="Management">
 					<li><a
-						href="/50plus/Management?role=1&user=<%=(String) session.getAttribute("user")%>">Admin(1)</a></li>
+						href="/50plus/Management?role=1&user=<%=(String) session.getAttribute("username")%>">Admin(1)</a></li>
 					<li><a
-						href="/50plus/Management?role=2&user=<%=(String) session.getAttribute("user")%>">Forscher(2)</a></li>
+						href="/50plus/Management?role=2&user=<%=(String) session.getAttribute("username")%>">Forscher(2)</a></li>
 					<li><a
-						href="/50plus/Management?role=3&user=<%=(String) session.getAttribute("user")%>">User(3)</a></li>
+						href="/50plus/Management?role=3&user=<%=(String) session.getAttribute("username")%>">User(3)</a></li>
 				</ul>
 			</div>
+			<br>
 			Synchroner Zugriff muss erarbeitet/bedacht werden. Pinnwand:missing
 			Suche+Ergebnisse:missing Testfälle:missing Pinnwand.java, mir fällt
 			gerade auf, dass ein eigenes Servlet für die Pinnwand vl. nicht so
 			schlecht wäre. Andererseits wird die Pinnwand nun keine besonderen
 			Funktionen benötigen, hm.. Zustand speichern: work in progress,
-			scheint erstmal zu funktionieren.
-				<%
-		        	if (session.getAttribute("user")==null){
+			scheint erstmal zu funktionieren. 
+			<br>
+			<br>
+			
+			
+			<form action="Pinnwand" method="post"> 
+			
+			
+			<textarea name="inhalt" rows="7" cols="90"></textarea>
+			
+				
+			
+			<input type="submit" name="posten" value="posten"> <br>
+			
+			
+			<%
+			String user = 	(String) session.getAttribute("username");
+			String vorname = 	(String) session.getAttribute("vorname");
+			 %>
+			 
+			<%=  user %>
+			<%=  vorname %>
+			
+			
+			</form> 
+					
+			
+			
+			
+			<%
+		        	if (session.getAttribute("username")==null){
 				 
 					response.sendRedirect("index.jsp");
 		        	}

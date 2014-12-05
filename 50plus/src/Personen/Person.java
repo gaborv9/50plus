@@ -9,7 +9,7 @@ public abstract class Person implements Serializable {
 	public int alter;
 	public String vorname;
 	public String nachname;
-	public String id; // username eindeutig
+	public String id; // id=username, diese sind eindeutig
 	public String pw;
 	public GregorianCalendar datum;
 	public ArrayList<Person> freunde;

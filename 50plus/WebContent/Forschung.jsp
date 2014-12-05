@@ -84,11 +84,11 @@
 	<div class="row">
 		<div class="col-lg-12" id="content">
 			<%
-				out.println((String) session.getAttribute("user")
+				out.println((String) session.getAttribute("username")
 						+ " surft hier gerade");
 			%>
 			<%
-				if (session.getAttribute("user") == null) {
+				if (session.getAttribute("username") == null) {
 
 					response.sendRedirect("index.jsp");
 				}

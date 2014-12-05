@@ -5,17 +5,19 @@
  */
 package Management;
 
-import Personen.Person;
-import Personen.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Personen.Person;
+import Personen.User;
 
 /**
  * 
@@ -93,13 +95,14 @@ public class Register extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
-		String username = request.getParameter("nutzername");
+		String username = request.getParameter("username");
 		String password = request.getParameter("passwort");
 		String vorname = request.getParameter("vorname");
 		String nachname = request.getParameter("nachname");
 		String year = request.getParameter("datum3");
 		String month = request.getParameter("datum2");
 		String day = request.getParameter("datum1");
+	
 
 		PersonManagement a = new PersonManagement();
 		Person p = new User();
