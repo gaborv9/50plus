@@ -9,13 +9,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-
 import Personen.Post;
+
 
 public class Post_Serialisierung 
 {
 	public String pfad;
-	ArrayList<Post> postlist;
+	ArrayList<Post> globalpostlist= new ArrayList<Post>();
+
 	
     public Post_Serialisierung()
     {
@@ -27,25 +28,13 @@ public class Post_Serialisierung
     public void speicherePost(Post p) {
         
     
-        
-    	
-    	postlist = getPostlist();
-    	
-    	postlist.add(p);
 
-    	File file = new File(pfad);
     	
-        if (!file.exists())
-        {
-            try 
-            {
-                file.createNewFile();
-            } 
-            catch (IOException ex) 
-            {
-                System.out.println(ex.getMessage());
-            }
-        }
+    	globalpostlist = getGlobalpostlist();
+    	
+    	globalpostlist.add(p);
+
+
     	
     	FileOutputStream out = null;
     	ObjectOutputStream output = null;
@@ -57,11 +46,11 @@ public class Post_Serialisierung
             //Stream wird geoeffnet, um Objekte zu speichern 
             output = new ObjectOutputStream(out);
             //Objekt wird gespeichert
-            output.writeObject(postlist);
+            output.writeObject(globalpostlist);
         }
         catch (IOException ex) 
         {
-           System.out.println("Konnte liste nicht speichern. " + ex);
+           System.out.println("Konnte postlist nicht speichern. " + ex);
         }
         finally
         {
@@ -77,9 +66,27 @@ public class Post_Serialisierung
          }
      }
     
-    public ArrayList<Post> getPostlist()
+    
+    public ArrayList<Post> getGlobalpostlist()
 	{
-
+    	
+    	
+    	File file = new File(pfad);
+    	
+        if (!file.exists())
+        {
+            try 
+            {
+                file.createNewFile();
+            } 
+            catch (IOException ex) 
+            {
+                System.out.println(ex.getMessage());
+            }
+        }
+    	
+    	
+    	
 		InputStream is = null;
 		ObjectInputStream os = null;
 		
@@ -88,7 +95,7 @@ public class Post_Serialisierung
 			is = new FileInputStream(pfad);
 			os = new ObjectInputStream(is);
 			
-			postlist = (ArrayList<Post>) os.readObject();
+			globalpostlist = (ArrayList<Post>) os.readObject();
 		}
 		
 		catch(IOException e)
@@ -107,6 +114,12 @@ public class Post_Serialisierung
 			{
 				is.close();
 				os.close();
+				
+			
+				
+
+				
+				
 			}
 			
 			catch(Exception e)
@@ -114,10 +127,35 @@ public class Post_Serialisierung
 				e.printStackTrace();
 			}
 		}
-		return postlist;
+		return globalpostlist;
 	}
     
-    
+    public ArrayList<Post> getOwnpostlist(String username)
+   	{
+    	ArrayList<Post> ownpostlist = new ArrayList<Post>();
+    	
+    	int j = 0;
+    	Post temp_post;
+    	
+    	for(int i = 0; i < globalpostlist.size(); i++)
+		{
+			
+			/*System.out.println(postlist.get(i).getUsername());
+			System.out.println(postlist.get(i).getInhalt());
+			System.out.println(postlist.get(i).getZeitpunkt());
+			*/
+			
+			
+			if(globalpostlist.get(i).getUsername().equals(username))
+			{
+				temp_post = globalpostlist.get(i);
+				ownpostlist.add(j, temp_post);
+				j++;
+			}
+		}
+		
+    	return ownpostlist;
+   	}
     
 }
 

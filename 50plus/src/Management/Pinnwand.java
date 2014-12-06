@@ -49,21 +49,28 @@ public class Pinnwand extends HttpServlet {
 		
 		//id???
 		
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		//String username = request.getParameter("user");
+		
 		//requests von Pinnwand.jsp
-		String user = request.getParameter("user");
 		String inhalt = request.getParameter("inhalt");
-		String zeitpunkt = new SimpleDateFormat("dd-MM-yyyy_HH:mm").format(Calendar.getInstance().getTime());
+		String zeitpunkt = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
 		
 		//neues Post wird erstellt
-		Post p = new Post(user, inhalt, zeitpunkt);
+		Post p = new Post(username, inhalt, zeitpunkt);
 		
 		//Post wird spreichert
 	    PinnwandManagement pm = new PinnwandManagement();
-		pm.add(p);
+		pm.addPost(p);
 	    
 		//neue postlist wird erstellt und aktualisiert und in session gesetzt
-	    ArrayList<Post> postlist = pm.getPostlist();
-	    HttpSession session = request.getSession();
+	    ArrayList<Post> postlist = pm.getOwnpostlist(username);
+	    	    
+	    
+	    
+	    
 	    session.setAttribute("postlist", postlist);
 	   
 	    

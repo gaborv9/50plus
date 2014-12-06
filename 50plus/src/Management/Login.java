@@ -108,11 +108,11 @@ public class Login extends HttpServlet {
 		
 		PinnwandManagement pm = new PinnwandManagement();
 		
-		ArrayList<Post> postlist = pm.getPostlist();
+		ArrayList<Post> postlist = pm.getOwnpostlist(username);
 		
 		Serialisierung a = new Serialisierung();
-		if ((a.getPersonbyid(username) != null)
-				&& password.equals(a.getPersonbyid(username).getPW())) {
+		if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW())) 
+		{
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
 		 
@@ -120,7 +120,9 @@ public class Login extends HttpServlet {
 			
 			
 			response.sendRedirect("Pinnwand.jsp");
-		} else {
+		} 
+		else 
+		{
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
 			out.println(username);

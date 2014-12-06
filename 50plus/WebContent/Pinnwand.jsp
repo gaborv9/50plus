@@ -114,6 +114,13 @@
 					Funktionen benötigen, hm.. Zustand speichern: work in progress,
 					scheint erstmal zu funktionieren. 
 					<br>
+					
+					bei der Ausgabe statt Scriplets sollten wir eher Taglibs and EL nutzen:
+					http://stackoverflow.com/questions/3177733/how-to-avoid-java-code-in-jsp-files
+					<br>
+					Automatisches Neuladen der Posts kann man nur mit Ajax lösen (?)
+					http://stackoverflow.com/questions/19139798/reload-jstl-el-scriptlets-without-refreshing-the-page
+					<br>
 					<br>
 					
 					
@@ -128,16 +135,19 @@
 					<br>
 					
 					<%
-					String user = (String) session.getAttribute("username");
+					String username = (String) session.getAttribute("username");
 					ArrayList<Post> postlist = 	(ArrayList<Post>) session.getAttribute("postlist");
 				     %>
 					 
-					<%=  user %>
-					<% for (int i=0; i<postlist.size(); i++)
-					   {
-							out.println(postlist.get(i).getZeitpunkt() + ":    "); 
-		               		out.println(postlist.get(i).getInhalt() + "<br>"); 
-					   }
+					eingeloggt als <%= username %> 
+					<br>
+					
+					<% 
+					for (int i=0; i < postlist.size(); i++)
+				    {
+						out.println(postlist.get(i).getZeitpunkt() + ":    "); 
+	               		out.println(postlist.get(i).getInhalt() + "<br>"); 
+				    }
 					
 		             %>
 				

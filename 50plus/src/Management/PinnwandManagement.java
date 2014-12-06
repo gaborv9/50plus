@@ -10,14 +10,14 @@ public class PinnwandManagement {
 	Post_Serialisierung ps = new Post_Serialisierung();
  
 
-    public void add(Post p) 
+    public void addPost(Post p) 
     {
     	ps.speicherePost(p);
     }
 
-    public ArrayList<Post> getPostlist() 
+    public ArrayList<Post> getOwnpostlist(String username) 
     {
-    	return ps.getPostlist();
+    	return ps.getOwnpostlist(username);
     } 
     
 
