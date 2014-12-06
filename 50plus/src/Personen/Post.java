@@ -6,16 +6,38 @@ import java.io.Serializable;
 public class Post implements Serializable
 {
 
-	String username;
-	String inhalt;
-	String jetzt;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5232046163819389300L;
 	
-	public Post (String username, String inhalt, String jetzt)
+	private String username;
+	private String inhalt;
+	private String zeitpunkt;
+	
+	public Post (String username, String inhalt, String zeitpunkt)
 	{
 		this.username = username;
 		this.inhalt = inhalt;
-		this.jetzt = jetzt;
+		this.zeitpunkt = zeitpunkt;
 	}
+	
+	public String getUsername()
+	{
+		return username;
+	}
+	
+	public String getInhalt()
+	{
+		return inhalt;
+	}
+	
+	public String getZeitpunkt()
+	{
+		return zeitpunkt;
+	}
+	
+	
 	
 	
 }

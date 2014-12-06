@@ -3,6 +3,7 @@ package Management;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Data.Post_Serialisierung;
 import Personen.Post;
@@ -46,14 +48,27 @@ public class Pinnwand extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		//id???
+		
+		//requests von Pinnwand.jsp
 		String user = request.getParameter("user");
 		String inhalt = request.getParameter("inhalt");
-		String jetzt = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+		String zeitpunkt = new SimpleDateFormat("dd-MM-yyyy_HH:mm").format(Calendar.getInstance().getTime());
 		
-		Post p = new Post(user, inhalt, jetzt);
+		//neues Post wird erstellt
+		Post p = new Post(user, inhalt, zeitpunkt);
+		
+		//Post wird spreichert
 	    PinnwandManagement pm = new PinnwandManagement();
-		
-	    pm.add(p);
+		pm.add(p);
+	    
+		//neue postlist wird erstellt und aktualisiert und in session gesetzt
+	    ArrayList<Post> postlist = pm.getPostlist();
+	    HttpSession session = request.getSession();
+	    session.setAttribute("postlist", postlist);
+	   
+	    
+	    response.sendRedirect("Pinnwand.jsp");
+	    
 		
 	}
 

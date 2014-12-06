@@ -7,6 +7,7 @@ package Management;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Data.Serialisierung;
+import Personen.Post;
+import Management.PinnwandManagement;
 
 /**
  * 
@@ -102,12 +105,20 @@ public class Login extends HttpServlet {
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-
+		
+		PinnwandManagement pm = new PinnwandManagement();
+		
+		ArrayList<Post> postlist = pm.getPostlist();
+		
 		Serialisierung a = new Serialisierung();
 		if ((a.getPersonbyid(username) != null)
 				&& password.equals(a.getPersonbyid(username).getPW())) {
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
+		 
+			session.setAttribute("postlist", postlist);
+			
+			
 			response.sendRedirect("Pinnwand.jsp");
 		} else {
 			response.setContentType("text/html");
