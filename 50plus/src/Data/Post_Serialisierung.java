@@ -14,28 +14,26 @@ import Personen.Post;
 
 public class Post_Serialisierung 
 {
-	public String pfad;
-	ArrayList<Post> globalpostlist= new ArrayList<Post>();
+	private String pfad;
+	private ArrayList<Post> globalPostlist;
 
+ 
 	
     public Post_Serialisierung()
     {
         String dir = System.getProperty("user.dir"); //Gibt Pfad von Eclipse
         this.pfad= dir + "/post.ser"; //das veraendern wir noch
+        globalPostlist = new ArrayList<Post>();
     }
 	
     
-    public void speicherePost(Post p) {
+    public void speicherePost(Post p) 
+    {
         
-    
-
+    	globalPostlist = getGlobalpostlist();
     	
-    	globalpostlist = getGlobalpostlist();
-    	
-    	globalpostlist.add(p);
+    	globalPostlist.add(p);
 
-
-    	
     	FileOutputStream out = null;
     	ObjectOutputStream output = null;
     	    	
@@ -46,7 +44,7 @@ public class Post_Serialisierung
             //Stream wird geoeffnet, um Objekte zu speichern 
             output = new ObjectOutputStream(out);
             //Objekt wird gespeichert
-            output.writeObject(globalpostlist);
+            output.writeObject(globalPostlist);
         }
         catch (IOException ex) 
         {
@@ -65,12 +63,9 @@ public class Post_Serialisierung
 			}
          }
      }
-    
-    
-    public ArrayList<Post> getGlobalpostlist()
+        
+	public ArrayList<Post> getGlobalpostlist()
 	{
-    	
-    	
     	File file = new File(pfad);
     	
         if (!file.exists())
@@ -81,80 +76,79 @@ public class Post_Serialisierung
             } 
             catch (IOException ex) 
             {
-                System.out.println(ex.getMessage());
+            	System.out.println("IO Exception" + ex);
             }
+            return globalPostlist;
+          
         }
-    	
-    	
-    	
-		InputStream is = null;
-		ObjectInputStream os = null;
-		
-		try
-		{
-			is = new FileInputStream(pfad);
-			os = new ObjectInputStream(is);
-			
-			globalpostlist = (ArrayList<Post>) os.readObject();
-		}
-		
-		catch(IOException e)
-		{
-			System.err.println(e);
-		}
-		
-		catch(ClassNotFoundException e)
-		{
-			System.err.println(e);
-		}
-		
-		finally
-		{
-			try
-			{
-				is.close();
-				os.close();
-				
-			
-				
-
-				
-				
-			}
-			
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
-		return globalpostlist;
-	}
+        
+        else
+        {
+          	
+    		InputStream is = null;
+    		ObjectInputStream os = null;
+    		
+    		try
+    		{
+    			is = new FileInputStream(pfad);
+    			os = new ObjectInputStream(is);
+    			
+    			globalPostlist = (ArrayList<Post>) os.readObject();
+    		}
+    		
+    		catch(IOException e)
+    		{
+    			System.err.println("IOException" + e);
+    		}
+    		
+    		catch(ClassNotFoundException e)
+    		{
+    			System.err.println("globalPostlist not found" + e);
+    		}
+    		
+    		finally
+    		{
+    			try
+    			{
+    				//os.close();  manchmal Exception, warum?
+    				is.close();
+    			}
+    			
+    			catch(Exception e)
+    			{
+    				System.err.println("Konnte Streams nicht schliessen. " + e);
+    			}
+    		}
+    		return globalPostlist;
+        }
+  	}
     
     public ArrayList<Post> getOwnpostlist(String username)
    	{
-    	ArrayList<Post> ownpostlist = new ArrayList<Post>();
-    	
+    	globalPostlist = getGlobalpostlist();
+    	ArrayList<Post> ownPostlist = new ArrayList<Post>();
+    	    	  	
     	int j = 0;
     	Post temp_post;
     	
-    	for(int i = 0; i < globalpostlist.size(); i++)
+    	/*Gabor: Notiz fuer mich -  warum ist das so nicht richtig?
+    	
+    	if (globalPostlist.size() == 0)
+    	{
+        	return null;
+        }
+        */
+    	     	
+    	for(int i = 0; i < globalPostlist.size(); i++)
 		{
-			
-			/*System.out.println(postlist.get(i).getUsername());
-			System.out.println(postlist.get(i).getInhalt());
-			System.out.println(postlist.get(i).getZeitpunkt());
-			*/
-			
-			
-			if(globalpostlist.get(i).getUsername().equals(username))
+			if(globalPostlist.get(i).getUsername().equals(username))
 			{
-				temp_post = globalpostlist.get(i);
-				ownpostlist.add(j, temp_post);
+				temp_post = globalPostlist.get(i);
+				ownPostlist.add(j, temp_post);
 				j++;
 			}
 		}
-		
-    	return ownpostlist;
+		return ownPostlist;
    	}
     
 }

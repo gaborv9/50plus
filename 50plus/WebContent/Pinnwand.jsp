@@ -117,10 +117,7 @@
 					
 					bei der Ausgabe statt Scriplets sollten wir eher Taglibs and EL nutzen:
 					http://stackoverflow.com/questions/3177733/how-to-avoid-java-code-in-jsp-files
-					<br>
-					Automatisches Neuladen der Posts kann man nur mit Ajax lösen (?)
-					http://stackoverflow.com/questions/19139798/reload-jstl-el-scriptlets-without-refreshing-the-page
-					<br>
+
 					<br>
 					
 					
@@ -143,11 +140,16 @@
 					<br>
 					
 					<% 
-					for (int i=0; i < postlist.size(); i++)
-				    {
-						out.println(postlist.get(i).getZeitpunkt() + ":    "); 
-	               		out.println(postlist.get(i).getInhalt() + "<br>"); 
-				    }
+					if(postlist.size() != 0)
+					{
+						for (int i=0; i < postlist.size(); i++)
+					    {
+							out.println(postlist.get(i).getOwnPostcounter() + ":    "); 
+							out.println(postlist.get(i).getZeitpunkt() + ":    "); 
+		               		out.println(postlist.get(i).getInhalt() + "<br>"); 
+					    }
+					}
+
 					
 		             %>
 				

@@ -46,9 +46,7 @@ public class Pinnwand extends HttpServlet {
 	{
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		
-		//id???
-		
+	
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
