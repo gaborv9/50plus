@@ -31,7 +31,8 @@ public class Post_Serialisierung
     {
         
     	globalPostlist = getGlobalpostlist();
-    	
+    	p.setOwnPostcounter(globalPostlist.size() + 1);
+
     	globalPostlist.add(p);
 
     	FileOutputStream out = null;
@@ -79,13 +80,11 @@ public class Post_Serialisierung
             	System.out.println("IO Exception" + ex);
             }
             return globalPostlist;
-          
-        }
+         }
         
         else
         {
-          	
-    		InputStream is = null;
+          	InputStream is = null;
     		ObjectInputStream os = null;
     		
     		try
@@ -138,7 +137,7 @@ public class Post_Serialisierung
         	return null;
         }
         */
-    	     	
+    	    	
     	for(int i = 0; i < globalPostlist.size(); i++)
 		{
 			if(globalPostlist.get(i).getUsername().equals(username))

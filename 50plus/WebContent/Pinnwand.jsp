@@ -144,7 +144,7 @@
 					{
 						for (int i=0; i < postlist.size(); i++)
 					    {
-							out.println(postlist.get(i).getOwnPostcounter() + ":    "); 
+							out.println(postlist.get(i).getPostcounter() + ":    "); 
 							out.println(postlist.get(i).getZeitpunkt() + ":    "); 
 		               		out.println(postlist.get(i).getInhalt() + "<br>"); 
 					    }
