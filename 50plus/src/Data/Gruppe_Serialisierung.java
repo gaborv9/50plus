@@ -33,7 +33,11 @@ public class Gruppe_Serialisierung {
                 System.out.println(ex.getMessage());
             }
         }
+<<<<<<< HEAD
         if (file.length() == 0){
+=======
+        if (file.length() ==0){
+>>>>>>> 00a0e32049e35b3bf5599748cb04b8aaa1f8bf3c
            return list;
         }
         try {
