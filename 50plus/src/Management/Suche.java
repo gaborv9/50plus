@@ -5,6 +5,7 @@
  */
 package Management;
 
+import Data.Gruppe_Serialisierung;
 import Data.Serialisierung;
 import Personen.Person;
 import Personen.User;
@@ -73,33 +74,33 @@ public class Suche extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @SuppressWarnings({ "unused", "null" })
+    
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
          String suche= request.getParameter("suche");
          Serialisierung a = new Serialisierung();
+         Gruppe_Serialisierung b = new Gruppe_Serialisierung();
          ArrayList<Person> perliste = new ArrayList<Person>();
-         //ArrayList<Gruppe> grpliste = new ArrayList<Gruppe>();
+         ArrayList<GruppeClass> grpliste = new ArrayList<GruppeClass>();
          perliste = a.getPersonList();
-         //grpliste = a.getGruppenList();
-         //int zaehler = perliste.size();
-         ArrayList<Person> gefperliste = null;
-         //ArrayList<Gruppe> gefgrpliste;
+         grpliste = b.getGruppenList();
+         ArrayList<Person> gefperliste = new ArrayList<Person>();
+         ArrayList<GruppeClass> gefgrpliste = new ArrayList<GruppeClass>();
          
          for(Person test: perliste){
         	 if(test.getID().equals(suche)) gefperliste.add(test); 
          }
-        /* for(Gruppe test: grpliste){
+        for(GruppeClass test: grpliste){
         	 if(test.getName().equals(suche)) gefgrpliste.add(test);
-         }*/
+         }
          
          
          response.setContentType("text/html");
          PrintWriter out = response.getWriter();
          out.println("Personen: ");
-       	 if(gefperliste==null) out.println("Keine Treffer!");
+       	 if(gefperliste.isEmpty()) out.println("Keine Treffer!");
        	 else{
        		 for(Person test: gefperliste){
        			 out.println(test.getID()+" "+test.getVorname()+" "+test.getNachname());
@@ -107,9 +108,9 @@ public class Suche extends HttpServlet {
        	 }
        		 out.println("Gruppen: ");
        	 
-         /*for(Gruppe test: gefgrpliste){
+         for(GruppeClass test: gefgrpliste){
         	 out.println(test.getName());
-         }*/
+         }
        // processRequest(request, response);
     }
 
