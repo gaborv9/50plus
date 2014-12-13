@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -78,7 +79,12 @@ public class Suche extends HttpServlet {
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+		
+		 response.setContentType("text/html");
+		 HttpSession session = request.getSession();
+		 String username = (String) session.getAttribute("username");
+		 
+		 
          String suche= request.getParameter("suche");
          Serialisierung a = new Serialisierung();
          Gruppe_Serialisierung b = new Gruppe_Serialisierung();
@@ -90,15 +96,19 @@ public class Suche extends HttpServlet {
          ArrayList<GruppeClass> gefgrpliste = new ArrayList<GruppeClass>();
          
          for(Person test: perliste){
-        	 if(test.getID().equals(suche)) gefperliste.add(test); 
+        	 if((test.getID().equals(suche)||test.getVorname().equals(suche)||test.getNachname().equals(suche))&&(!(suche.equals(username)))) gefperliste.add(test); 
          }
         for(GruppeClass test: grpliste){
         	 if(test.getName().equals(suche)) gefgrpliste.add(test);
          }
          
+         session.setAttribute("gefperliste",gefperliste);
+         session.setAttribute("gefgrpliste",gefgrpliste);
+         session.setAttribute("username", username);
          
-         response.setContentType("text/html");
-         PrintWriter out = response.getWriter();
+         response.sendRedirect("Suche.jsp");
+         
+        /*
          out.println("Personen: ");
        	 if(gefperliste.isEmpty()) out.println("Keine Treffer!");
        	 else{
@@ -110,10 +120,10 @@ public class Suche extends HttpServlet {
        	 
          for(GruppeClass test: gefgrpliste){
         	 out.println(test.getName());
-         }
+         }*/
        // processRequest(request, response);
     }
-
+	
     /**
      * Returns a short description of the servlet.
      *
