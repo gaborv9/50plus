@@ -7,10 +7,16 @@ package Management;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import Data.Serialisierung;
+import Personen.Person;
 
 /**
  *
@@ -57,11 +63,24 @@ public class Freunde extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        	
+    	response.setContentType("text/html");
+    	HttpSession session = request.getSession();
+    	if(!(request.getParameter("freundname").isEmpty())){
+    		
+    		String freundname = request.getParameter("freundname");
+    		String username2 = (String) session.getAttribute("username");
+    		Serialisierung a = new Serialisierung();
+    		Person test_1,test_2;
+    		test_1 = a.getPersonbyid(freundname);
+    		test_2 = a.getPersonbyid(username2);
+    		
+    		test_2.setFreunde(test_1);
+    		
+    	}
+    	response.sendRedirect("Suche.jsp");
         
-        
-        
-        
-        processRequest(request, response);
+        //processRequest(request, response);
     }
 
     /**
@@ -75,7 +94,26 @@ public class Freunde extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+    	
+    	response.setContentType("text/html");
+    	HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");
+		Serialisierung a = new Serialisierung();
+		ArrayList<Person> perliste = new ArrayList<Person>();
+		perliste = a.getPersonList();
+		
+		for(Person test: perliste){
+			if(test.getID().equals(username)){
+				ArrayList<Person> geffreunde = new ArrayList<Person>();
+				geffreunde = test.getFreunde();
+				session.setAttribute("geffreunde", geffreunde);
+				break;
+			}
+		}
+		
+		response.sendRedirect("Freunde.jsp");
+		
+        
     }
 
     /**

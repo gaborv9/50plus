@@ -64,7 +64,32 @@ public class Suche extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
         processRequest(request, response);
+        response.setContentType("text/html");
+    	HttpSession session = request.getSession();
+    	if(!(request.getParameter("freundname").isEmpty())){
+    		
+    		String freundname = request.getParameter("freundname");
+    		String username2 = (String) session.getAttribute("username");
+    		Serialisierung a = new Serialisierung();
+    		ArrayList<Person> perliste2 = new ArrayList<Person>();
+    		perliste2 = a.getPersonList();
+    		for(Person test: perliste2){
+    			if(test.getID().equals(freundname)){
+    				ArrayList<Person> freundlist = test.getFreunde();
+    				for(Person test2: freundlist){
+    					if(username2==test2.getID()){
+    						session.setAttribute("ist_befreundet", true);
+    						break;
+    					}
+    				}
+    			}
+    			session.setAttribute("ist_befreundet",false);
+    		}
+		
+    	}
+    	response.sendRedirect("Suche.jsp");
     }
 
     /**

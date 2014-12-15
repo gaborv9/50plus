@@ -126,6 +126,10 @@
 							<li><a
 								href="/50plus/Management?role=3&user=<%=test.getID()%>">User</a></li>
 						</ul>
+						<div class="btn-group" role="toolbar" aria-label="">
+						
+						<button type="button" class="btn btn-default" onclick="<ul method='get' action='Freunde' href='/50plus/Freunde?freundname=<%=test.getID()%>'></ul>">Freundschaft anbieten</button>
+					</div>
 					</div>
 						<%
 						out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+" Rolle: "+test.getRole()+"<br>");
