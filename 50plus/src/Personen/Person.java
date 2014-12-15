@@ -31,6 +31,11 @@ public abstract class Person implements Serializable {
 	 * 1 = Freund wurde erfolgreich hinzugefuegt
 	 * 0 = Freund bereits enthalten
 	 */
+	
+	public void setArrayList(ArrayList<Person>a){
+		this.freunde = a;
+	}
+	
 	public int setFreunde(Person zufuegen){
 		if(!(freunde==null)){
 		for(Person test: freunde){

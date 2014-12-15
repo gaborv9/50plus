@@ -35,8 +35,8 @@
 </head>
 <body>
 	<%@ page import="java.util.ArrayList" import="Personen.Person"
-		import="Management.Freunde"%>
-
+		import="Management.Freunde" import="Management.PersonManagement"%>
+		
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -84,12 +84,15 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12" id="content">
-				<form action="Freunde" method="post">
-
+				 
 					<h2>Meine Freunde:</h2>
 					<%
-					ArrayList<Person> geffreunde = (ArrayList<Person>) session.getAttribute("geffreunde");
+				
 					
+					String username = (String) session.getAttribute("username");
+ 					PersonManagement a = new PersonManagement();
+ 					ArrayList<Person> geffreunde =a.getPerson(username).getFreunde();
+ 					
 							if(geffreunde.size() == 0) out.println("Du hast noch keine Freunde");
 							else{
 								for(Person test: geffreunde){
@@ -101,12 +104,7 @@
 							  	}
 					%>
 
-				</form>
-				
-			<%
-				session.setAttribute("postDeleteSuccess", "nichts");
-			%>
-				
+				 
 			</div>
 		</div>
 	</div>

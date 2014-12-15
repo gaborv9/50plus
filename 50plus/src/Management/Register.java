@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -106,6 +107,9 @@ public class Register extends HttpServlet {
 
 		PersonManagement a = new PersonManagement();
 		Person p = new User();
+		ArrayList<Person> list = new ArrayList<>();
+		p.setArrayList(list);
+		
 		int fc = 0; // failcheck
 		if (p.setID(username) == 0) {
 			out.println("Username darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");

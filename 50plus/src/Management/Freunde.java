@@ -77,9 +77,23 @@ public class Freunde extends HttpServlet {
     		test_1 = a.getPersonbyid(freundname);
     		test_2 = a.getPersonbyid(username);
     		
-    		test_2.setFreunde(test_1);
-    		
+    		boolean check=false;
+    		 
+	    		for (Person per : test_2.getFreunde()){
+	    			if (freundname.equals(per.getID())){
+	    				check=true;
+	    			}
+	    		}
+	    		if (check==false){
+	    			test_2.setFreunde(test_1);
+	        		Person test2 = test_2;
+	        		a.loeschePerson(test_2);
+	        		a.speicherePerson(test2);
+	    		}
+	 	 
+	    	
     	}
+    	
     	response.sendRedirect("Suche.jsp");
         
         //processRequest(request, response);
@@ -97,22 +111,14 @@ public class Freunde extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
-    	response.setContentType("text/html");
+    	
     	HttpSession session = request.getSession();
+    	Serialisierung a = new Serialisierung();
 		String username = (String) session.getAttribute("username");
-		Serialisierung a = new Serialisierung();
-		ArrayList<Person> perliste = new ArrayList<Person>();
-		perliste = a.getPersonList();
-		
-		Person test = a.getPersonbyid(username);
-		perliste = test.getFreunde();
-		ArrayList<Person> geffreunde = new ArrayList<Person>();
-		for(Person test2: perliste){
-			geffreunde.add(test2);
-		}
-		session.setAttribute("geffreunde", geffreunde);
-		
-		response.sendRedirect("Freunde.jsp");
+		Person getlistuser = a.getPersonbyid(username);
+		session.setAttribute("geffreunde", getlistuser.getFreunde());
+    	
+		response.sendRedirect("Freunde.jsp"); 
 		
         
     }
