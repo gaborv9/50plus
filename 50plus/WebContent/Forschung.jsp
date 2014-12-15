@@ -96,6 +96,11 @@
 			//Hier wird noch eine Ueberpruefung kommen, ob der Surfende Admin
 			oder Forscher ist, da nur Forscher Zugriff haben.
 			<jsp:include page="/Forschung" flush="true" />
+			
+			
+			<%
+				session.setAttribute("postDeleteSuccess", "nichts");
+			%>
 		</div>
 	</div>
 </div>

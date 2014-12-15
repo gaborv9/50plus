@@ -93,7 +93,6 @@
 				<div class="col-lg-12" id="content">
 					<h1>Hier ist deine tolle Pinnwand</h1>
 					
-					<br>
 					
 					bei der Ausgabe statt Scriplets sollten wir eher Taglibs and EL nutzen:
 					http://stackoverflow.com/questions/3177733/how-to-avoid-java-code-in-jsp-files
@@ -110,6 +109,41 @@
 					
 					<input type="submit" name="posten" value="posten"> 
 					<br>
+					</form> 
+						               		
+					<%
+						String postDeleteSuccess = (String)session.getAttribute("postDeleteSuccess");
+					
+					%>		            
+		           
+		            
+		            <form action="Pinnwand_Delete" method="post"> 
+		            
+		           	<input type="text" name="postNumber">
+		            
+		            <input type="submit" name="delete" value="delete"> 
+					<%
+						if (postDeleteSuccess.equals("noSuccess"))
+						{
+							out.println("Sie haben kein Post mit dieser Nummer.");
+						}
+						else if(postDeleteSuccess.equals("success"))
+						{
+							out.println("Post gelöscht.");
+						}
+						else if(postDeleteSuccess.equals("notNumber"))
+						{
+							out.println("Sie haben keine Nummer eingegeben!");
+						}						
+							
+						
+					
+					
+					
+					%>			            
+					</form> 
+			  	
+					
 					
 					<%
 					String username = (String) session.getAttribute("username");
@@ -124,18 +158,16 @@
 					{
 						for (int i=0; i < postlist.size(); i++)
 					    {
-							out.println(postlist.get(i).getPostcounter() + ":    "); 
+							out.println(postlist.get(i).getOwnPostcounter() + ":    "); 
 							out.println(postlist.get(i).getZeitpunkt() + ":    "); 
-		               		out.println(postlist.get(i).getInhalt() + "<br>"); 
-					    }
+		               		out.println(postlist.get(i).getInhalt() + "<br><br>"); 
+		            	}
 					}
 
 					
 		             %>
-				
+									
 					
-					
-					</form> 
 							
 					
 					

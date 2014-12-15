@@ -102,6 +102,11 @@
 					%>
 
 				</form>
+				
+			<%
+				session.setAttribute("postDeleteSuccess", "nichts");
+			%>
+				
 			</div>
 		</div>
 	</div>

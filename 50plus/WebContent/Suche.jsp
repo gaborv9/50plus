@@ -160,9 +160,9 @@
 					%>
 
 
-
-
-
+					<%
+					session.setAttribute("postDeleteSuccess", "nichts");
+					%>
 
 				</form>
 

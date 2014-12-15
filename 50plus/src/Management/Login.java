@@ -122,7 +122,9 @@ public class Login extends HttpServlet {
 			session.setAttribute("username", username);
 		 	session.setAttribute("postlist", postlist);
 		 	session.setAttribute("grouplist", grouplist);
-			
+		 	session.setAttribute("grouplist", grouplist);
+		 	session.setAttribute("postDeleteSuccess", "nichts");
+		 	
 			response.sendRedirect("Pinnwand.jsp");
 		} 
 		else 
