@@ -11,42 +11,30 @@ public class Post implements Serializable
 	 */
 	private static final long serialVersionUID = 5232046163819389300L;
 	
-	private int ownPostcounter;
-	//private static int globalPostcounter;
+	private int Postcounter;
 	private String username;
 	private String inhalt;
 	private String zeitpunkt;
 	
 	public Post (String username, String inhalt, String zeitpunkt)
 	{
-	
-		this.ownPostcounter = 0; //spaeter wird es in Post_Serialisierung gesetzt werden
+		this.Postcounter = 0; //spaeter wird es in Post_Serialisierung gesetzt werden
 		this.username = username;
 		this.inhalt = inhalt;
 		this.zeitpunkt = zeitpunkt;
 	}
 	
 
-	public int getOwnPostcounter()
+	public int getPostcounter()
 	{
-		return ownPostcounter;
+		return Postcounter;
 	}
 
 	public void setOwnPostcounter(int zahl)
 	{
-		ownPostcounter = zahl;
+		Postcounter = zahl;
 	} 
 	
-	/*public int getGlobalPostcounter()
-	{
-		return globalPostcounter;
-	}
-
-	public void setGlobalPostcounter(int zahl)
-	{
-		globalPostcounter = zahl;
-	} 
-	*/
 	public String getUsername()
 	{
 		return username;

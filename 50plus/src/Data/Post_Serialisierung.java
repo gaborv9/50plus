@@ -31,17 +31,8 @@ public class Post_Serialisierung
     {
         
     	globalPostlist = getGlobalpostlist();
-    	
-    	p.setOwnPostcounter(getMaxPostNumber() + 1);
- 
-    	/*
-    	System.out.println("Alle Counter");
-    	for(int i = 0; i < globalPostlist.size(); i++)
-		{
-    		System.out.println(globalPostlist.get(i).getOwnPostcounter());
-		}
-    	*/
-    	
+    	p.setOwnPostcounter(globalPostlist.size() + 1);
+
     	globalPostlist.add(p);
 
     	FileOutputStream out = null;
@@ -159,110 +150,5 @@ public class Post_Serialisierung
 		return ownPostlist;
    	}
     
-    public void loeschePost(int postNumber) 
-    {
-        
-    	globalPostlist = getGlobalpostlist();
-    	//p.setOwnPostcounter(globalPostlist.size() + 1);
-
-    	int i;
-    	
-    	for(i = 0; i < globalPostlist.size(); i++)
-		{
-			if(globalPostlist.get(i).getOwnPostcounter() == postNumber)
-			{
-				globalPostlist.remove(globalPostlist.get(i));
-			}
-	
-		}
-    	
-    	
-    	FileOutputStream out = null;
-    	ObjectOutputStream output = null;
-    	    	
-        try 
-        {
-            //Ausgabestrom der zur Datei führt wird geöffnet
-            out = new FileOutputStream(pfad);
-            //Stream wird geoeffnet, um Objekte zu speichern 
-            output = new ObjectOutputStream(out);
-            //Objekt wird gespeichert
-            output.writeObject(globalPostlist);
-        }
-        catch (IOException ex) 
-        {
-           System.out.println("Konnte postlist nicht speichern. " + ex);
-        }
-        finally
-        {
-            try 
-            {
-				output.close();
-				out.close();
-			} 
-            catch (IOException e) 
-            {
-            	System.out.println("Konnte Streams nicht schliessen. " + e);
-			}
-         }
-     }
-    
-    public ArrayList<Integer> getPostNumbers(String username)
-   	{
- 
-    	ArrayList<Post> ownPostlist = getOwnpostlist(username);
-    	ArrayList<Integer> ownPostNumbers = new ArrayList<Integer>();
-    
-    	int tempCounter;
-    	int j = 0;
-    	
-    	
-    	for(int i = 0; i < globalPostlist.size(); i++)
-		{
-			if(globalPostlist.get(i).getUsername().equals(username))
-			{
-				tempCounter = globalPostlist.get(i).getOwnPostcounter();
-				ownPostNumbers.add(j, tempCounter);
-				j++;
-			}
-		}
-		return ownPostNumbers;
-   	}    
-    
-    private int getMaxPostNumber()
-   	{
-    	int max = 0;
-    	
-    	for(int i = 0; i < globalPostlist.size(); i++)
-		{
-			if(globalPostlist.get(i).getOwnPostcounter() > max)
-			{
-				max = globalPostlist.get(i).getOwnPostcounter();
-			}
-		}
-		return max;
-   	}    
-    
-    
-    
-   /* public Post getPost(int postNumber)
-   	{
-    	globalPostlist = getGlobalpostlist();
-      	    	  	
-   
-    	Post p;
-        	    	
-    	for(int i = 0; i < globalPostlist.size(); i++)
-		{
-			if(globalPostlist.get(i).getOwnPostcounter() == postNumber)
-			{
-				p = globalPostlist.get(i);
-				return p;
-			}
-		}
-    	System.out.println("nem talaltam a postot");
-		return null;
-   	}   
-    */
 }
 
