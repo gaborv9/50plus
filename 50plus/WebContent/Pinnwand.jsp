@@ -92,28 +92,7 @@
 			<div class="row">
 				<div class="col-lg-12" id="content">
 					<h1>Hier ist deine tolle Pinnwand</h1>
-					<div class="btn-group">
-						<button type="button" data-toggle="dropdown"
-							class="btn btn-default dropdown-toggle">
-							TestRollenvergabe <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" method="get" action="Management">
-							<li><a
-								href="/50plus/Management?role=1&user=<%=(String) session.getAttribute("username")%>">Admin(1)</a></li>
-							<li><a
-								href="/50plus/Management?role=2&user=<%=(String) session.getAttribute("username")%>">Forscher(2)</a></li>
-							<li><a
-								href="/50plus/Management?role=3&user=<%=(String) session.getAttribute("username")%>">User(3)</a></li>
-						</ul>
-					</div>
-					<br>
-					Synchroner Zugriff muss erarbeitet/bedacht werden. Pinnwand:missing
-					Suche+Ergebnisse:missing Testfälle:missing Pinnwand.java, mir fällt
-					gerade auf, dass ein eigenes Servlet für die Pinnwand vl. nicht so
-					schlecht wäre. Andererseits wird die Pinnwand nun keine besonderen
-					Funktionen benötigen, hm.. Zustand speichern: work in progress,
-					scheint erstmal zu funktionieren. 
-					<br>
+					
 					
 					bei der Ausgabe statt Scriplets sollten wir eher Taglibs and EL nutzen:
 					http://stackoverflow.com/questions/3177733/how-to-avoid-java-code-in-jsp-files
@@ -130,6 +109,41 @@
 					
 					<input type="submit" name="posten" value="posten"> 
 					<br>
+					</form> 
+						               		
+					<%
+						String postDeleteSuccess = (String)session.getAttribute("postDeleteSuccess");
+					
+					%>		            
+		           
+		            
+		            <form action="Pinnwand_Delete" method="post"> 
+		            
+		           	<input type="text" name="postNumber">
+		            
+		            <input type="submit" name="delete" value="delete"> 
+					<%
+						if (postDeleteSuccess.equals("noSuccess"))
+						{
+							out.println("Sie haben kein Post mit dieser Nummer.");
+						}
+						else if(postDeleteSuccess.equals("success"))
+						{
+							out.println("Post gelöscht.");
+						}
+						else if(postDeleteSuccess.equals("notNumber"))
+						{
+							out.println("Sie haben keine Nummer eingegeben!!!");
+						}						
+							
+						
+					
+					
+					
+					%>			            
+					</form> 
+			  	
+					
 					
 					<%
 					String username = (String) session.getAttribute("username");
@@ -144,18 +158,16 @@
 					{
 						for (int i=0; i < postlist.size(); i++)
 					    {
-							out.println(postlist.get(i).getPostcounter() + ":    "); 
+							out.println(postlist.get(i).getOwnPostcounter() + ":    "); 
 							out.println(postlist.get(i).getZeitpunkt() + ":    "); 
-		               		out.println(postlist.get(i).getInhalt() + "<br>"); 
-					    }
+		               		out.println(postlist.get(i).getInhalt() + "<br><br>"); 
+		            	}
 					}
 
 					
 		             %>
-				
+									
 					
-					
-					</form> 
 							
 					
 					

@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import Data.Post_Serialisierung;
 import Personen.Post;
 
-public class PinnwandManagement {
+public class PinnwandManagement 
+{
 
 	Post_Serialisierung ps = new Post_Serialisierung();
  
@@ -20,15 +21,21 @@ public class PinnwandManagement {
     	return ps.getOwnpostlist(username);
     } 
     
-
-    /*
-    public int delete(String username) {
-        if (ser.loeschePerson(ser.getPersonbyid(username)) == 0) {
-            return 0; //username existiert bereits
-        } else {
-            return 1; //Hat geklappt
-        }
+    public void deletePost(int postNumber) 
+    {
+    	ps.loeschePost(postNumber);
     }
+    public ArrayList<Integer> getPostNumbers(String username)
+    {
+    	return ps.getPostNumbers(username);
+    } 
+   
+    /*
+    public Post getPost(int postNumber) 
+    {
+    	return ps.getPost(postNumber);
+    
+    }    
     */
 
 }

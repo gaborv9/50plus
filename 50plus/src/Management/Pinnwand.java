@@ -65,7 +65,7 @@ public class Pinnwand extends HttpServlet {
 	    
 		//neue postlist wird erstellt und aktualisiert und in session gesetzt
 	    ArrayList<Post> postlist = pm.getOwnpostlist(username);
-	    	    
+	    
 	    
 	    
 	    

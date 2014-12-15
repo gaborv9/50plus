@@ -32,11 +32,18 @@ public abstract class Person implements Serializable {
 	 * 0 = Freund bereits enthalten
 	 */
 	public int setFreunde(Person zufuegen){
+		if(!(freunde==null)){
 		for(Person test: freunde){
 			if(test.equals(zufuegen)) return 0;
 		}
+		
 		freunde.add(zufuegen);
 		return 1;
+		}
+		ArrayList<Person> test = new ArrayList<Person>();
+		test.add(zufuegen);
+		freunde = test;
+		return 0;
 	}
 
 	/**

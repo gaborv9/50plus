@@ -33,6 +33,11 @@
 <link href="dist/css/logo-nav.css" rel="stylesheet">
 
 </head>
+
+
+
+<body>
+		<%@ page import="java.util.ArrayList, Management.GruppeClass, Data.Gruppe_Serialisierung" %> 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
@@ -80,27 +85,79 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12" id="content">
+		
+			<br><br>
+			<form method="post" action="Gruppen">
+			<div class="form-group">
+               <label for="Name">Bitte den Namen der neuen Gruppe eingeben: </label>
+                <input type="gruppenname" class="form-control" name="gruppenname" placeholder="Name der Gruppe" required>
+            
+            	<button type="register" class="btn btn-default">Gruppe gründen</button>
+            	</div>
+			</form>
 
+			
+			<form action="Gruppen" method="post">
 			<%
 				out.println((String) session.getAttribute("username")
 						+ " surft hier gerade");
 			%>
+			<br>
+			
+				<%
+				out.println((String) session.getAttribute("gruppenname")
+						+ " gruppe");
+			%>
+			<br><br>
+				<%
+				//out.println((ArrayList<GruppeClass>) session.getAttribute("grouplist"));
+			%>	
+			
+			<br>
+			Administrator Nachname: <%out.println((String) session.getAttribute("admin")); %>
+			<br>
+			
+			<%
+					String username = (String) session.getAttribute("username");
+					ArrayList<GruppeClass> grouplist = (ArrayList<GruppeClass>) session.getAttribute("grouplist");
+				%>
+			
+			
+			<br>
+			<% 
+					out.println("Liste der Gruppen: ");
+			%>
+			<br>
+			<%
+					if(grouplist.size() != 0)
+					{
+						for (int i=0; i < grouplist.size(); i++)
+					    {
+							out.println(grouplist.get(i).getName() + "<br>"); 
+					    }
+					}
+
+					
+		      %>
+
+			</form>
 			<%
 				if (session.getAttribute("username") == null) {
 
 					response.sendRedirect("index.jsp");
 				}
 			%>
+			
 		</div>
 	</div>
 </div>
 <!-- /.container -->
 
 <!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+	<script src="dist/js/jquery-1.11.1.js"></script>
+		
+		<!-- Bootstrap Core JavaScript -->
+		<script src="dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>

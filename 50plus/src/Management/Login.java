@@ -105,11 +105,13 @@ public class Login extends HttpServlet {
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		//String groupname = request.getParameter("gruppenname");
 				
 		PinnwandManagement pm = new PinnwandManagement();
+		GruppeManagement gr = new GruppeManagement();
 		
 		ArrayList<Post> postlist = pm.getOwnpostlist(username);
-	
+		ArrayList<GruppeClass> grouplist = gr.getOwnGruppelist(username);
 		
 		
 		
@@ -119,7 +121,10 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
 		 	session.setAttribute("postlist", postlist);
-			
+		 	session.setAttribute("grouplist", grouplist);
+		 	session.setAttribute("grouplist", grouplist);
+		 	session.setAttribute("postDeleteSuccess", "nichts");
+		 	
 			response.sendRedirect("Pinnwand.jsp");
 		} 
 		else 

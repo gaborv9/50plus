@@ -33,76 +33,85 @@
 <link href="dist/css/logo-nav.css" rel="stylesheet">
 
 </head>
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<body>
+	<%@ page import="java.util.ArrayList" import="Personen.Person"
+		import="Management.Freunde"%>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"> <img
+					src="http://placehold.it/150x150&text=BILD" alt="">
+				</a>
+
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+
+				<ul class="nav navbar-nav">
+					<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+					<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
+					<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
+					<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+					<li><a href="/50plus/Login?logout=true">Logout</a></li>
+					<form class="form-signin" method="post" action="Suche" role="form">
+						<div class="form-group">
+							<input type="suche" class="form-control" name="suche"
+								placeholder="Freunde/Gruppen finden..">
+						</div>
+					</form>
+				</ul>
+
+			</div>
+
+			<!-- /.navbar-collapse -->
+		</div>
+
+		<!-- /.container -->
+	</nav>
+
+	<!-- Page Content -->
 	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#bs-example-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#"> <img
-				src="http://placehold.it/150x150&text=BILD" alt="">
-			</a>
+		<div class="row">
+			<div class="col-lg-12" id="content">
+				<form action="Freunde" method="post">
 
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
+					<h2>Meine Freunde:</h2>
+					<%
+					ArrayList<Person> geffreunde = (ArrayList<Person>) session.getAttribute("geffreunde");
+					
+							if(geffreunde.size() == 0) out.println("Du hast noch keine Freunde");
+							else{
+								for(Person test: geffreunde){
+										out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+"<br>");		
+									}
+								}
+								if (session.getAttribute("username")==null){
+									response.sendRedirect("index.jsp");
+							  	}
+					%>
 
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-
-			<ul class="nav navbar-nav">
-				<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
-				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
-				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
-				<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
-				<li><a href="/50plus/Login?logout=true">Logout</a></li>
-				<form class="form-signin" method="post" action="Suche" role="form">
-					<div class="form-group">
-						<input type="suche" class="form-control" name="suche"
-							placeholder="Freunde/Gruppen finden..">
-					</div>
 				</form>
-			</ul>
-
+			</div>
 		</div>
-
-		<!-- /.navbar-collapse -->
 	</div>
-
 	<!-- /.container -->
-</nav>
 
-<!-- Page Content -->
-<div class="container">
-	<div class="row">
-		<div class="col-lg-12" id="content">
-			<%
-				out.println((String) session.getAttribute("username") + " surft hier gerade");
-			  /*  HttpSession session1=request.getSession(false);  
-		        if(session1==null){  */
-		        	
-		        	if (session.getAttribute("username")==null){
-				 
-					response.sendRedirect("index.jsp");
-		        	}
-				
-			%>
-
-
-		</div>
-	</div>
-</div>
-<!-- /.container -->
-
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+	<!-- jQuery -->
+		<script src="dist/js/jquery-1.11.1.js"></script>
+		
+		<!-- Bootstrap Core JavaScript -->
+		<script src="dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>
