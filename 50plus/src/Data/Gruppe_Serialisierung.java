@@ -118,7 +118,7 @@ public class Gruppe_Serialisierung
     		{
     			try
     			{
-    				os.close();  //manchmal Exception, warum?
+    				//os.close();  //manchmal Exception, warum?
     				is.close();
     			}
     			
