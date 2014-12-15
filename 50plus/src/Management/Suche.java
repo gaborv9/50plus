@@ -116,7 +116,9 @@ public class Suche extends HttpServlet {
          ArrayList<Person> perliste = new ArrayList<Person>();
          ArrayList<GruppeClass> grpliste = new ArrayList<GruppeClass>();
          perliste = a.getPersonList();
+
          grpliste = b.getGruppenlist();
+
          ArrayList<Person> gefperliste = new ArrayList<Person>();
          ArrayList<GruppeClass> gefgrpliste = new ArrayList<GruppeClass>();
          

@@ -3,7 +3,6 @@ package Management;
 import Data.Gruppe_Serialisierung;
 import Management.GruppeClass;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -23,4 +22,3 @@ public class GruppeManagement{
     } 
     
 }
-

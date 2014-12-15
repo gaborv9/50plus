@@ -3,8 +3,6 @@ package Management;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import Data.Gruppe_Serialisierung;
-import Management.GruppeManagement;
 import Personen.Person;
 import Personen.User;
 
@@ -24,10 +22,6 @@ public class GruppeClass implements Serializable{
 	public GruppeClass (String name, Person admin, ArrayList<Person> mitglied)
 	{
 		this.groupcounter = 0; //spaeter wird er in Gruppe_Serialisierung gesetzt
-		/*this.name = name;
-		this.admin = admin;
-		this.mitglied = mitglied;*/
-		
 		setName(name);
 		setAdmin(admin);
 		setMitglied(mitglied);
