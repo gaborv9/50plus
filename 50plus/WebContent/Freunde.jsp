@@ -33,8 +33,11 @@
 <link href="dist/css/logo-nav.css" rel="stylesheet">
 
 </head>
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<body>
+ 	<%@ page import="java.util.ArrayList" import="Personen.Person" import="Management.Freunde" %> 
+	
+	<!-- Navigation -->
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
@@ -74,25 +77,49 @@
 	</div>
 
 	<!-- /.container -->
-</nav>
+	</nav>
 
-<!-- Page Content -->
-<div class="container">
-	<div class="row">
-		<div class="col-lg-12" id="content">
-			<%
-				out.println((String) session.getAttribute("username") + " surft hier gerade");
-			  /*  HttpSession session1=request.getSession(false);  
-		        if(session1==null){  */
-		        	
-		        	if (session.getAttribute("username")==null){
-				 
-					response.sendRedirect("index.jsp");
-		        	}
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12" id="content">
+				<form action="Freunde" method="post">
 				
-			%>
+				<%
+				
+			//	if(((ArrayList<Person>)session.getAttribute("geffreunde")).isEmpty()) out.println("Du hast noch keine Freunde");
+		
+			
+				ArrayList<Person> geffreunde = (ArrayList<Person>) session.getAttribute("geffreunde");
+				
+				%>
+				<h2>Meine Freunde: </h2>
+				<% 
+					int i = 0;
+				if(geffreunde == null) out.println("Du hast noch keine Freunde");
+				else{
+					
+				
+					for(Person test: geffreunde) i++;
+					
+					if(i == 0) out.println("Du hast noch keine Freunde.");
+					else{
+						for(Person test: geffreunde){
+							out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+"<br>");	
+						}
+				
+		   				
+					}
+				}
+		
+					if (session.getAttribute("username")==null){
+						 
+						response.sendRedirect("index.jsp");
+		  				  }
+		
+					%>
 
-
+			</form>
 		</div>
 	</div>
 </div>

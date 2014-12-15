@@ -7,10 +7,12 @@ package Management;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 
@@ -66,25 +68,24 @@ public class Management extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		    HttpSession session = request.getSession();
 
-		if (request.getParameter("role") != null) {
+		if (request.getParameter("role") != null && request.getParameter("username") !=null) {
 			int role = Integer.parseInt(request.getParameter("role"));
-			String user = request.getParameter("user");
+			String username = request.getParameter("username");
 			PersonManagement a = new PersonManagement();
 
-			if (role == 1) {
-				a.setRole("username", role);
-
-			} else if (role == 2) {
-				a.setRole("username", role);
-			} else {
-				response.setContentType("text/html");
-				PrintWriter out = response.getWriter();
-				out.println(user+ " ist eingeloggt");
+			if (a.getPerson(session.getId()).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
+					/*response.setContentType("text/html");
+					PrintWriter out = response.getWriter();
+					out.println(username + " ist eingeloggt");*/
+					a.setRole(username, role);
 			}
-
+			else{//nichts :p
+				
+			}
 		}
-
+		//href="/50plus/Management?role=1&username=<%=(String) session.getAttribute("username")%>">Admin(1)</a></li>
 		// processRequest(request, response);
 	}
 

@@ -99,20 +99,17 @@
 						</button>
 						<ul class="dropdown-menu" method="get" action="Management">
 							<li><a
-								href="/50plus/Management?role=1&user=<%=(String) session.getAttribute("username")%>">Admin(1)</a></li>
+								href="/50plus/Management?role=1&username=hiermussnameuebergebenwerden">Admin(1)</a></li>
 							<li><a
-								href="/50plus/Management?role=2&user=<%=(String) session.getAttribute("username")%>">Forscher(2)</a></li>
+								href="/50plus/Management?role=2&username=hiermussnameuebergebenwerden">Forscher(2)</a></li>
 							<li><a
-								href="/50plus/Management?role=3&user=<%=(String) session.getAttribute("username")%>">User(3)</a></li>
+								href="/50plus/Management?role=3&username=hiermussnameuebergebenwerden">User(3)</a></li>
 						</ul>
 					</div>
 					<br>
-					Synchroner Zugriff muss erarbeitet/bedacht werden. Pinnwand:missing
-					Suche+Ergebnisse:missing Testfälle:missing Pinnwand.java, mir fällt
-					gerade auf, dass ein eigenes Servlet für die Pinnwand vl. nicht so
-					schlecht wäre. Andererseits wird die Pinnwand nun keine besonderen
-					Funktionen benötigen, hm.. Zustand speichern: work in progress,
-					scheint erstmal zu funktionieren. 
+					Der TestButton gehoert bei Freunde rein, dort muss noch der Name übergeben werden, oder zumindest auf eine bestimmte
+					Weise muss der Name des zu veraendernden Users uebergeben werden.
+					missing Testfälle, sowie gute Formatierung
 					<br>
 					
 					bei der Ausgabe statt Scriplets sollten wir eher Taglibs and EL nutzen:

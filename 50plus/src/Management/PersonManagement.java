@@ -9,6 +9,9 @@ public class PersonManagement {
 
     //1 2 oder 3..
 
+    public Person getPerson(String username){
+    	return ser.getPersonbyid(username);
+    }
     public void setRole(String username, int role) {
         ser.getPersonbyid(username).setRole(role);
     }
