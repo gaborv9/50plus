@@ -67,6 +67,8 @@ public class Freunde extends HttpServlet {
     	response.setContentType("text/html");
     	String freundname = request.getParameter("freundname");
     	HttpSession session = request.getSession();
+    	PrintWriter out = response.getWriter();
+	    out.println("dein servlet kommt hierher");
     	if(!(request.getParameter("freundname").isEmpty())){
     		
     		String username = (String) session.getAttribute("username");
@@ -78,7 +80,7 @@ public class Freunde extends HttpServlet {
     		test_2.setFreunde(test_1);
     		
     	}
-    	response.sendRedirect("Suche.jsp");
+    	//response.sendRedirect("Suche.jsp");
         
         //processRequest(request, response);
     }
