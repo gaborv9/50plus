@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Personen.Person;
+
 /**
  * 
  * @author master
@@ -68,23 +70,28 @@ public class Management extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		    HttpSession session = request.getSession();
-
+		HttpSession session = request.getSession();
+		String onlineuser = (String) session.getAttribute("username");
+		   /* PrintWriter out = response.getWriter();
+		    out.println(onlineuser);*/
+		
 		if (request.getParameter("role") != null && request.getParameter("username") !=null) {
 			int role = Integer.parseInt(request.getParameter("role"));
 			String username = request.getParameter("username");
+		
 			PersonManagement a = new PersonManagement();
-
-			if (a.getPerson(session.getId()).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
+			
+			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
 					/*response.setContentType("text/html");
 					PrintWriter out = response.getWriter();
 					out.println(username + " ist eingeloggt");*/
 					a.setRole(username, role);
 			}
 			else{//nichts :p
-				
+				 
 			}
 		}
+		response.sendRedirect("Suche.jsp");
 		//href="/50plus/Management?role=1&username=<%=(String) session.getAttribute("username")%>">Admin(1)</a></li>
 		// processRequest(request, response);
 	}

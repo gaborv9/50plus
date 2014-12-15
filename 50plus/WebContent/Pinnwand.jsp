@@ -92,24 +92,7 @@
 			<div class="row">
 				<div class="col-lg-12" id="content">
 					<h1>Hier ist deine tolle Pinnwand</h1>
-					<div class="btn-group">
-						<button type="button" data-toggle="dropdown"
-							class="btn btn-default dropdown-toggle">
-							TestRollenvergabe <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" method="get" action="Management">
-							<li><a
-								href="/50plus/Management?role=1&username=hiermussnameuebergebenwerden">Admin(1)</a></li>
-							<li><a
-								href="/50plus/Management?role=2&username=hiermussnameuebergebenwerden">Forscher(2)</a></li>
-							<li><a
-								href="/50plus/Management?role=3&username=hiermussnameuebergebenwerden">User(3)</a></li>
-						</ul>
-					</div>
-					<br>
-					Der TestButton gehoert bei Freunde rein, dort muss noch der Name übergeben werden, oder zumindest auf eine bestimmte
-					Weise muss der Name des zu veraendernden Users uebergeben werden.
-					missing Testfälle, sowie gute Formatierung
+					
 					<br>
 					
 					bei der Ausgabe statt Scriplets sollten wir eher Taglibs and EL nutzen:

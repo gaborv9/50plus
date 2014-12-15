@@ -120,11 +120,11 @@
 						</button>
 						<ul class="dropdown-menu" method="get" action="Management">
 							<li><a
-								href="/50plus/Management?role=1&user=<%=test.getID()%>">Administrator</a></li>
+								href="/50plus/Management?role=1&username=<%=test.getID()%>">Administrator</a></li>
 							<li><a
-								href="/50plus/Management?role=2&user=<%=test.getID()%>">Forscher</a></li>
+								href="/50plus/Management?role=2&username=<%=test.getID()%>">Forscher</a></li>
 							<li><a
-								href="/50plus/Management?role=3&user=<%=test.getID()%>">User</a></li>
+								href="/50plus/Management?role=3&username=<%=test.getID()%>">User</a></li>
 						</ul>
 						<div class="btn-group" role="toolbar" aria-label="">
 						
@@ -162,10 +162,10 @@
 	<!-- /.container -->
 	
 	<!-- jQuery -->
-	<script src="js/jquery.js"></script>
-	
-	<!-- Bootstrap Core JavaScript -->
-	<script src="js/bootstrap.min.js"></script>
+		<script src="dist/js/jquery-1.11.1.js"></script>
+		
+		<!-- Bootstrap Core JavaScript -->
+		<script src="dist/js/bootstrap.min.js"></script>
 	
 	</body>
 </html>
