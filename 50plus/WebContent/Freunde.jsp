@@ -86,25 +86,37 @@
 				<form action="Freunde" method="post">
 				
 				<%
-							
+				
+			//	if(((ArrayList<Person>)session.getAttribute("geffreunde")).isEmpty()) out.println("Du hast noch keine Freunde");
+		
+			
 				ArrayList<Person> geffreunde = (ArrayList<Person>) session.getAttribute("geffreunde");
 				
 				%>
 				<h2>Meine Freunde: </h2>
 				<% 
+					int i = 0;
+				if(geffreunde == null) out.println("Du hast noch keine Freunde");
+				else{
 					
-					if((geffreunde).isEmpty()) out.println("Du hast noch keine Freunde.");
+				
+					for(Person test: geffreunde) i++;
+					
+					if(i == 0) out.println("Du hast noch keine Freunde.");
 					else{
 						for(Person test: geffreunde){
 							out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+"<br>");	
 						}
 				
-		   				if (session.getAttribute("username")==null){
-				 
+		   				
+					}
+				}
+		
+					if (session.getAttribute("username")==null){
+						 
 						response.sendRedirect("index.jsp");
 		  				  }
-					}
-				
+		
 					%>
 
 			</form>

@@ -65,15 +65,15 @@ public class Freunde extends HttpServlet {
             throws ServletException, IOException {
         	
     	response.setContentType("text/html");
+    	String freundname = request.getParameter("freundname");
     	HttpSession session = request.getSession();
     	if(!(request.getParameter("freundname").isEmpty())){
     		
-    		String freundname = request.getParameter("freundname");
-    		String username2 = (String) session.getAttribute("username");
+    		String username = (String) session.getAttribute("username");
     		Serialisierung a = new Serialisierung();
     		Person test_1,test_2;
     		test_1 = a.getPersonbyid(freundname);
-    		test_2 = a.getPersonbyid(username2);
+    		test_2 = a.getPersonbyid(username);
     		
     		test_2.setFreunde(test_1);
     		
@@ -102,14 +102,13 @@ public class Freunde extends HttpServlet {
 		ArrayList<Person> perliste = new ArrayList<Person>();
 		perliste = a.getPersonList();
 		
-		for(Person test: perliste){
-			if(test.getID().equals(username)){
-				ArrayList<Person> geffreunde = new ArrayList<Person>();
-				geffreunde = test.getFreunde();
-				session.setAttribute("geffreunde", geffreunde);
-				break;
-			}
+		Person test = a.getPersonbyid(username);
+		perliste = test.getFreunde();
+		ArrayList<Person> geffreunde = new ArrayList<Person>();
+		for(Person test2: perliste){
+			geffreunde.add(test2);
 		}
+		session.setAttribute("geffreunde", geffreunde);
 		
 		response.sendRedirect("Freunde.jsp");
 		
