@@ -96,6 +96,21 @@
 							if(geffreunde.size() == 0) out.println("Du hast noch keine Freunde");
 							else{
 								for(Person test: geffreunde){
+									%>
+									<div class="btn-group">
+						<button type="button" data-toggle="dropdown"
+							class="btn btn-default dropdown-toggle">
+							Entfernen <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" method="get" action="Freunde">
+							<li><a
+								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>">Entfernen</a></li>
+							 
+						</ul>
+
+
+					</div>
+									<% 
 										out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+"<br>");		
 									}
 								}

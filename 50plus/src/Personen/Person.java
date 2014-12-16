@@ -4,7 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+
 public abstract class Person implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	public int role;
 	public int alter;
 	public String vorname;
@@ -23,33 +30,50 @@ public abstract class Person implements Serializable {
 		return freunde;
 	}
 	
+	
 	/**
 	 * 
-	 * @param zufuegen
-	 * Person, welche als Freund hinzugefuegt werden soll
-	 * @return 1 oder 0
-	 * 1 = Freund wurde erfolgreich hinzugefuegt
-	 * 0 = Freund bereits enthalten
+	 * @param a - Parameter fuer Geaenderte Freund-Liste
 	 */
-	
 	public void setArrayList(ArrayList<Person>a){
 		this.freunde = a;
 	}
-	
-	public int setFreunde(Person zufuegen){
+	/**
+	 * 
+	 * @param zufuegen Person die den Freunden zugefuegt werden soll
+	 */
+	public void setFreunde(Person user, boolean addrem){
 		if(!(freunde==null)){
-		for(Person test: freunde){
-			if(test.equals(zufuegen)) return 0;
-		}
+			if(addrem == true){
+				for(Person test: freunde){
+					if(test.equals(user)) return;
+				}
 		
-		freunde.add(zufuegen);
-		return 1;
+				freunde.add(user);
+				return;
+			}
+			
+			/*
+			else if(addrem == false){
+				for(Person test: freunde){
+					if(test.equals(user)){
+						freunde.remove(user);
+						return;
+					}
+				}*/
+			ArrayList<Person> test = new ArrayList<Person>();
+			for(Person test2: freunde){
+				if(!(test2.getID().equals(user.getID()))) test.add(test2);
+			}
+			freunde = test;
+			for(Person test2: freunde)
+				System.out.println(test2.getID()+ " ");
+			return;
+			}
 		}
-		ArrayList<Person> test = new ArrayList<Person>();
-		test.add(zufuegen);
-		freunde = test;
-		return 0;
-	}
+	
+
+
 
 	/**
 	 * @param role

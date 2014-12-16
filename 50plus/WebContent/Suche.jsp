@@ -130,13 +130,13 @@
 					<div class="btn-group">
 						<button type="button" data-toggle="dropdown"
 							class="btn btn-default dropdown-toggle">
-							Add/Remove <span class="caret"></span>
+							Adden/Entfernen <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" method="get" action="Freunde">
 							<li><a
-								href="/50plus/Freunde?freundname=<%=test.getID()%>">ADD</a></li>
+								href="/50plus/Freunde?adddelete=1&freundname=<%=test.getID()%>">Freund adden</a></li>
 							<li><a
-								href="/50plus/Freunde?freundname=<%=test.getID()%>">REMOVE</a></li>
+								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>">Entfernen</a></li>
 							 
 						</ul>
 
