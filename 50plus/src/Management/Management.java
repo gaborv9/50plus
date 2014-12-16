@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Data.Serialisierung;
 import Personen.Person;
 
 /**
@@ -82,10 +83,14 @@ public class Management extends HttpServlet {
 			PersonManagement a = new PersonManagement();
 			
 			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
-					/*response.setContentType("text/html");
-					PrintWriter out = response.getWriter();
-					out.println(username + " ist eingeloggt");*/
-					a.setRole(username, role);
+			
+				Serialisierung ser = new Serialisierung();
+				Person save = a.getPerson(username);
+				save.setRole(role);
+				ser.loeschePerson(a.getPerson(username));
+			    ser.speicherePerson(save);
+				
+				
 			}
 			else{//nichts :p
 				 

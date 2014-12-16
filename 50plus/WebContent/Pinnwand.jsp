@@ -150,7 +150,7 @@
 					if(postlist.size() != 0)
 					{
 						//for (int i=0; i < postlist.size(); i++)
-							int i =postlist.size();
+							 
 										for (Post test: postlist )
 					    {
 							//out.println(test.getOwnPostcounter() + ":    "); 

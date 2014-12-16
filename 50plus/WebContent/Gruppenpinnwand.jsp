@@ -74,7 +74,7 @@
 			</ul>
 
 		</div>
-		<span style="color:grey; padding-left:40px"> <%=(String) session.getAttribute("username") %> </span>	
+		<span style="color:grey; padding-left:40px"> <%=(String) session.getAttribute("gruppenname") %> </span>	
 		<!-- /.navbar-collapse -->
 	</div>
 
@@ -87,47 +87,15 @@
 		<div class="col-lg-12" id="content">
 		
 			<br><br>
-			<form method="post" action="Gruppen">
-			<div class="form-group">
-               <label for="Name">Bitte den Namen der neuen Gruppe eingeben: </label>
-                <input type="gruppenname" class="form-control" name="gruppenname" placeholder="Name der Gruppe" required>
-            
-            	<button type="register" class="btn btn-default">Gruppe gründen</button>
-            	</div>
-			</form>
-
 			
 			<form action="Gruppen" method="post">
-			
-				<%
-					if(session.getAttribute("gruppenname")!=null){
-				
-						out.println((String) session.getAttribute("gruppenname")+ " Gruppe wurde erstellt!");
-						out.println("Der Nachname des Administrators: "+(String) session.getAttribute("admin"));
-					}
-					else{	
-					}
-				%>
 			
 			<%
 					String username = (String) session.getAttribute("username");
 					ArrayList<GruppeClass> grouplist = (ArrayList<GruppeClass>) session.getAttribute("grouplist");
 				%>
 			
-			
-			<br>
-			<h3>Liste der Gruppen: </h3>
-			<%
-					if(grouplist.size() != 0)
-					{
-						for (int i=0; i < grouplist.size(); i++)
-					    {
-							%>
-							<a href="/50plus/Gruppenpinnwand.jsp">
-							<%out.println(grouplist.get(i).getName() + "<br>"); 
-					    }
-					}			
-		      %></a>
+
 
 			</form>
 			<%

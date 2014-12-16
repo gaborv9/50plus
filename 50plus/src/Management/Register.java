@@ -137,6 +137,9 @@ public class Register extends HttpServlet {
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
 			fc = 1;
 		}
+		if (username.equals("admin1")){
+			p.setRole(1);
+		}
 
 		if (a.add(p) == 0) {
 			out.println("username schon vorhanden");
