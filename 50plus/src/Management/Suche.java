@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author master
+ * @author Lechl Bernhard
  */
 public class Suche extends HttpServlet {
 
@@ -30,7 +30,7 @@ public class Suche extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request servlet request - Beschreibung was Servlet macht
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
@@ -56,8 +56,8 @@ public class Suche extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param request servlet request - aktueller User wird abgefragt, sowie Freund der gesucht wird
+     * @param response servlet response - zurueckgegeben wird: true = sind befreundet, false = nicht befreundet
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -95,8 +95,8 @@ public class Suche extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param request servlet request - aktueller User, Suchbegriff
+     * @param response servlet response - Liste der gefundenen Gruppen, Liste der gefunden Personen, aktueller User
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

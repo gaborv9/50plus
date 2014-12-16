@@ -10,7 +10,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import Personen.Person;
- 
+ /**
+  * 
+  * @author Palkovits Dominik
+  *	
+  */
 public class Serialisierung {
     public String pfad;
     /**Pfad zur Datei wird gesetzt.
