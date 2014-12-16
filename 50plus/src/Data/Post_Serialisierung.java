@@ -22,7 +22,7 @@ public class Post_Serialisierung
     public Post_Serialisierung()
     {
         String dir = System.getProperty("user.dir"); //Gibt Pfad von Eclipse
-        this.pfad= dir + "/post.ser"; //das veraendern wir noch
+        this.pfad= dir + "/post.ser"; 
         globalPostlist = new ArrayList<Post>();
     }
 	
