@@ -71,6 +71,7 @@
 		</div>
 
 		<!-- /.navbar-collapse -->
+		<span style="color:grey; padding-left:40px"> <%=(String) session.getAttribute("username") %> </span>	
 	</div>
 
 	<!-- /.container -->
@@ -83,6 +84,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12" id="content">
+		<br>
+		<br>
 			<%
 				out.println((String) session.getAttribute("username")
 						+ " surft hier gerade");
@@ -114,4 +117,3 @@
 
 </body>
 </html>
-
