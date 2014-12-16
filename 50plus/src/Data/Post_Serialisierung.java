@@ -11,22 +11,33 @@ import java.util.ArrayList;
 
 import Personen.Post;
 
-
+/**
+ * Die Klasse Post_Serialisierung ist für die Serialisierung und Deserialisierung von 
+ * Post-Objekten(Posts) zuständig
+ */
 public class Post_Serialisierung 
 {
 	private String pfad;
 	private ArrayList<Post> globalPostlist;
 
- 
+	/**
+	 * default Konstruktor der Klasse Post_Serialisierung
+	 * der Pfad zur Datei wird gesetzt, wohin die Posts gespeichert werden
+	 */
 	
     public Post_Serialisierung()
     {
         String dir = System.getProperty("user.dir"); //Gibt Pfad von Eclipse
-        this.pfad= dir + "/post.ser"; 
+        this.pfad= dir + "/post.ser";
         globalPostlist = new ArrayList<Post>();
     }
 	
-    
+	/**
+	 * Die Methode speicherePost speichert ein Post Objekt in post.ser
+	 * @param p Post, der gespeichert wird
+	 * @throws IOException ex wenn globalPostlist nicht gespeichert werden kann
+	 * @throws IOException e wenn Streams nicht geschlossen werden können
+	 */  
     public void speicherePost(Post p) 
     {
         
@@ -58,7 +69,7 @@ public class Post_Serialisierung
         }
         catch (IOException ex) 
         {
-           System.out.println("Konnte postlist nicht speichern. " + ex);
+           System.out.println("Konnte globalPostlist nicht speichern. " + ex);
         }
         finally
         {
@@ -73,7 +84,15 @@ public class Post_Serialisierung
 			}
          }
      }
-        
+    
+	/**
+	 * Die Methode getGlobalpostlist gibt alle Posts zurueck
+	 * @throws IOException ex die Daten konnte nicht erstellt werden
+	 * @throws IOException e Streams konnten nicht geschlossen werden 
+	 * @throws ClassNotFoundException Klasse Postlist wurden nicht gefunden
+	 * @throws IOException e Streams konnten nicht geschlossen werden 
+	 * @return Liste aller Posts
+	 */         
 	public ArrayList<Post> getGlobalpostlist()
 	{
     	File file = new File(pfad);
@@ -122,7 +141,7 @@ public class Post_Serialisierung
     				is.close();
     			}
     			
-    			catch(Exception e)
+    			catch(IOException e)
     			{
     				System.err.println("Konnte Streams nicht schliessen. " + e);
     			}
@@ -131,6 +150,12 @@ public class Post_Serialisierung
         }
   	}
     
+	/**
+	 * Die Methode getOwnpostlist gibt alle Posts eines Users zurueck
+	 * @param username User, dessen Posts zurueckgegeben werden
+	 * @return alle Posts eines Users
+	 */ 	
+	
     public ArrayList<Post> getOwnpostlist(String username)
    	{
     	globalPostlist = getGlobalpostlist();
@@ -159,6 +184,12 @@ public class Post_Serialisierung
 		return ownPostlist;
    	}
     
+	/**
+	 * Die Methode loeschePost loescht einen Post
+	 * @param posNumber Post mit dieser Nummer wird geloescht
+	 * @throws IOException ex globalPostlist konnte nicht gespeichert werden
+	 * @throws IOException e Streams konnten nicht geschlossen werden 
+	 */    
     public void loeschePost(int postNumber) 
     {
         
@@ -175,8 +206,7 @@ public class Post_Serialisierung
 			}
 	
 		}
-    	
-    	
+    	    	
     	FileOutputStream out = null;
     	ObjectOutputStream output = null;
     	    	
@@ -191,7 +221,7 @@ public class Post_Serialisierung
         }
         catch (IOException ex) 
         {
-           System.out.println("Konnte postlist nicht speichern. " + ex);
+           System.out.println("Konnte globalPostlist nicht speichern. " + ex);
         }
         finally
         {
@@ -207,6 +237,11 @@ public class Post_Serialisierung
          }
      }
     
+	/**
+	 * Die Methode getPostNumbers gibt die Anzahl der Posts eines Users zurueck
+	 * @param username User, dessen Posts zurueckgegeben werden
+	 * @return die Anzahl der Posts eines Users
+	 */      
     public ArrayList<Integer> getPostNumbers(String username)
    	{
  
@@ -227,8 +262,11 @@ public class Post_Serialisierung
 			}
 		}
 		return ownPostNumbers;
-   	}    
-    
+   	}
+	/**
+	 * Die Methode getMaxPostNumber gibt die hoechste Nummer der Posts, die je gepostet wurden
+	 * @return die hoechste Nummer der Posts
+	 */     
     private int getMaxPostNumber()
    	{
     	int max = 0;
@@ -260,7 +298,7 @@ public class Post_Serialisierung
 				return p;
 			}
 		}
-    	System.out.println("nem talaltam a postot");
+    	System.out.println("ich habe den Post nicht gefunden");
 		return null;
    	}   
     */

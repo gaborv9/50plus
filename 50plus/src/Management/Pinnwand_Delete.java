@@ -14,14 +14,15 @@ import javax.servlet.http.HttpSession;
 import Personen.Post;
 
 /**
- * Servlet implementation class Pinnwand_Post_Delete
+ * Mit Servlet Pinnwand_Delete kann erfolgt das Löschen von Posts
  */
+
 @WebServlet("/Pinnwand_Post_Delete")
 public class Pinnwand_Delete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default Konstruktor
      */
     public Pinnwand_Delete() 
     {
@@ -29,9 +30,14 @@ public class Pinnwand_Delete extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+     * Handles the HTTP GET method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		response.setContentType("text/html");
@@ -60,15 +66,21 @@ public class Pinnwand_Delete extends HttpServlet {
 
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+     * auskommentiert, eine zweite Lösung für Löschen mit Eingeben der Nummer des Posts
+     * Handles the HTTP POST method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
 	
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		/*behalten nur für mich (Gabor)/zweite Lösung für Löschen, mit Eingeben der Nummer des Posts
+		/*behalten nur für mich (Gabor)/zweite Lösung für Löschen mit Eingeben der Nummer des Posts
 		 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
