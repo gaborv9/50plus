@@ -92,10 +92,10 @@
 
 					response.sendRedirect("index.jsp");
 				}
+			//<jsp:include page="/Forschung" flush="true" />
 			%>
-			//Hier wird noch eine Ueberpruefung kommen, ob der Surfende Admin
-			oder Forscher ist, da nur Forscher Zugriff haben.
-			<jsp:include page="/Forschung" flush="true" />
+			// Forschung kommt bei der naechsten Abgabe
+	
 			
 			
 			<%
