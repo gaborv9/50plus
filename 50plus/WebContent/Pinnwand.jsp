@@ -126,10 +126,11 @@
 				
 					
 					
-					<!--<input type="submit" name="posten" value="posten"> -->
+					
 				 
 					
 					</form> 
+					<!--<input type="submit" name="posten" value="posten"> -->
 						               		
 					<%
 						String postDeleteSuccess = (String)session.getAttribute("postDeleteSuccess");
@@ -149,22 +150,22 @@
 					if(postlist.size() != 0)
 					{
 						//for (int i=0; i < postlist.size(); i++)
-							int i=postlist.size()-1;
-										for (; i >0; --i)
+							int i =postlist.size();
+										for (Post test: postlist )
 					    {
-							//out.println(postlist.get(i).getOwnPostcounter() + ":    "); 
+							//out.println(test.getOwnPostcounter() + ":    "); 
 							out.println(username + ", ");
-							out.println(postlist.get(i).getZeitpunkt() + "<br />"); 
+							out.println(test.getZeitpunkt() + "<br />"); 
 							%>
 							<div class="panel panel-default">
-								<div class="panel-body" style="width: 1100px; word-wrap: break-word"><% out.println(postlist.get(i).getInhalt()); %></div>
+								<div class="panel-body" style="width: 1100px; word-wrap: break-word"><% out.println(test.getInhalt()); %></div>
 							</div>
 
 							<%
-		               //		out.println(postlist.get(i).getInhalt() + "<br />"); 
+		               //		out.println(test.getInhalt() + "<br />"); 
 		             %>
 		               	
-		               <a href="/50plus/Pinnwand_Delete?postNumber=<%= (postlist.get(i).getOwnPostcounter())%>">Delete</a><br> 	
+		               <a href="/50plus/Pinnwand_Delete?postNumber=<%= (test.getOwnPostcounter())%>">Delete</a><br> 	
 		               <br>
 		               		
 		               		
