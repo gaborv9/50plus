@@ -53,6 +53,7 @@
 					<a class="navbar-brand" href="#"> <img
 						src="http://placehold.it/150x150&text=BILD" alt="">
 					</a>
+				
 		
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
@@ -74,12 +75,15 @@
 								<input type="suche" class="form-control" name="suche"
 									placeholder="Freunde/Gruppen finden..">
 							</div>
+							
 						</form>
 					</ul>
-		
+				
 				</div>
-		
+				<span style="color:grey; padding-left:40px"> <%=(String) session.getAttribute("username") %> </span>	
 				<!-- /.navbar-collapse -->
+				
+				
 			</div>
 		
 			<!-- /.container -->
@@ -106,9 +110,13 @@
 					<textarea name="inhalt" rows="7" cols="90"></textarea> 
 					<br>
 						
+					<button type="register" class="btn btn-default">posten</button>
+				
 					
-					<input type="submit" name="posten" value="posten"> 
+					
+					<!--<input type="submit" name="posten" value="posten"> -->
 					<br>
+					
 					</form> 
 						               		
 					<%
@@ -116,34 +124,6 @@
 					
 					%>		            
 		           
-		            
-		            <form action="Pinnwand_Delete" method="post"> 
-		            
-		           	<input type="text" name="postNumber">
-		            
-		            <input type="submit" name="delete" value="delete"> 
-					<%
-						if (postDeleteSuccess.equals("noSuccess"))
-						{
-							out.println("Sie haben kein Post mit dieser Nummer.");
-						}
-						else if(postDeleteSuccess.equals("success"))
-						{
-							out.println("Post gelöscht.");
-						}
-						else if(postDeleteSuccess.equals("notNumber"))
-						{
-							out.println("Sie haben keine Nummer eingegeben!");
-						}						
-							
-						
-					
-					
-					
-					%>			            
-					</form> 
-			  	
-					
 					
 					<%
 					String username = (String) session.getAttribute("username");
@@ -158,25 +138,28 @@
 					{
 						for (int i=0; i < postlist.size(); i++)
 					    {
-							out.println(postlist.get(i).getOwnPostcounter() + ":    "); 
-							out.println(postlist.get(i).getZeitpunkt() + ":    "); 
-		               		out.println(postlist.get(i).getInhalt() + "<br><br>"); 
+							//out.println(postlist.get(i).getOwnPostcounter() + ":    "); 
+							out.println(username + ", ");
+							out.println(postlist.get(i).getZeitpunkt() + "<br />"); 
+		               		out.println(postlist.get(i).getInhalt() + "<br />"); 
+		             %>
+		               	
+		               <a href="/50plus/Pinnwand_Delete?postNumber=<%= (postlist.get(i).getOwnPostcounter())%>">Delete</a><br> 	
+		               <br>
+		               		
+		               		
+		            <% 
 		            	}
 					}
 
 					
 		             %>
-									
-					
-							
-					
-					
 					
 					<%
-				        	if (session.getAttribute("username")==null){
-						 
-							response.sendRedirect("index.jsp");
-				        	}
+			        	if (session.getAttribute("username")==null){
+					 
+						response.sendRedirect("index.jsp");
+			        	}
 						
 					%>
 				</div>

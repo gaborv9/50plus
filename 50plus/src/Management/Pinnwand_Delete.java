@@ -34,17 +34,42 @@ public class Pinnwand_Delete extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		HttpSession session = request.getSession();
+		String username = (String) session.getAttribute("username");	
+		
+		int postNumber =  Integer.parseInt(request.getParameter("postNumber"));
+
+		PinnwandManagement pm = new PinnwandManagement();
+		
+		if (pm.getPostNumbers(username).contains(postNumber))
+		{
+			pm.deletePost(postNumber);
+			session.setAttribute("postDeleteSuccess", "success");
+		}
+		else
+		{
+			session.setAttribute("postDeleteSuccess", "noSuccess");
+		}
+
+		ArrayList<Post> postlist = pm.getOwnpostlist(username);
+		session.setAttribute("postlist", postlist);
+		response.sendRedirect("Pinnwand.jsp");
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	
-	PinnwandManagement pm = new PinnwandManagement();
+
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		/*behalten nur für mich (Gabor)/zweite Lösung für Löschen, mit Eingeben der Nummer des Posts
+		 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
@@ -78,6 +103,35 @@ public class Pinnwand_Delete extends HttpServlet {
 			session.setAttribute("postlist", postlist);
 			response.sendRedirect("Pinnwand.jsp");
 		}
+
+
+		in Pinnwand.jsp kopieren
+		
+				    <form action="Pinnwand_Delete" method="post"> 
+		            
+		           	<input type="text" name="postNumber">
+		            
+		            <input type="submit" name="delete" value="delete"> 
+					<%
+						if (postDeleteSuccess.equals("noSuccess"))
+						{
+							out.println("Sie haben kein Post mit dieser Nummer.");
+						}
+						else if(postDeleteSuccess.equals("success"))
+						{
+							out.println("Post gelöscht.");
+						}
+						else if(postDeleteSuccess.equals("notNumber"))
+						{
+							out.println("Sie haben keine Nummer eingegeben!");
+						}						
+							
+			
+					
+					%>			            
+					</form> 
+
+		*/
 	}
 
 }

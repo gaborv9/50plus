@@ -69,7 +69,7 @@
 			</ul>
 
 		</div>
-
+		<span style="color:grey; padding-left:40px"> <%=(String) session.getAttribute("username") %> </span>	
 		<!-- /.navbar-collapse -->
 	</div>
 
