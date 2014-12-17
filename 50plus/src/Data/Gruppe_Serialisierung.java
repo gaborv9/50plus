@@ -13,8 +13,8 @@ import Management.GruppeClass;
 import Personen.Person;
 import Personen.User;
 
-/**Die Klasse Gruppe_Serialisierung ist für die Serialisierung und Deserialisierung von 
- * GruppeClass-Objekten(Gruppen) zuständig
+/**Die Klasse Gruppe_Serialisierung ist fuer die Serialisierung und Deserialisierung von 
+ * GruppeClass-Objekten(Gruppen) zustaendig
  */
 public class Gruppe_Serialisierung 
 {
@@ -74,7 +74,7 @@ public class Gruppe_Serialisierung
      }
       
     
-	/**Die Methode getGruppenlist gibt eine Liste aller Gruppen aus Gruppen.ser zurück.
+	/**Die Methode getGruppenlist gibt eine Liste aller Gruppen aus Gruppen.ser zurueck.
 	   * 
 	   * @return ArrayList mit Gruppen
 	   */	
@@ -137,7 +137,7 @@ public class Gruppe_Serialisierung
         }
   	}
     
-	/**Die Methode getOwnGruppenlist gibt eine Liste von allen Gruppen einer Person aus Gruppen.ser zurück.
+	/**Die Methode getOwnGruppenlist gibt eine Liste von allen Gruppen einer Person aus Gruppen.ser zurueck.
 	   * 
 	   * @param username Username eines Person-Objektes
 	   * @return ArrayList mit Gruppen

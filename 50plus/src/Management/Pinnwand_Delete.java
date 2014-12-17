@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import Personen.Post;
 
 /**
- * Mit Servlet Pinnwand_Delete kann erfolgt das Löschen von Posts
+ * Mit Servlet Pinnwand_Delete kann erfolgt das Loeschen von Posts
  */
 
 @WebServlet("/Pinnwand_Post_Delete")
@@ -67,7 +67,7 @@ public class Pinnwand_Delete extends HttpServlet {
 	}
 
     /**
-     * auskommentiert, eine zweite Lösung für Löschen mit Eingeben der Nummer des Posts
+     * auskommentiert, eine zweite Loesung fuer Loeschen mit Eingeben der Nummer des Posts
      * Handles the HTTP POST method.
      *
      * @param request servlet request
@@ -80,7 +80,7 @@ public class Pinnwand_Delete extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		/*behalten nur für mich (Gabor)/zweite Lösung für Löschen mit Eingeben der Nummer des Posts
+		/*behalten nur fuer mich (Gabor)/zweite Loesung fuer Loeschen mit Eingeben der Nummer des Posts
 		 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -131,7 +131,7 @@ public class Pinnwand_Delete extends HttpServlet {
 						}
 						else if(postDeleteSuccess.equals("success"))
 						{
-							out.println("Post gelöscht.");
+							out.println("Post geloescht.");
 						}
 						else if(postDeleteSuccess.equals("notNumber"))
 						{

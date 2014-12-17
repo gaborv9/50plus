@@ -47,7 +47,7 @@ public class PinnwandManagement
     
     /**
      * Die Methode getPostNumbers ruft die Methode getPostNumbers auf, mit Hilfe derer man die Anzahl der Posts eines User bekommt
-	 * @param postNumber Post mit dieser Number wird geloescht
+	 * @param username Post mit dieser Number wird geloescht
 	 * @return gibt die Anzahl des Posts eines Users zurueck
 	 */       
     public ArrayList<Integer> getPostNumbers(String username)

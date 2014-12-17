@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import Personen.Post;
 
 /**
- * Die Klasse Post_Serialisierung ist für die Serialisierung und Deserialisierung von 
- * Post-Objekten(Posts) zuständig
+ * Die Klasse Post_Serialisierung ist fuer die Serialisierung und Deserialisierung von 
+ * Post-Objekten(Posts) zustaendig
  */
 public class Post_Serialisierung 
 {
@@ -35,8 +35,6 @@ public class Post_Serialisierung
 	/**
 	 * Die Methode speicherePost speichert ein Post Objekt in post.ser
 	 * @param p Post, der gespeichert wird
-	 * @throws IOException ex wenn globalPostlist nicht gespeichert werden kann
-	 * @throws IOException e wenn Streams nicht geschlossen werden können
 	 */  
     public void speicherePost(Post p) 
     {
@@ -87,11 +85,7 @@ public class Post_Serialisierung
     
 	/**
 	 * Die Methode getGlobalpostlist gibt alle Posts zurueck
-	 * @throws IOException ex die Daten konnte nicht erstellt werden
-	 * @throws IOException e Streams konnten nicht geschlossen werden 
-	 * @throws ClassNotFoundException Klasse Postlist wurden nicht gefunden
-	 * @throws IOException e Streams konnten nicht geschlossen werden 
-	 * @return Liste aller Posts
+	 * @return globalPostList - Liste aller Posts eines Users
 	 */         
 	public ArrayList<Post> getGlobalpostlist()
 	{
@@ -186,9 +180,8 @@ public class Post_Serialisierung
     
 	/**
 	 * Die Methode loeschePost loescht einen Post
-	 * @param posNumber Post mit dieser Nummer wird geloescht
-	 * @throws IOException ex globalPostlist konnte nicht gespeichert werden
-	 * @throws IOException e Streams konnten nicht geschlossen werden 
+	 * @param postNumber Post mit dieser Nummer wird geloescht
+	 *
 	 */    
     public void loeschePost(int postNumber) 
     {
