@@ -59,7 +59,7 @@ public class Login extends HttpServlet {
 	// <editor-fold defaultstate="collapsed"
 	// desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
-	 * Handles the HTTP <code>GET</code> method.
+	 * Handles the HTTP <code>GET</code> method. Invalidates session.
 	 * 
 	 * @param request
 	 *            servlet request
@@ -88,7 +88,7 @@ public class Login extends HttpServlet {
 	}
 
 	/**
-	 * Handles the HTTP <code>POST</code> method.
+	 * Handles the HTTP <code>POST</code> method. Sets attributes to the session.
 	 * 
 	 * @param request
 	 *            servlet request

@@ -79,7 +79,7 @@ public class Register extends HttpServlet {
 	}
 
 	/**
-	 * Handles the HTTP <code>POST</code> method.
+	 * Handles the HTTP <code>POST</code> method. Registers and saves a new User.
 	 * 
 	 * @param request
 	 *            servlet request
