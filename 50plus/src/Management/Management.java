@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Data.Serialisierung;
 import Personen.Person;
 
 /**
@@ -22,19 +23,7 @@ import Personen.Person;
  */
 public class Management extends HttpServlet {
 
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-	 * methods.
-	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
-	 * @throws ServletException
-	 *             if a servlet-specific error occurs
-	 * @throws IOException
-	 *             if an I/O error occurs
-	 */
+
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -56,7 +45,7 @@ public class Management extends HttpServlet {
 	// <editor-fold defaultstate="collapsed"
 	// desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
-	 * Handles the HTTP <code>GET</code> method.
+	 * Handles the HTTP <code>GET</code> method. Alters the role
 	 * 
 	 * @param request
 	 *            servlet request
@@ -68,12 +57,11 @@ public class Management extends HttpServlet {
 	 *             if an I/O error occurs
 	 */
 	@Override
+ 
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+		HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String onlineuser = (String) session.getAttribute("username");
-		   /* PrintWriter out = response.getWriter();
-		    out.println(onlineuser);*/
 		
 		if (request.getParameter("role") != null && request.getParameter("username") !=null) {
 			int role = Integer.parseInt(request.getParameter("role"));
@@ -82,17 +70,20 @@ public class Management extends HttpServlet {
 			PersonManagement a = new PersonManagement();
 			
 			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
-					/*response.setContentType("text/html");
-					PrintWriter out = response.getWriter();
-					out.println(username + " ist eingeloggt");*/
-					a.setRole(username, role);
+			
+				Serialisierung ser = new Serialisierung();
+				Person save = a.getPerson(username);
+				save.setRole(role);
+				ser.loeschePerson(a.getPerson(username));
+			    ser.speicherePerson(save);
+ 
 			}
-			else{//nichts :p
+			else{
 				 
 			}
 		}
 		response.sendRedirect("Suche.jsp");
-		//href="/50plus/Management?role=1&username=<%=(String) session.getAttribute("username")%>">Admin(1)</a></li>
+		 
 		// processRequest(request, response);
 	}
 

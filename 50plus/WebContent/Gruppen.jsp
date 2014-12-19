@@ -98,24 +98,16 @@
 
 			
 			<form action="Gruppen" method="post">
-			<%
-				out.println((String) session.getAttribute("username")
-						+ " surft hier gerade");
-			%>
-			<br>
 			
 				<%
-				out.println((String) session.getAttribute("gruppenname")
-						+ " gruppe");
-			%>
-			<br><br>
-				<%
-				//out.println((ArrayList<GruppeClass>) session.getAttribute("grouplist"));
-			%>	
-			
-			<br>
-			Administrator Nachname: <%out.println((String) session.getAttribute("admin")); %>
-			<br>
+					if(session.getAttribute("gruppenname")!=null){
+				
+						out.println((String) session.getAttribute("gruppenname")+ " Gruppe wurde erstellt!");
+						out.println("Der Nachname des Administrators: "+(String) session.getAttribute("admin"));
+					}
+					else{	
+					}
+				%>
 			
 			<%
 					String username = (String) session.getAttribute("username");
@@ -124,21 +116,18 @@
 			
 			
 			<br>
-			<% 
-					out.println("Liste der Gruppen: ");
-			%>
-			<br>
+			<h3>Liste der Gruppen: </h3>
 			<%
 					if(grouplist.size() != 0)
 					{
 						for (int i=0; i < grouplist.size(); i++)
 					    {
-							out.println(grouplist.get(i).getName() + "<br>"); 
+							%>
+							<a href="/50plus/Gruppenpinnwand.jsp">
+							<%out.println(grouplist.get(i).getName() + "<br>"); 
 					    }
-					}
-
-					
-		      %>
+					}			
+		      %></a>
 
 			</form>
 			<%

@@ -18,30 +18,43 @@ import Data.Post_Serialisierung;
 import Personen.Post;
 
 /**
- * Servlet implementation class Pinnwand_servlet
+ * Mit Servlet Pinnwand erfolgt das Posten von Posts
  */
 
-public class Pinnwand extends HttpServlet {
+public class Pinnwand extends HttpServlet 
+{
 	private static final long serialVersionUID = 1L;
        
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default Konstruktor
      */
-    public Pinnwand() {
+    public Pinnwand() 
+    {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * Handles the HTTP GET method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+    /**
+     * Handles the HTTP POST method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		response.setContentType("text/html");
@@ -71,10 +84,7 @@ public class Pinnwand extends HttpServlet {
 		    session.setAttribute("postlist", postlist);
  
 		}
-
 		  response.sendRedirect("Pinnwand.jsp");
-	    
-		
-	}
+ 	}
 
 }

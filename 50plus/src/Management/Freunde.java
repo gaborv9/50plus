@@ -20,7 +20,7 @@ import Personen.Person;
 
 /**
  *
- * @author master
+ * @author Lechl Bernhard
  */
 public class Freunde extends HttpServlet {
 
@@ -55,8 +55,8 @@ public class Freunde extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param request servlet request - freundname der hinzu oder entfernt werden soll, aktueller User, addelete = loeschen oder hinzufuegen
+     * @param response servlet response - nichts (eventuelle textausgaben)
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
@@ -138,8 +138,8 @@ public class Freunde extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param request servlet request - aktueller User und dessen username
+     * @param response servlet response - liste der Freunde, die User hat
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

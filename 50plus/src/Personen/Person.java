@@ -40,7 +40,9 @@ public abstract class Person implements Serializable {
 	}
 	/**
 	 * 
-	 * @param zufuegen Person die den Freunden zugefuegt werden soll
+	 * @param addrem Person die den Freunden zugefuegt werden soll
+	 * @param user aktueller User
+	 * 
 	 */
 	public void setFreunde(Person user, boolean addrem){
 		if(!(freunde==null)){
@@ -115,6 +117,7 @@ public abstract class Person implements Serializable {
 	/**
 	 * @param vorname
 	 *            the vorname to set
+	 * @return 1 wenn Vorname zugefuegt wurde
 	 */
 	public int setVorname(String vorname) {
 		if ((vorname.length() > 25) || (vorname.isEmpty() == true)) {
@@ -134,6 +137,7 @@ public abstract class Person implements Serializable {
 	/**
 	 * @param nachname
 	 *            the nachname to set
+	 * @return 1 wenn nachname gesetzt
 	 */
 	public int setNachname(String nachname) {
 		if ((nachname.length() > 25) || (nachname.isEmpty() == true)) {
@@ -154,6 +158,7 @@ public abstract class Person implements Serializable {
 	/**
 	 * @param id
 	 *            the id to set
+	 * @return 1 wenn id gesetzt
 	 */
 	public int setID(String id) {
 		if ((id.length() > 25) || (id.isEmpty() == true)) {
@@ -164,15 +169,18 @@ public abstract class Person implements Serializable {
 	}
 
 	/**
-	 * @return the datum
+	 * @return datum
 	 */
 	public GregorianCalendar getDatum() {
 		return datum;
 	}
 
 	/**
-	 * @param datum
+	 * @param year - das jahr
+	 * @param month - das Monat
+	 * @param day - der tag
 	 *            the datum to set
+	 * @return 1 wenn datum gesetzt
 	 */
 	public int setDatum(String year, String month, String day) {
 		try {
@@ -201,7 +209,7 @@ public abstract class Person implements Serializable {
 	}
 
 	/**
-	 * @return the pw
+	 * @return pw - Passwort
 	 */
 	public String getPW() {
 		return pw;
@@ -210,6 +218,7 @@ public abstract class Person implements Serializable {
 	/**
 	 * @param pw
 	 *            the pw to set
+	 * @return 1 wenn gesetzt
 	 */
 	public int setPW(String pw) {
     	if ((id.length() >25) || (id.isEmpty()==true) || (pw.length() < 6)){

@@ -79,7 +79,7 @@ public class Register extends HttpServlet {
 	}
 
 	/**
-	 * Handles the HTTP <code>POST</code> method.
+	 * Handles the HTTP <code>POST</code> method. Registers and saves a new User.
 	 * 
 	 * @param request
 	 *            servlet request
@@ -136,6 +136,9 @@ public class Register extends HttpServlet {
 			out.println("Sie müssen alt genug sein und ein korrektes Datum eingeben!");
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
 			fc = 1;
+		}
+		if (username.equals("admin1")){
+			p.setRole(1);
 		}
 
 		if (a.add(p) == 0) {

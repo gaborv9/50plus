@@ -10,14 +10,19 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import Personen.Person;
- 
+ /**
+  * 
+  * @author Palkovits Dominik
+  *	
+  */
 public class Serialisierung {
     public String pfad;
+    
+    
     /**Pfad zur Datei wird gesetzt.
      * 
-     * @param pfad Pfad wird übergeben
+     * 
      */
- 
     public Serialisierung(){
         String dir = System.getProperty("user.dir"); //Gibt Pfad von tomcat/bin zurueck
         this.pfad= dir+"/db.ser";
@@ -82,6 +87,7 @@ public class Serialisierung {
     /**Person-Objekt wird persistent gespeichert
      * 
      * @param a Person-Objekt welches gespeichert werden soll
+     * @return 1 wenn herausgelesen wurde
      */
     //Serialisierung  
    @SuppressWarnings("unchecked")
@@ -114,11 +120,12 @@ public class Serialisierung {
         }
         return 1;
     }
-    /**Person-Objekt wird gelöscht.
+    /**Person-Objekt wird geloescht.
      * 
-     * @param a Zu löschendes Person-Objekt
+     * @param a Zu loeschendes Person-Objekt
+     * @return 1 wenn geloescht wurde
      */
-    /*Die Methode loeschePerson(Person) soll ein bestehendes Person von der persistenten Datenquelle löschen. 
+    /*Die Methode loeschePerson(Person) soll ein bestehendes Person von der persistenten Datenquelle loeschen. 
     Falls es kein solches Person gibt, soll IllegalArgumentException (mit entsprechender Fehlermeldung) geworfen werden.*/
  @SuppressWarnings("unchecked")  
     public int loeschePerson(Person a) {
