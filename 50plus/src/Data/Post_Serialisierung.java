@@ -256,11 +256,14 @@ public class Post_Serialisierung
 		}
 		return ownPostNumbers;
    	}
+    
+    
+    
 	/**
 	 * Die Methode getMaxPostNumber gibt die hoechste Nummer der Posts, die je gepostet wurden
 	 * @return die hoechste Nummer der Posts
 	 */     
-    private int getMaxPostNumber()
+    public int getMaxPostNumber()
    	{
     	int max = 0;
     	
