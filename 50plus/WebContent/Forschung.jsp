@@ -32,8 +32,25 @@
 <!--flush="true"/>;-->
 <link href="dist/css/logo-nav.css" rel="stylesheet">
 
+
+
+<link href="flot/examples/examples.css" rel="stylesheet" type="text/css">
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="flot/excanvas.min.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="flot/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="flot/jquery.flot.js"></script>
+
+	 <script type="text/javascript">
+    $(document).ready(function () {
+        $.plot($("#flot-placeholder"),
+               data, 
+               options);
+    });
+</script>
+
+
+
 </head>
-<body>
+
 <body>
 	<%@ page import="java.util.ArrayList"%>
 	<!-- Navigation -->
@@ -107,68 +124,72 @@
 							placeholder="Person suchen..">
 
 					</form>
-						
+
 				</div>
-				<a class="btn btn-default" href="/50plus/Forschung?information=information" role="button">Allgemeine Informationen</a>
-				
-			
+				<a class="btn btn-default"
+					href="/50plus/Forschung?information=information" role="button">Allgemeine
+					Informationen</a>
+
+
 				<%
-				if (session.getAttribute("anfrage").equals("keine")){	
-				}
-				
-				else if(session.getAttribute("anfrage").equals("keinzugriff")){
-					%>
-					Sie sind kein Forscher - Kein Zugriff.			
-					
-					<%
-
-				}
-				else if(session.getAttribute("anfrage").equals("info")){
-					ArrayList<Integer> allgemeinwerte = (ArrayList<Integer>) session.getAttribute("allgemeinwerte");
-					out.println("<br />");
-					out.println("Anzahl aller registrierten Personen: "+allgemeinwerte.get(0));
-					out.println("<br />");
-					out.println("Anzahler aller Posts: " + allgemeinwerte.get(1));
-					out.println("<br />");
-					out.println("Juengste Person: " + allgemeinwerte.get(2));
-					out.println("<br />");
-					out.println("Aelteste Person: " + allgemeinwerte.get(3));
-					out.println("<br />");
-					out.println("Anzahl der Admins: " + allgemeinwerte.get(4));
-					out.println("<br />");
-					out.println("Anzahl der User: " + allgemeinwerte.get(5));
-					out.println("<br />");
-					out.println("Anzahler der Forscher: " + allgemeinwerte.get(6));
-					out.println("<br />");
-					out.println("Durchschnittsalter aller Personen: " + allgemeinwerte.get(7));
-					out.println("<br />");
-					out.println("Durchschnittliche Freundesanzahl: " + allgemeinwerte.get(8));
-					out.println("<br />");
-					out.println("Durchschnitt von Posts pro Person: " + allgemeinwerte.get(9));
-
-				}
-				else if(session.getAttribute("anfrage").equals("person")){
-					
-					if (session.getAttribute("personfound").equals("true")) {
-						ArrayList<Integer> searchedpersonwerte = (ArrayList<Integer>) session.getAttribute("searchedpersonwerte");
-						
-						out.println("<br />");
-						out.println("Postanzahl: "+searchedpersonwerte.get(0));
-						out.println("<br />");
-						out.println("Freundeanzahl: "+searchedpersonwerte.get(1));
- 
+					if (session.getAttribute("anfrage").equals("keine")) {
 					}
-					else{
-						out.println("<br />");
-						out.println("Person nicht gefunden!");
-					}
-						
-					
-				}
-				else{}
+
+					else if (session.getAttribute("anfrage").equals("keinzugriff")) {
 				%>
+				Sie sind kein Forscher - Kein Zugriff.
 
 				<%
+					} else if (session.getAttribute("anfrage").equals("info")) {
+						ArrayList<Integer> allgemeinwerte = (ArrayList<Integer>) session
+								.getAttribute("allgemeinwerte");
+						out.println("<br />");
+						out.println("Anzahl aller registrierten Personen: "
+								+ allgemeinwerte.get(0));
+						out.println("<br />");
+						out.println("Anzahler aller Posts: " + allgemeinwerte.get(1));
+						out.println("<br />");
+						out.println("Juengste Person: " + allgemeinwerte.get(2));
+						out.println("<br />");
+						out.println("Aelteste Person: " + allgemeinwerte.get(3));
+						out.println("<br />");
+						out.println("Anzahl der Admins: " + allgemeinwerte.get(4));
+						out.println("<br />");
+						out.println("Anzahl der User: " + allgemeinwerte.get(5));
+						out.println("<br />");
+						out.println("Anzahler der Forscher: " + allgemeinwerte.get(6));
+						out.println("<br />");
+						out.println("Durchschnittsalter aller Personen: "
+								+ allgemeinwerte.get(7));
+						out.println("<br />");
+						out.println("Durchschnittliche Freundesanzahl: "
+								+ allgemeinwerte.get(8));
+						out.println("<br />");
+						out.println("Durchschnitt von Posts pro Person: "
+								+ allgemeinwerte.get(9));
+
+					} else if (session.getAttribute("anfrage").equals("person")) {
+
+						if (session.getAttribute("personfound").equals("true")) {
+							ArrayList<Integer> searchedpersonwerte = (ArrayList<Integer>) session
+									.getAttribute("searchedpersonwerte");
+
+							out.println("<br />");
+							out.println("Postanzahl: " + searchedpersonwerte.get(0));
+							out.println("<br />");
+							out.println("Freundeanzahl: " + searchedpersonwerte.get(1));
+							//Darunter kommt unter Umstaenden noch ein Line Chart
+				%>
+			    
+				<%
+					} else {
+							out.println("<br />");
+							out.println("Person nicht gefunden!");
+						}
+
+					} else {
+					}
+
 					session.setAttribute("postDeleteSuccess", "nichts");
 				%>
 			</div>
