@@ -13,7 +13,7 @@ public abstract class Person implements Serializable {
 	
 	
 	public int role;
-	public int alter;
+	public int alter; //Alter wird derzeit nicht gesetzt, da man sonst immer auf die Aktualisierung achten muesste, also wird immer neu berechnet mit getAlter
 	public String vorname;
 	public String nachname;
 	public String id; // id=username, diese sind eindeutig
@@ -96,7 +96,12 @@ public abstract class Person implements Serializable {
 	 * @return the alter
 	 */
 	public int getAlter() {
-		return alter;
+
+		GregorianCalendar now = new GregorianCalendar();
+		
+		int alter= now.get(GregorianCalendar.YEAR) - this.datum.get(GregorianCalendar.YEAR);
+	    return alter;
+		
 	}
 
 	/**
@@ -192,7 +197,7 @@ public abstract class Person implements Serializable {
 			GregorianCalendar gebdate = new GregorianCalendar();
 			gebdate.setLenient(false);
 			gebdate.set(GregorianCalendar.YEAR, yeari);
-			gebdate.set(GregorianCalendar.MONTH, monthi-1); //Weil die doofen Programmierer beim Monat eine Ausnahme machen und bei 0 anfangen.. Hier die Ausgabe noch checken.
+			gebdate.set(GregorianCalendar.MONTH, monthi-1); //Beim Monat gibt es eine Ausnahme, man faengt bei 0 anfangen.. Hier die Ausgabe noch checken.
 			gebdate.set(GregorianCalendar.DAY_OF_MONTH, dayi);
 			if ((now.get(GregorianCalendar.YEAR) - gebdate.get(GregorianCalendar.YEAR)) < 49) {
 				return 0;
