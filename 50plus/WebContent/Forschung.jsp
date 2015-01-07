@@ -45,7 +45,7 @@
 </head>
 
 <body>
-	<%@ page import="java.util.ArrayList"%>
+		<%@ page import="java.util.ArrayList" import="Personen.Post"%>
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -176,9 +176,18 @@
 							out.println("Freundeanzahl: " + searchedpersonwerte.get(1));
 							out.println("<br />");
 							out.println("Gruppenanzahl: " + searchedpersonwerte.get(2));
-							 
+							
+						 
+								
+								String username = (String) session.getAttribute("username");
+								ArrayList<Post> postlist = 	(ArrayList<Post>) session.getAttribute("postlist");
+							   
+								String postpermonth[] = new String[12];
+ 
+							
 				%>
 				<script type="text/javascript">
+				
 				var werte = [[1, 5], [2, 5], [3, 20], [4, 0], [5, 10], [6, 100], [7, 30], [8, 10], [9, 5], [10, 3], [11, 2], [12, 1]];
  
 				$(document).ready(function () {

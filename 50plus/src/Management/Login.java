@@ -115,7 +115,7 @@ public class Login extends HttpServlet {
 		
 		
 		
-		Serialisierung a = new Serialisierung();
+		PersonDAO a = new Serialisierung();
 		if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW())) 
 		{
 			HttpSession session = request.getSession();

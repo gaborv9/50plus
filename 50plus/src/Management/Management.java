@@ -25,7 +25,6 @@ import Personen.User;
  */
 public class Management extends HttpServlet {
 
-
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -72,11 +71,15 @@ public class Management extends HttpServlet {
 			PersonManagement a = new PersonManagement();
 			
 			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
-				Serialisierung ser = new Serialisierung();
+				/*Serialisierung ser = new Serialisierung();
 				Person save = a.getPerson(username);
 				save.setRole(role);
 				ser.loeschePerson(a.getPerson(username));
-			    ser.speicherePerson(save);
+			    ser.speicherePerson(save);*/
+				Person save = a.getPerson(username);
+				save.setRole(role);
+				a.delete(username);
+			    a.add(save);
  
 			}
 			else{
@@ -115,7 +118,7 @@ public class Management extends HttpServlet {
 		String day = request.getParameter("datum1");
 
 		HttpSession session = request.getSession();
-		Serialisierung ser = new Serialisierung();
+		PersonDAO ser = new Serialisierung();
 		String usernamenow =(String) session.getAttribute("username");
 		Person p= ser.getPersonbyid((String) session.getAttribute("username"));
 

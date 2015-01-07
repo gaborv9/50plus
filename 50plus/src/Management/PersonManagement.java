@@ -4,8 +4,7 @@ import Data.Serialisierung;
 import Personen.Person;
 
 public class PersonManagement {
-
-    Serialisierung ser = new Serialisierung();
+   private PersonDAO ser = new Serialisierung();
 
     //1 2 oder 3..
     
@@ -17,7 +16,6 @@ public class PersonManagement {
     public Person getPerson(String username){
     	return ser.getPersonbyid(username);
     }
-    
     /**Person wird persistent angelegt.
      * 
      * @param a Personen-Objekt

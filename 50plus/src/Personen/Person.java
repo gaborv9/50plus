@@ -12,15 +12,15 @@ public abstract class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	public int role;
-	public int alter; //Alter wird derzeit nicht gesetzt, da man sonst immer auf die Aktualisierung achten muesste, also wird immer neu berechnet mit getAlter
-	public String vorname;
-	public String nachname;
-	public String id; // id=username, diese sind eindeutig
-	public String pw;
-	public GregorianCalendar datum;
-	public ArrayList<Person> freunde;
-	public String picturelink;
+	private int role;
+	private int alter; //Alter wird derzeit nicht gesetzt, da man sonst immer auf die Aktualisierung achten muesste, also wird immer neu berechnet mit getAlter
+	private String vorname;
+	private String nachname;
+	private String id; // id=username, diese sind eindeutig
+	private String pw;
+	private GregorianCalendar datum;
+	private ArrayList<Person> freunde;
+	private String picturelink;
 	
 	public String getPicturelink() {
 		return picturelink;

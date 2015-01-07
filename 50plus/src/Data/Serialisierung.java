@@ -9,13 +9,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+import Management.PersonDAO;
 import Personen.Person;
  /**
   * 
   * @author Palkovits Dominik
   *	
   */
-public class Serialisierung {
+public class Serialisierung implements PersonDAO{
     public String pfad;
     
     
