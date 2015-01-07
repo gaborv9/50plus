@@ -20,7 +20,16 @@ public abstract class Person implements Serializable {
 	public String pw;
 	public GregorianCalendar datum;
 	public ArrayList<Person> freunde;
+	public String picturelink;
 	
+	public String getPicturelink() {
+		return picturelink;
+	}
+	public void setPicturelink(String picturelink) {
+		this.picturelink = picturelink;
+	}
+
+
 	/**
 	 * 
 	 * @return freunde

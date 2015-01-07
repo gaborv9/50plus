@@ -158,9 +158,15 @@ public class Management extends HttpServlet {
 		else{
 			ser.loeschePerson(ser.getPersonbyid(usernamenow));
 			p.setID(usernamenow);
+			if (!(request.getParameter("picturelink") ==null)){
+				p.setPicturelink(request.getParameter("picturelink"));
+			}
+			
 			ser.speicherePerson(p);
  
 		}
+		
+		
 		response.sendRedirect("Profil.jsp");
 		
 		

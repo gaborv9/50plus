@@ -59,7 +59,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#"> <img
-					src="http://placehold.it/150x150&text=BILD" alt="">
+					src="<%out.print(session.getAttribute("picturelink"));%>" alt="">
 				</a>
 
 			</div>
@@ -168,20 +168,20 @@
             </div>
             </div>
             </div>
-		  
+		 
 		  <div class="form-group">
 		   <div class="col-md-3">
-		    <label for="bild">Bild auswaehlen</label>
-		    <input type="file" id="bild">
-		     </div>
-		  </div>
-		  
-		  
+		    <label for="link">Link zum Bild (max 150x150)</label>
+		    <input type="text" class="form-control" name="picturelink" placeholder="Link">
+		   </div>
+		  </div> 
+	  
+ 
 		  <button type="submit" class="btn btn-default">Submit</button>
 		  
-		  
+	 
 	</form>
-	 </div>
+	
 </div>
 
 

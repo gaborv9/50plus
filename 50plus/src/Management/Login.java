@@ -125,7 +125,11 @@ public class Login extends HttpServlet {
 		 	session.setAttribute("grouplist", grouplist);
 		 	session.setAttribute("postDeleteSuccess", "nichts");
 		 	session.setAttribute("anfrage", "keine");
-		 	
+		 	if (a.getPersonbyid(username).getPicturelink() ==null){
+		 		session.setAttribute("picturelink","http://placehold.it/150x150&text=BILD");
+		 	}else{		
+		 	session.setAttribute("picturelink", a.getPersonbyid(username).getPicturelink());
+		 	}
 			response.sendRedirect("Pinnwand.jsp");
 		} 
 		else 
