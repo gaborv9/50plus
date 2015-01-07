@@ -123,19 +123,14 @@
 		<h4><small>Vorname:</small><%out.print(a.getVorname());%></h4>
 		<h4><small>Nachname:</small><%out.print(a.getNachname());%></h4>
 		<h4><small>Alter:</small><%out.print(a.getAlter());%></h4>
-		<h4><small>Geburtsdatum:</small><%out.print(a.datum.get(GregorianCalendar.DAY_OF_MONTH) +" "+ a.datum.get(GregorianCalendar.MONTH) +" "+ a.datum.get(GregorianCalendar.YEAR)); %></h4>
+		<h4><small>Geburtsdatum:</small><%out.print(a.getDatumString()); %></h4>
   </div>
   <div class="col-md-9">
  <br />
  <br />
  <h4>Daten aendern:</h4>
 	<form class="form form-horizontal" role="form" method="post" action="Management">
-		   <div class="form-group">
-		   <div class="col-md-3">
-		    <label for="Username">Username</label>
-		    <input type="text" class="form-control" name="username" placeholder="Username">
-		     </div>
-		  </div>
+ 
 		  <div class="form-group">
 		   <div class="col-md-3">
 		    <label for="Vorname">Vorname</label>
@@ -154,13 +149,25 @@
 		    <input type="password" class="form-control" name="password" placeholder="Password">
 		   </div>
 		  </div> 
-		  
-		   <div class="form-group">
-		   <div class="col-md-3">
-		    <label for="gebdatum">Geburtsdatum</label>
-		    <input type="text" class="form-control" name="gebdatum" placeholder="Geburtsdatum">
-		   </div>
-		  </div> 
+ 
+		     <div class="form-group">
+		     <div class="col-md-3">
+                <label for="Geburtsdatum">Geburtsdatum</label>
+                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                 <ul class="nav navbar-nav">
+                    <li>
+                       <input type="geburtsdatum" class="form-control" name="datum1" placeholder="DD">
+                    </li>
+                    <li>
+                        <input type="geburtsdatum" class="form-control" name="datum2" placeholder="MM">
+                    </li>
+                    <li>
+                       <input type="geburtsdatum" class="form-control" name="datum3" placeholder="YYYY">
+                    </li>
+ 				</ul>
+            </div>
+            </div>
+            </div>
 		  
 		  <div class="form-group">
 		   <div class="col-md-3">

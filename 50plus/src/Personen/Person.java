@@ -179,6 +179,13 @@ public abstract class Person implements Serializable {
 	public GregorianCalendar getDatum() {
 		return datum;
 	}
+	public String getDatumString(){
+		int year=datum.get(GregorianCalendar.YEAR);
+		int month=datum.get(GregorianCalendar.MONTH)+1;
+		int day=datum.get(GregorianCalendar.DAY_OF_MONTH);
+ 
+		return  (Integer.toString(day)+"-"+Integer.toString(month)+"-"+Integer.toString(year));
+	}
 
 	/**
 	 * @param year - das jahr
