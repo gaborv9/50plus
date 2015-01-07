@@ -66,6 +66,7 @@
 						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+						<li><a href="/50plus/Profil.jsp">Profil</a></li>
 						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 		
 		

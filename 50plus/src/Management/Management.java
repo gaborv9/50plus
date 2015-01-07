@@ -70,7 +70,6 @@ public class Management extends HttpServlet {
 			PersonManagement a = new PersonManagement();
 			
 			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
-			
 				Serialisierung ser = new Serialisierung();
 				Person save = a.getPerson(username);
 				save.setRole(role);
@@ -103,7 +102,16 @@ public class Management extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		processRequest(request, response);
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String vorname = request.getParameter("vorname");
+		String nachname = request.getParameter("nachname");
+		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		out.print(username);
+		out.print(vorname);
+		//processRequest(request, response);
 	}
 
 	/**

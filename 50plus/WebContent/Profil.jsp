@@ -1,8 +1,9 @@
 <%-- 
-    Document   : Forschung
-    Created on : 22.11.2014, 15:37:13
+    Document   : Profil
+    Created on : 6.1.2015, 19:22:10
     Author     : master
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -45,7 +46,7 @@
 </head>
 
 <body>
-	<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.ArrayList" import="Personen.Person" import="Management.PersonManagement" import="Data.Serialisierung" import ="java.util.GregorianCalendar"%>
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -68,7 +69,7 @@
 				id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav">
-					<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+						<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
 						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
@@ -99,110 +100,85 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12" id="content">
-				<br> <br>
-
-				<%
+				
+<div class="row">
+  <div class="col-md-3">
+   <br />
+  	<%
 					//	out.println((String) session.getAttribute("username")
 					//+ " surft hier gerade");
 					if (session.getAttribute("username") == null) {
 
 						response.sendRedirect("index.jsp");
 					}
-					//<jsp:include page="/Forschung" flush="true" />
 				%>
+			
+			<h2><small>Profil von</small><%out.print(session.getAttribute("username"));%></h2>
+			 <br />
+		<% 
+		Serialisierung ser = new Serialisierung();
+		String username =(String) session.getAttribute("username");
+		Person a=  ser.getPersonbyid((String) session.getAttribute("username"));
+		%>
+		<h4><small>Vorname:</small><%out.print(a.getVorname());%></h4>
+		<h4><small>Nachname:</small><%out.print(a.getNachname());%></h4>
+		<h4><small>Alter:</small><%out.print(a.getAlter());%></h4>
+		<h4><small>Geburtsdatum:</small><%out.print(a.datum.get(GregorianCalendar.DAY_OF_MONTH) +" "+ a.datum.get(GregorianCalendar.MONTH) +" "+ a.datum.get(GregorianCalendar.YEAR)); %></h4>
+  </div>
+  <div class="col-md-9">
+ <br />
+ <br />
+ <h4>Daten aendern:</h4>
+	<form class="form form-horizontal" role="form" method="post" action="Management">
+		   <div class="form-group">
+		   <div class="col-md-3">
+		    <label for="Username">Username</label>
+		    <input type="text" class="form-control" name="username" placeholder="Username">
+		     </div>
+		  </div>
+		  <div class="form-group">
+		   <div class="col-md-3">
+		    <label for="Vorname">Vorname</label>
+		    <input type="text" class="form-control" name="vorname" placeholder="Vorname">
+		     </div>
+		  </div>
+		  <div class="form-group">
+		   <div class="col-md-3">
+		    <label for="Nachname">Nachname</label>
+		    <input type="text" class="form-control" name="nachname" placeholder="Nachname">
+		     </div>
+		  </div>
+		  <div class="form-group">
+		   <div class="col-md-3">
+		    <label for="password">Password</label>
+		    <input type="password" class="form-control" name="password" placeholder="Password">
+		   </div>
+		  </div> 
+		  
+		   <div class="form-group">
+		   <div class="col-md-3">
+		    <label for="gebdatum">Geburtsdatum</label>
+		    <input type="text" class="form-control" name="gebdatum" placeholder="Geburtsdatum">
+		   </div>
+		  </div> 
+		  
+		  <div class="form-group">
+		   <div class="col-md-3">
+		    <label for="bild">Bild auswaehlen</label>
+		    <input type="file" id="bild">
+		     </div>
+		  </div>
+		  
+		  
+		  <button type="submit" class="btn btn-default">Submit</button>
+		  
+		  
+	</form>
+	 </div>
+</div>
 
-				<div class="input-group">
-					<form class="form-search" method="get" action="Forschung"
-						role="form">
-						<input type="text" name="searchperson" class="form-control"
-							placeholder="Person suchen..">
 
-					</form>
-
-				</div>
-				<a class="btn btn-default"
-					href="/50plus/Forschung?information=information" role="button">Allgemeine
-					Informationen</a>
-				<br />
-
-				<%
-					if (session.getAttribute("anfrage").equals("keine")) {
-					}
-
-					else if (session.getAttribute("anfrage").equals("keinzugriff")) {
-				%>
-				Sie sind kein Forscher - Kein Zugriff.
-
-				<%
-					} else if (session.getAttribute("anfrage").equals("info")) {
-						ArrayList<Integer> allgemeinwerte = (ArrayList<Integer>) session.getAttribute("allgemeinwerte");
-						out.println("<br />");
-						out.println("Anzahl aller registrierten Personen: "
-								+ allgemeinwerte.get(0));
-						out.println("<br />");
-						out.println("Anzahler aller Posts: " + allgemeinwerte.get(1));
-						out.println("<br />");
-						out.println("Anzahler aller Gruppen: " + allgemeinwerte.get(10));
-						out.println("<br />");
-						out.println("Juengste Person: " + allgemeinwerte.get(2));
-						out.println("<br />");
-						out.println("Aelteste Person: " + allgemeinwerte.get(3));
-						out.println("<br />");
-						out.println("Anzahl der Admins: " + allgemeinwerte.get(4));
-						out.println("<br />");
-						out.println("Anzahl der User: " + allgemeinwerte.get(5));
-						out.println("<br />");
-						out.println("Anzahler der Forscher: " + allgemeinwerte.get(6));
-						out.println("<br />");
-						out.println("Durchschnittsalter aller Personen: "
-								+ allgemeinwerte.get(7));
-						out.println("<br />");
-						out.println("Durchschnittliche Freundesanzahl: "
-								+ allgemeinwerte.get(8));
-						out.println("<br />");
-						out.println("Durchschnitt von Posts pro Person: "
-								+ allgemeinwerte.get(9));
-
-					} else if (session.getAttribute("anfrage").equals("person")) {
-
-						if (session.getAttribute("personfound").equals("true")) {
-							ArrayList<Integer> searchedpersonwerte = (ArrayList<Integer>) session.getAttribute("searchedpersonwerte");
-
-							out.println("<br />");
-							out.println("Username:" + session.getAttribute("searchedusername"));
-							out.println("<br />");
-							out.println("Postanzahl: " + searchedpersonwerte.get(0));
-							out.println("<br />");
-							out.println("Freundeanzahl: " + searchedpersonwerte.get(1));
-							out.println("<br />");
-							out.println("Gruppenanzahl: " + searchedpersonwerte.get(2));
-							 
-				%>
-				<script type="text/javascript">
-				var werte = [[1, 5], [2, 5], [3, 20], [4, 0], [5, 10], [6, 100], [7, 30], [8, 10], [9, 5], [10, 3], [11, 2], [12, 1]];
- 
-				$(document).ready(function () {
-				    $.plot($("#placeholder"), [werte]);
-				});
-				</script>
-			    <br />
-			    <br />
-			    <div id="placeholder"></div>
-			    x-Achse: Monat
-			    <br />
-			    y-Achse: Post-Anzahl
-				<%
-					} else {
-							out.println("<br />");
-							out.println("Person nicht gefunden!");
-						}
-
-					} else {
-					}
-
-					session.setAttribute("postDeleteSuccess", "nichts");
-				%>
-			</div>
+		</div>
 		</div>
 	</div>
 	<!-- /.container -->
