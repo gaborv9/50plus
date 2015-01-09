@@ -23,6 +23,7 @@ import Personen.User;
  * 
  * @author master
  */
+@SuppressWarnings("serial")
 public class Management extends HttpServlet {
 
 	protected void processRequest(HttpServletRequest request,
@@ -63,7 +64,13 @@ public class Management extends HttpServlet {
 		HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String onlineuser = (String) session.getAttribute("username");
-		
+ 
+		if (request.getParameter("picturelink")!=null) {
+			PersonManagement a= new PersonManagement();
+			a.changelink(a.getPerson(onlineuser), request.getParameter("picturelink"));
+		//	session.setAttribute("picturelink", a.getPerson(onlineuser));
+			response.sendRedirect("Profil.jsp");
+		} 
 		if (request.getParameter("role") != null && request.getParameter("username") !=null) {
 			int role = Integer.parseInt(request.getParameter("role"));
 			String username = request.getParameter("username");
@@ -71,23 +78,15 @@ public class Management extends HttpServlet {
 			PersonManagement a = new PersonManagement();
 			
 			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
-				/*Serialisierung ser = new Serialisierung();
-				Person save = a.getPerson(username);
-				save.setRole(role);
-				ser.loeschePerson(a.getPerson(username));
-			    ser.speicherePerson(save);*/
-				Person save = a.getPerson(username);
-				save.setRole(role);
-				a.delete(username);
-			    a.add(save);
- 
+				a.changerole(a.getPerson(username), role);
 			}
 			else{
 				 
 			}
+		
+		response.sendRedirect("Profil.jsp");
 		}
-		response.sendRedirect("Suche.jsp");
-		 
+	
 		// processRequest(request, response);
 	}
 
@@ -118,9 +117,9 @@ public class Management extends HttpServlet {
 		String day = request.getParameter("datum1");
 
 		HttpSession session = request.getSession();
-		PersonDAO ser = new Serialisierung();
+		PersonManagement ser = new PersonManagement();
 		String usernamenow =(String) session.getAttribute("username");
-		Person p= ser.getPersonbyid((String) session.getAttribute("username"));
+		Person p= ser.getPerson((String) session.getAttribute("username"));
 
 		
 		int fc = 0; // failcheck
@@ -155,21 +154,16 @@ public class Management extends HttpServlet {
 		}
 		
 		if (fc == 1) {
-			ser.loeschePerson(ser.getPersonbyid("/////////##//////////"));
+			ser.delete("/////////##//////////");
 			 
 		}
 		else{
-			ser.loeschePerson(ser.getPersonbyid(usernamenow));
+			ser.delete(usernamenow);
 			p.setID(usernamenow);
-			if (!(request.getParameter("picturelink") ==null)){
-				p.setPicturelink(request.getParameter("picturelink"));
-			}
-			
-			ser.speicherePerson(p);
+			ser.add(p);
  
 		}
-		
-		
+ 
 		response.sendRedirect("Profil.jsp");
 		
 		

@@ -23,6 +23,7 @@ import Management.PinnwandManagement;
  * 
  * @author master
  */
+@SuppressWarnings("serial")
 public class Login extends HttpServlet {
 
 	/**

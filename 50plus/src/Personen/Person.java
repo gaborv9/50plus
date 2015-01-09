@@ -10,10 +10,8 @@ public abstract class Person implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
 	private int role;
-	private int alter; //Alter wird derzeit nicht gesetzt, da man sonst immer auf die Aktualisierung achten muesste, also wird immer neu berechnet mit getAlter
+	//private int alter; Alter wird derzeit nicht gesetzt, da man sonst immer auf die Aktualisierung achten muesste, also wird immer neu berechnet mit getAlter
 	private String vorname;
 	private String nachname;
 	private String id; // id=username, diese sind eindeutig
@@ -25,8 +23,14 @@ public abstract class Person implements Serializable {
 	public String getPicturelink() {
 		return picturelink;
 	}
-	public void setPicturelink(String picturelink) {
+	public int setPicturelink(String picturelink) {
+		if ( picturelink.isEmpty()==true || picturelink.length() > 1000){
+			return 0;
+		}
+		else{
 		this.picturelink = picturelink;
+			return 1;
+		}
 	}
 
 
@@ -83,15 +87,18 @@ public abstract class Person implements Serializable {
 			}
 		}
 	
-
-
-
 	/**
 	 * @param role
 	 *            the role to set
 	 */
-	public void setRole(int role) {
-		this.role = role;
+	public int setRole(int role) {
+		if (role > 3 || role < 1){
+			return 0;
+		}
+		else{
+			this.role = role;
+			return 1;
+		}
 	}
 
 	/**
@@ -117,9 +124,9 @@ public abstract class Person implements Serializable {
 	 * @param alter
 	 *            the alter to set
 	 */
-	public void setAlter(int alter) {
+	/*public void setAlter(int alter) {
 		this.alter = alter;
-	}
+	}*/
 
 	/**
 	 * @return the vorname
@@ -213,7 +220,7 @@ public abstract class Person implements Serializable {
 			GregorianCalendar gebdate = new GregorianCalendar();
 			gebdate.setLenient(false);
 			gebdate.set(GregorianCalendar.YEAR, yeari);
-			gebdate.set(GregorianCalendar.MONTH, monthi-1); //gebdate.set(GregorianCalendar.MONTH, monthi-1);  Beim Monat gibt es eine Ausnahme, man muss bei 0 anfangen.. Hier die Ausgabe noch checken.
+			gebdate.set(GregorianCalendar.MONTH, monthi-1); //Beim Monat gibt es eine Ausnahme, man muss bei 0 anfangen.., Profil.jsp hat bei der Ausgabe+1 zur korrekten Darstellung.
 			gebdate.set(GregorianCalendar.DAY_OF_MONTH, dayi);
 			if ((now.get(GregorianCalendar.YEAR) - gebdate.get(GregorianCalendar.YEAR)) < 49) {
 				return 0;
@@ -241,7 +248,7 @@ public abstract class Person implements Serializable {
 	 * @return 1 wenn gesetzt
 	 */
 	public int setPW(String pw) {
-    	if ((id.length() >25) || (id.isEmpty()==true) || (pw.length() < 6)){
+    	if ((pw.length() >25) || (pw.isEmpty()==true) || (pw.length() < 6)){
     		return 0;
     	}
         this.pw = pw;
