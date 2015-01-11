@@ -51,7 +51,7 @@
 							class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="#"> <img
-						src="http://placehold.it/150x150&text=BILD" alt="">
+						src="<%out.print(session.getAttribute("picturelink"));%>" alt="">
 					</a>
 				
 		
@@ -66,6 +66,7 @@
 						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+						<li><a href="/50plus/Profil.jsp">Profil</a></li>
 						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 		
 		

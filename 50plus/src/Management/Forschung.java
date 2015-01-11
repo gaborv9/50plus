@@ -119,7 +119,7 @@ public class Forschung extends HttpServlet {
 				juengster = ptemp.getAlter();
 			}
 			gesamtalter = ptemp.getAlter() + gesamtalter;
-
+			freundcounter=0;
 			for (Person freunde : ptemp.getFreunde()) {
 				freundcounter++;
 			}
@@ -192,11 +192,12 @@ public class Forschung extends HttpServlet {
 				session.setAttribute("personfound", "false"); // Person wurde nicht gefunden
 				response.sendRedirect("Forschung.jsp");
 			} else {
+				int friendc=0;
 				session.setAttribute("personfound", "true");
 				session.setAttribute("anfrage", "person");
 				ArrayList<Integer> personwerte = new ArrayList<>();
 				for (Person freunde : pser.getPersonbyid(searchedperson).getFreunde()) {
-					freundcounter++; // Freundeanzahl
+					friendc++; // Freundeanzahl
 				}
 
 				personwerte.add(postser.getOwnpostlist(searchedperson).size());// postanzahl des users
@@ -210,7 +211,7 @@ public class Forschung extends HttpServlet {
 					}
 				}*/
 				
-				personwerte.add(freundcounter);
+				personwerte.add(friendc);
 				personwerte.add(usergroups);
 				session.setAttribute("searchedusername", pser.getPersonbyid(searchedperson).getID());
 				session.setAttribute("searchedpersonwerte", personwerte);

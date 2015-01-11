@@ -23,6 +23,7 @@ import Management.PinnwandManagement;
  * 
  * @author master
  */
+@SuppressWarnings("serial")
 public class Login extends HttpServlet {
 
 	/**
@@ -115,7 +116,7 @@ public class Login extends HttpServlet {
 		
 		
 		
-		Serialisierung a = new Serialisierung();
+		PersonDAO a = new Serialisierung();
 		if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW())) 
 		{
 			HttpSession session = request.getSession();
@@ -125,7 +126,11 @@ public class Login extends HttpServlet {
 		 	session.setAttribute("grouplist", grouplist);
 		 	session.setAttribute("postDeleteSuccess", "nichts");
 		 	session.setAttribute("anfrage", "keine");
-		 	
+		 	if (a.getPersonbyid(username).getPicturelink() ==null){
+		 		session.setAttribute("picturelink","http://placehold.it/150x150&text=BILD");
+		 	}else{		
+		 	session.setAttribute("picturelink", a.getPersonbyid(username).getPicturelink());
+		 	}
 			response.sendRedirect("Pinnwand.jsp");
 		} 
 		else 

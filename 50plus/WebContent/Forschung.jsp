@@ -45,7 +45,7 @@
 </head>
 
 <body>
-	<%@ page import="java.util.ArrayList"%>
+		<%@ page import="java.util.ArrayList" import="Personen.Post"%>
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -58,7 +58,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#"> <img
-					src="http://placehold.it/150x150&text=BILD" alt="">
+					src="<%out.print(session.getAttribute("picturelink"));%>" alt="">
 				</a>
 
 			</div>
@@ -69,10 +69,11 @@
 
 				<ul class="nav navbar-nav">
 					<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
-					<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
-					<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
-					<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
-					<li><a href="/50plus/Login?logout=true">Logout</a></li>
+						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
+						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
+						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+						<li><a href="/50plus/Profil.jsp">Profil</a></li>
+						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 					<form class="form-signin" method="post" action="Suche" role="form">
 						<div class="form-group">
 							<input type="suche" class="form-control" name="suche"
@@ -175,9 +176,18 @@
 							out.println("Freundeanzahl: " + searchedpersonwerte.get(1));
 							out.println("<br />");
 							out.println("Gruppenanzahl: " + searchedpersonwerte.get(2));
-							 
+							
+						 
+								
+								String username = (String) session.getAttribute("username");
+								ArrayList<Post> postlist = 	(ArrayList<Post>) session.getAttribute("postlist");
+							   
+								String postpermonth[] = new String[12];
+ 
+							
 				%>
 				<script type="text/javascript">
+				
 				var werte = [[1, 5], [2, 5], [3, 20], [4, 0], [5, 10], [6, 100], [7, 30], [8, 10], [9, 5], [10, 3], [11, 2], [12, 1]];
  
 				$(document).ready(function () {
