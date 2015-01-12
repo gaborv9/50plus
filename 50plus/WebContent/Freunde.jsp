@@ -85,15 +85,71 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12" id="content">
-				 
+					<%
+					String username = (String) session.getAttribute("username");
+ 					PersonManagement a = new PersonManagement();
+ 					ArrayList<Person> geffreunde = a.getPerson(username).getFreunde();
+ 					boolean prufaus = false;
+ 					boolean prufein = false;
+ 					
+ 					
+ 					ArrayList<Person> ausstehendeAnfragen = a.getPerson(username).getgesendeteAnfragen();
+ 					if(ausstehendeAnfragen==null) prufaus=true;
+ 					
+ 					
+ 					ArrayList<Person> eingehendeAnfragen = a.getPerson(username).geteingehendeAnfragen();
+ 					if(eingehendeAnfragen==null) prufein=true;
+ 					
+					%>
+					<h2>Meine ausstehenden Anfragen:</h2>
+					
+					<% 
+					
+					if(prufaus){ out.println("Du hast noch keine Anfragen verschickt.");}
+					else{
+						for(Person test: ausstehendeAnfragen){
+							out.println(test.getID() +" hat noch nicht geantwortet");
+						}
+					}
+						
+					
+					%>
+					
+					<h2>Meine Freundschaftsanfragen:</h2>
+					  
+				 	<%
+				 	
+				 	if(prufein) out.println("Du hast zurzeit keine Freundschaftsanfragen.");
+					else{
+						for(Person test: eingehendeAnfragen){
+							
+							%>
+							<div class="btn-group">
+						<button type="button" data-toggle="dropdown"
+							class="btn btn-default dropdown-toggle">
+							Akzeptieren <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" method="get" action="Freunde">
+							<li><a
+								href="/50plus/Freunde?adddelete=1&freundname=<%=test.getID()%>&wunsch=zufuegen">Akzeptieren</a></li>
+							 <li><a
+								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>&wunsch=zufuegen">Nicht Akzeptieren</a></li>
+							 
+						</ul>
+		</div>
+							<%
+							
+							out.println(test.getID() +" will dich als Freund.");
+						}
+					}
+					
+				 	%>
+				 	
 					<h2>Meine Freunde:</h2>
 					<%
 				
 					
-					String username = (String) session.getAttribute("username");
- 					PersonManagement a = new PersonManagement();
- 					ArrayList<Person> geffreunde =a.getPerson(username).getFreunde();
- 					
+					
 							if(geffreunde.size() == 0) out.println("Du hast noch keine Freunde");
 							else{
 								for(Person test: geffreunde){
@@ -105,13 +161,13 @@
 						</button>
 						<ul class="dropdown-menu" method="get" action="Freunde">
 							<li><a
-								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>">Entfernen</a></li>
+								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>&wunsch=loeschen">Entfernen</a></li>
 							 
 						</ul>
 
 
 					</div>
-									<% 
+					<% 
 										out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+"<br>");		
 									}
 								}

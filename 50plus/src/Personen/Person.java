@@ -18,6 +18,8 @@ public abstract class Person implements Serializable {
 	private String pw;
 	private GregorianCalendar datum;
 	private ArrayList<Person> freunde;
+	private ArrayList<Person> eingehendeAnfragen;
+	private ArrayList<Person> gesendeteAnfragen;
 	private String picturelink;
 	
 	public String getPicturelink() {
@@ -32,8 +34,66 @@ public abstract class Person implements Serializable {
 			return 1;
 		}
 	}
-
-
+	public ArrayList<Person> getgesendeteAnfragen(){
+		return gesendeteAnfragen;
+	}
+	public ArrayList<Person> geteingehendeAnfragen(){
+		return eingehendeAnfragen;
+	}
+	
+	public void addgesendeteAnfragen(Person zufuegen){
+		ArrayList<Person> altlist = getgesendeteAnfragen();
+			if(!(altlist==null)){
+				boolean doppelt = false;
+				for(Person test : altlist){
+					if(test.equals(zufuegen)) doppelt = true;
+				}
+				if(doppelt==false){
+					altlist.add(zufuegen);
+					gesendeteAnfragen = altlist;
+				}
+			}
+	}
+	public void remgesendeteAnfragen(Person loeschen){
+		ArrayList<Person> altlist = getgesendeteAnfragen();
+			if(!(altlist==null)){
+				boolean doppelt = false;
+				for(Person test : altlist){
+					if(test.equals(loeschen)) doppelt = true;
+				}
+				if(doppelt==false){
+					altlist.remove(loeschen);
+					gesendeteAnfragen = altlist;
+				}
+			}
+	}
+	public void addeingehendeAnfragen(Person zufuegen){
+		ArrayList<Person> altlist = geteingehendeAnfragen();
+		if(!(altlist==null)){
+			boolean doppelt = false;
+			for(Person test : altlist){
+				if(test.equals(zufuegen)) doppelt = true;
+			}
+			if(doppelt==false){
+				altlist.add(zufuegen);
+				eingehendeAnfragen = altlist;
+			}
+		}
+	}
+	public void remeingehendeAnfragen(Person loeschen){
+		ArrayList<Person> altlist = geteingehendeAnfragen();
+			if(!(altlist==null)){
+				boolean doppelt = false;
+				for(Person test : altlist){
+					if(test.equals(loeschen)) doppelt = true;
+				}
+				if(doppelt==false){
+					altlist.remove(loeschen);
+					eingehendeAnfragen = altlist;
+				}
+			}
+	}
+	
 	/**
 	 * 
 	 * @return freunde

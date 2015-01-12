@@ -94,10 +94,10 @@
 
 					<%
 						ArrayList<Person> gefperliste = (ArrayList<Person>) session.getAttribute("gefperliste");
-																ArrayList<GruppeClass> gefgrpliste = (ArrayList<GruppeClass>) session.getAttribute("gefgrpliste");
-																String username = (String) session.getAttribute("username");
+						ArrayList<GruppeClass> gefgrpliste = (ArrayList<GruppeClass>) session.getAttribute("gefgrpliste");
+						String username = (String) session.getAttribute("username");
 					%>
-					<h2>Freunde:</h2>
+					<h2>Personen:</h2>
 					<br>
 					<%
 						for(Person test: gefperliste){
@@ -134,10 +134,8 @@
 						</button>
 						<ul class="dropdown-menu" method="get" action="Freunde">
 							<li><a
-								href="/50plus/Freunde?adddelete=1&freundname=<%=test.getID()%>">Freund adden</a></li>
-							<li><a
-								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>">Entfernen</a></li>
-							 
+								href="/50plus/Freunde?adddelete=1&freundname=<%=test.getID()%>&wunsch=adden">Freund adden</a></li>
+							
 						</ul>
 
 
