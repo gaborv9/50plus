@@ -66,6 +66,7 @@
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
 						<li><a href="/50plus/Profil.jsp">Profil</a></li>
+						<li><a href="/50plus/Admin.jsp">Admin</a></li>
 						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 
 
@@ -102,15 +103,7 @@
 					<%
 						for(Person test: gefperliste){
 					%>
-					<!-- 			
-					<div class="btn-group" role="toolbar" aria-label="">
 					
-						<button type="button" class="btn btn-default" onclick="<ul method='get' action='Management' href='/50plus/Management?role=1&user='> </ul>">Administrator</button>
-					    <button type="button" class="btn btn-default" onclick="<ul method='get' action='Management' href='/50plus/Management?role=2&user='> </ul>">Forscher</button>
-					 	<button type="button" class="btn btn-default" onclick="<ul method='get' action='Management' href='/50plus/Management?role=3&user='> </ul>">User</button>
-					 	
-					</div>
-					-->
 					<div class="btn-group">
 						<button type="button" data-toggle="dropdown"
 							class="btn btn-default dropdown-toggle">
@@ -134,12 +127,26 @@
 						</button>
 						<ul class="dropdown-menu" method="get" action="Freunde">
 							<li><a
-								href="/50plus/Freunde?adddelete=1&freundname=<%=test.getID()%>&wunsch=adden">Freund adden</a></li>
+								href="/50plus/Freunde?freundname=<%=test.getID()%>&wunsch=adden">Freund adden</a></li>
 							
 						</ul>
 
 
 					</div>
+					<div class="btn-group">
+						<button type="button" data-toggle="dropdown"
+							class="btn btn-default dropdown-toggle">
+							Person melden <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" method="get" action="Meldung">
+							<li><a
+								href="/50plus/Meldung?personname=<%=test.getID()%>&wunsch=meldung">Person melden</a></li>
+							
+						</ul>
+
+
+					</div>
+					
 
 					<%
 						out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+" Rolle: "+test.getRole()+"<br>");

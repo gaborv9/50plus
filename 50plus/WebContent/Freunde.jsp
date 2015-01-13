@@ -64,6 +64,7 @@
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
 						<li><a href="/50plus/Profil.jsp">Profil</a></li>
+						<li><a href="/50plus/Admin.jsp">Admin</a></li>
 						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 					<form class="form-signin" method="post" action="Suche" role="form">
 						<div class="form-group">
@@ -85,32 +86,40 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12" id="content">
+				<form action="Freunde" method="post">
 					<%
+					//response.sendRedirect("Freunde.java");
 					String username = (String) session.getAttribute("username");
  					PersonManagement a = new PersonManagement();
  					ArrayList<Person> geffreunde = a.getPerson(username).getFreunde();
+ 					ArrayList<Person> ausstehendeAnfragen = a.getPerson(username).getgesendeteAnfragen();
+ 					ArrayList<Person> eingehendeAnfragen = a.getPerson(username).geteingehendeAnfragen();
  					boolean prufaus = false;
  					boolean prufein = false;
+ 					boolean freund = false;
  					
  					
- 					ArrayList<Person> ausstehendeAnfragen = a.getPerson(username).getgesendeteAnfragen();
+ 					
  					if(ausstehendeAnfragen==null) prufaus=true;
+ 					if(ausstehendeAnfragen.size()==0) prufaus=true;
  					
- 					
- 					ArrayList<Person> eingehendeAnfragen = a.getPerson(username).geteingehendeAnfragen();
  					if(eingehendeAnfragen==null) prufein=true;
+ 					if(ausstehendeAnfragen.size()==0) prufaus=true;
+ 					
+ 					if(geffreunde.size()==0) freund = true;
  					
 					%>
 					<h2>Meine ausstehenden Anfragen:</h2>
 					
 					<% 
 					
-					if(prufaus){ out.println("Du hast noch keine Anfragen verschickt.");}
-					else{
+					
+					if(!prufaus){
 						for(Person test: ausstehendeAnfragen){
 							out.println(test.getID() +" hat noch nicht geantwortet");
 						}
 					}
+					else { out.println("Du hast noch keine Anfragen verschickt.");}
 						
 					
 					%>
@@ -119,8 +128,8 @@
 					  
 				 	<%
 				 	
-				 	if(prufein) out.println("Du hast zurzeit keine Freundschaftsanfragen.");
-					else{
+				 	
+					if(!prufein){
 						for(Person test: eingehendeAnfragen){
 							
 							%>
@@ -139,9 +148,10 @@
 		</div>
 							<%
 							
-							out.println(test.getID() +" will dich als Freund.");
+							out.println(test.getID() +" will dich als Freund. <br>");
 						}
 					}
+					else out.println("Du hast zurzeit keine Freundschaftsanfragen.");
 					
 				 	%>
 				 	
@@ -150,7 +160,7 @@
 				
 					
 					
-							if(geffreunde.size() == 0) out.println("Du hast noch keine Freunde");
+							if(freund) out.println("Du hast noch keine Freunde");
 							else{
 								for(Person test: geffreunde){
 									%>
@@ -176,7 +186,7 @@
 							  	}
 					%>
 
-				 
+				</form> 
 			</div>
 		</div>
 	</div>

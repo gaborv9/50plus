@@ -67,12 +67,15 @@ public class Freunde extends HttpServlet {
     	response.setContentType("text/html");
     	String freundname = request.getParameter("freundname");
     	HttpSession session = request.getSession();
-    	//PrintWriter out = response.getWriter();
-    	String Ziel = "Suche.jsp";
+    	PrintWriter out = response.getWriter();
+    	String Ziel = "Freunde.jsp";
+    	//out.println("ich bin vor der Auswahl");
     	
     	String wunsch = request.getParameter("wunsch");
     	if(wunsch.equals("zufuegen")){
     		freundzufuegen(request, response);
+    		out.println("Ich bin in zufuegen");
+    		Ziel = "Freunde.jsp";
     	}
     	else if(wunsch.equals("loeschen")){
     		freundloeschen(request,response);
@@ -80,10 +83,11 @@ public class Freunde extends HttpServlet {
     	}
     	else if(wunsch.equals("adden")){
     		freundanfragen(request,response);
+    		//out.println("ich bin in adden");
     		Ziel = "Freunde.jsp";
     	}
     	
-    	
+    	//out.println("ich bin wieder draussen");
     	
     	response.sendRedirect(Ziel);
         //processRequest(request, response);
@@ -126,17 +130,19 @@ public class Freunde extends HttpServlet {
     
     public void freundanfragen(HttpServletRequest request, HttpServletResponse response) throws IOException{
     	response.setContentType("text/html");
+    	PrintWriter out = response.getWriter();
     	String freundname = request.getParameter("freundname");
     	HttpSession session = request.getSession();
     	String username =(String) session.getAttribute("username");
     	Serialisierung a = new Serialisierung();
     	Person ich = a.getPersonbyid(username);
     	Person freund = a.getPersonbyid(freundname);
-    	
-    	if(!(request.getParameter("freundname").isEmpty())){
+    	out.println("Anfragen wird aufgerufen"+freund.getID());
+    	if((!(request.getParameter("freundname").isEmpty()))){
     		ich.addgesendeteAnfragen(freund);
     		freund.addeingehendeAnfragen(ich);
-    		
+    		//if(ich.getgesendeteAnfragen()==null) out.println("Leere Liste");
+    		for(Person test: ich.getgesendeteAnfragen()) out.println(test.getID());
     		Person ichneu = ich;
     		Person freundneu = freund;
     		
@@ -180,7 +186,11 @@ public class Freunde extends HttpServlet {
     					
     					
     					useralt.setFreunde(freund,false);
+    					freund.setFreunde(freund,false);
+    					Person freundneu = freund;
     					Person userneu = useralt;
+    					a.loeschePerson(freund);
+    					a.speicherePerson(freundneu);
     					a.loeschePerson(useralt);
     					a.speicherePerson(userneu);
     					
@@ -193,7 +203,7 @@ public class Freunde extends HttpServlet {
     }
     
     public void freundzufuegen(HttpServletRequest request, HttpServletResponse response) throws IOException{
-    	
+    	PrintWriter out = response.getWriter();
     	response.setContentType("text/html");
     	String freundname =(String) request.getParameter("freundname");
     	HttpSession session = request.getSession();   
@@ -203,9 +213,10 @@ public class Freunde extends HttpServlet {
     		String adddelete = (String) request.getParameter("adddelete");
     		String zufuegen = "1";
     		String loeschen = "0";
+    		out.println("Ich bin vor der Auswahl");
     		
     		if(adddelete.equals(zufuegen)){
-    			
+    			out.println("ich bin in adddelete==1");
     			Serialisierung a = new Serialisierung();
     			Person freund,useralt;
     			freund = a.getPersonbyid(freundname);
@@ -220,6 +231,7 @@ public class Freunde extends HttpServlet {
     				}
     			if (check==false){
     					useralt.setFreunde(freund,true);
+    					freund.setFreunde(useralt, true);
     					
     	    			freund.remgesendeteAnfragen(useralt);
     	    			useralt.remeingehendeAnfragen(freund);

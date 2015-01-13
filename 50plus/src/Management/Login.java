@@ -8,6 +8,7 @@ package Management;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -117,7 +118,8 @@ public class Login extends HttpServlet {
 		
 		
 		PersonDAO a = new Serialisierung();
-		if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW())) 
+		GregorianCalendar test = new GregorianCalendar();
+		if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW())) // &&(a.getPersonbyid(username).getsperrdatum()<=test) 
 		{
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
@@ -126,6 +128,8 @@ public class Login extends HttpServlet {
 		 	session.setAttribute("grouplist", grouplist);
 		 	session.setAttribute("postDeleteSuccess", "nichts");
 		 	session.setAttribute("anfrage", "keine");
+		 	session.setAttribute("bitte", "keine");
+		 	
 		 	if (a.getPersonbyid(username).getPicturelink() ==null){
 		 		session.setAttribute("picturelink","http://placehold.it/150x150&text=BILD");
 		 	}else{		
@@ -139,8 +143,15 @@ public class Login extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println(username);
 			out.println(password);
-			out.println("falsche Eingabe");
-
+			/*
+			if(test.before(a.getPersonbyid(username).getsperrdatum())){ //fuer Gesperrtdatum ausgeben
+				GregorianCalendar test2 = a.getPersonbyid(username).getsperrdatum();
+				out.println(" !Sie sind noch bis "+GregTag(test2)+". "+GregMon(test2)+". "+GregJahr(test2)+" gesperrt!");
+			}
+			else{
+			*/
+				out.println("falsche Eingabe");
+			//}
 		}
 	}
 
@@ -155,5 +166,17 @@ public class Login extends HttpServlet {
 	public String getServletInfo() {
 		return "Short description";
 	}// </editor-fold>
+	
+	public int GregTag(GregorianCalendar test3){
+        return test3.get(GregorianCalendar.DAY_OF_MONTH);
+    }
+   
+    public int GregMon(GregorianCalendar test3){
+        return test3.get(GregorianCalendar.MONTH);
+    }
+       
+    public int GregJahr(GregorianCalendar test3){
+        return test3.get(GregorianCalendar.YEAR);
+    }
 
 }

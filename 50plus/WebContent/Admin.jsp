@@ -1,9 +1,8 @@
 <%-- 
-    Document   : Forschung
-    Created on : 22.11.2014, 15:37:13
+    Document   : Admin
+    Created on : 13.01.2015, 15:37:13
     Author     : master
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -45,7 +44,7 @@
 </head>
 
 <body>
-		<%@ page import="java.util.ArrayList" import="Personen.Post"%>
+		<%@ page import="java.util.ArrayList" import="Personen.Person"%>
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -103,115 +102,54 @@
 				<br> <br>
 
 				<%
-					//	out.println((String) session.getAttribute("username")
-					//+ " surft hier gerade");
+					
 					if (session.getAttribute("username") == null) {
 
 						response.sendRedirect("index.jsp");
 					}
-					//<jsp:include page="/Forschung" flush="true" />
 				%>
 
-				<div class="input-group">
-					<form class="form-search" method="get" action="Forschung"
-						role="form">
-						<input type="text" name="searchperson" class="form-control"
-							placeholder="Person suchen..">
-
-					</form>
-
-				</div>
+				
 				<a class="btn btn-default"
-					href="/50plus/Forschung?information=information" role="button">Allgemeine
-					Informationen</a>
+					href="/50plus/Meldung?wunsch=liste" role="button">gemeldete Personen anzeigen</a>
 				<br />
 
 				<%
-					if (session.getAttribute("anfrage").equals("keine")) {
+					if (session.getAttribute("bitte").equals("nichts")) {
 					}
 
-					else if (session.getAttribute("anfrage").equals("keinzugriff")) {
+					else if (session.getAttribute("bitte").equals("nichterlaubt")) {
 				%>
-				Sie sind kein Forscher - Kein Zugriff.
+				Sie sind kein Administrator - Kein Zugriff!
 
 				<%
-					} else if (session.getAttribute("anfrage").equals("info")) {
-						ArrayList<Integer> allgemeinwerte = (ArrayList<Integer>) session.getAttribute("allgemeinwerte");
-						out.println("<br />");
-						out.println("Anzahl aller registrierten Personen: "
-								+ allgemeinwerte.get(0));
-						out.println("<br />");
-						out.println("Anzahler aller Posts: " + allgemeinwerte.get(1));
-						out.println("<br />");
-						out.println("Anzahler aller Gruppen: " + allgemeinwerte.get(10));
-						out.println("<br />");
-						out.println("Juengste Person: " + allgemeinwerte.get(2));
-						out.println("<br />");
-						out.println("Aelteste Person: " + allgemeinwerte.get(3));
-						out.println("<br />");
-						out.println("Anzahl der Admins: " + allgemeinwerte.get(4));
-						out.println("<br />");
-						out.println("Anzahl der User: " + allgemeinwerte.get(5));
-						out.println("<br />");
-						out.println("Anzahler der Forscher: " + allgemeinwerte.get(6));
-						out.println("<br />");
-						out.println("Durchschnittsalter aller Personen: "
-								+ allgemeinwerte.get(7));
-						out.println("<br />");
-						out.println("Durchschnittliche Freundesanzahl: "
-								+ allgemeinwerte.get(8));
-						out.println("<br />");
-						out.println("Durchschnitt von Posts pro Person: "
-								+ allgemeinwerte.get(9));
-
-					} else if (session.getAttribute("anfrage").equals("person")) {
-
-						if (session.getAttribute("personfound").equals("true")) {
-							ArrayList<Integer> searchedpersonwerte = (ArrayList<Integer>) session.getAttribute("searchedpersonwerte");
-
-							out.println("<br />");
-							out.println("Username:" + session.getAttribute("searchedusername"));
-							out.println("<br />");
-							out.println("Postanzahl: " + searchedpersonwerte.get(0));
-							out.println("<br />");
-							out.println("Freundeanzahl: " + searchedpersonwerte.get(1));
-							out.println("<br />");
-							out.println("Gruppenanzahl: " + searchedpersonwerte.get(2));
-							
-						 
-								
-								String username = (String) session.getAttribute("username");
-								ArrayList<Post> postlist = 	(ArrayList<Post>) session.getAttribute("postlist");
-							   
-								String postpermonth[] = new String[12];
- 
-							
-				%>
-				<script type="text/javascript">
-				
-				var werte = [[1, 5], [2, 5], [3, 20], [4, 0], [5, 10], [6, 100], [7, 30], [8, 10], [9, 5], [10, 3], [11, 2], [12, 1]];
- 
-				$(document).ready(function () {
-				    $.plot($("#placeholder"), [werte]);
-				});
-				</script>
-			    <br />
-			    <br />
-			    <div id="placeholder"></div>
-			    x-Achse: Monat
-			    <br />
-			    y-Achse: Post-Anzahl
-				<%
-					} else {
-							out.println("<br />");
-							out.println("Person nicht gefunden!");
+					}
+					else if(session.getAttribute("bitte").equals("personensperren")){
+						ArrayList<Person> sperrliste =(ArrayList<Person>) session.getAttribute("sperrliste");
+						if(sperrliste.size()==0){
+							out.println("Es wurden noch keine Personen gemeldet.");
 						}
-
-					} else {
+						else{
+							for(Person test:sperrliste){
+							
+									%>
+									
+									Befristet sperren:
+									<a class="btn btn-default" href="/50plus/Meldung?wunsch=unbefsperren" role="button">unbefristet sperren</a>
+									<div class="input-group">
+										<form class="form-search" method="get" action="Meldung"
+											role="form">
+											<input type="text" name="zeit" class="form-control"
+												placeholder="Anzahl der Tage">
+										</form>
+									</div>
+								<% 
+								out.print("User "+test.getID()+" wurde "+test.getmeldunganz()+" mal gemeldet.");
+							}
+						}
 					}
-
-					session.setAttribute("postDeleteSuccess", "nichts");
 				%>
+				
 			</div>
 		</div>
 	</div>
