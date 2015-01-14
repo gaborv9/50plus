@@ -65,29 +65,25 @@ public class Freunde extends HttpServlet {
             throws ServletException, IOException {
     	
     	response.setContentType("text/html");
-    	String freundname = request.getParameter("freundname");
-    	HttpSession session = request.getSession();
     	PrintWriter out = response.getWriter();
     	String Ziel = "Freunde.jsp";
-    	//out.println("ich bin vor der Auswahl");
+    	FreundeManagement f = new FreundeManagement();
     	
     	String wunsch = request.getParameter("wunsch");
     	if(wunsch.equals("zufuegen")){
-    		freundzufuegen(request, response);
+    		f.freundzufuegen(request, response);
     		out.println("Ich bin in zufuegen");
     		Ziel = "Freunde.jsp";
     	}
     	else if(wunsch.equals("loeschen")){
-    		freundloeschen(request,response);
+    		f.freundloeschen(request,response);
     		Ziel = "Freunde.jsp";
     	}
     	else if(wunsch.equals("adden")){
-    		freundanfragen(request,response);
-    		//out.println("ich bin in adden");
-    		Ziel = "Freunde.jsp";
+    		f.freundanfragen(request,response);
+    		    		Ziel = "Freunde.jsp";
     	}
     	
-    	//out.println("ich bin wieder draussen");
     	
     	response.sendRedirect(Ziel);
         //processRequest(request, response);
@@ -127,143 +123,4 @@ public class Freunde extends HttpServlet {
         return "Short description";
     }// </editor-fold>
     
-    
-    public void freundanfragen(HttpServletRequest request, HttpServletResponse response) throws IOException{
-    	response.setContentType("text/html");
-    	PrintWriter out = response.getWriter();
-    	String freundname = request.getParameter("freundname");
-    	HttpSession session = request.getSession();
-    	String username =(String) session.getAttribute("username");
-    	Serialisierung a = new Serialisierung();
-    	Person ich = a.getPersonbyid(username);
-    	Person freund = a.getPersonbyid(freundname);
-    	out.println("Anfragen wird aufgerufen"+freund.getID());
-    	if((!(request.getParameter("freundname").isEmpty()))){
-    		ich.addgesendeteAnfragen(freund);
-    		freund.addeingehendeAnfragen(ich);
-    		//if(ich.getgesendeteAnfragen()==null) out.println("Leere Liste");
-    		for(Person test: ich.getgesendeteAnfragen()) out.println(test.getID());
-    		Person ichneu = ich;
-    		Person freundneu = freund;
-    		
-    		a.loeschePerson(ich);
-    		a.speicherePerson(ichneu);
-    		a.loeschePerson(freund);
-    		a.speicherePerson(freundneu);
-    		
-    	}
-    }
-    
-    public void freundloeschen(HttpServletRequest request, HttpServletResponse response) throws IOException{
-    	response.setContentType("text/html");
-    	String freundname = request.getParameter("freundname");
-    	HttpSession session = request.getSession();
-    	
-    	
-    	if(!(request.getParameter("freundname").isEmpty())){
-    		String adddelete = (String) request.getParameter("adddelete");
-    		String zufuegen = "1";
-    		String loeschen = "0";
-    		
-    		if(adddelete.equals(loeschen)){
-        		//out.println("Ich loesche jetzt!");
-        		String username = (String) session.getAttribute("username");
-    			Serialisierung a = new Serialisierung();
-    			Person freund,useralt;
-    			freund = a.getPersonbyid(freundname);
-    			useralt = a.getPersonbyid(username);
-    			ArrayList<Person> freundlist = new ArrayList<Person>();
-    			freundlist = useralt.getFreunde();
-    			
-    			boolean check=false;
-    			
-    			for (Person per : freundlist){
-    				if (freundname.equals(per.getID())){
-    					check=true;
-        				}
-    				}
-    			if (check==true){
-    					
-    					
-    					useralt.setFreunde(freund,false);
-    					freund.setFreunde(freund,false);
-    					Person freundneu = freund;
-    					Person userneu = useralt;
-    					a.loeschePerson(freund);
-    					a.speicherePerson(freundneu);
-    					a.loeschePerson(useralt);
-    					a.speicherePerson(userneu);
-    					
-    					
-    				
-    				}
-        		}
-        	
-        	}
-    }
-    
-    public void freundzufuegen(HttpServletRequest request, HttpServletResponse response) throws IOException{
-    	PrintWriter out = response.getWriter();
-    	response.setContentType("text/html");
-    	String freundname =(String) request.getParameter("freundname");
-    	HttpSession session = request.getSession();   
-    	String username = (String) session.getAttribute("username");
-	    
-    	if(!(request.getParameter("freundname").isEmpty())){
-    		String adddelete = (String) request.getParameter("adddelete");
-    		String zufuegen = "1";
-    		String loeschen = "0";
-    		out.println("Ich bin vor der Auswahl");
-    		
-    		if(adddelete.equals(zufuegen)){
-    			out.println("ich bin in adddelete==1");
-    			Serialisierung a = new Serialisierung();
-    			Person freund,useralt;
-    			freund = a.getPersonbyid(freundname);
-    			useralt = a.getPersonbyid(username);
-    			
-    			boolean check=false;
-    			
-    			for (Person per : useralt.getFreunde()){
-    				if (freundname.equals(per.getID())){
-    					check=true;
-	    				}
-    				}
-    			if (check==false){
-    					useralt.setFreunde(freund,true);
-    					freund.setFreunde(useralt, true);
-    					
-    	    			freund.remgesendeteAnfragen(useralt);
-    	    			useralt.remeingehendeAnfragen(freund);
-    	    			Person userneu = useralt;
-    	        		Person freundneu = freund;
-    	        		a.loeschePerson(freund);
-    	        		a.speicherePerson(freundneu);
-    	    			a.loeschePerson(useralt);
-    					a.speicherePerson(userneu);
-    				}
-	 	 
-	    	
-    			}
-    		else if(adddelete.equals(loeschen)){
-    			Serialisierung a = new Serialisierung();
-    			Person freund,user;
-    			freund = a.getPersonbyid(freundname);
-    			user = a.getPersonbyid(username);
-    			
-    			freund.remgesendeteAnfragen(user);
-    			user.remeingehendeAnfragen(freund);
-    			
-    			Person ichneu = user;
-        		Person freundneu = freund;
-        		
-        		a.loeschePerson(user);
-        		a.speicherePerson(ichneu);
-        		a.loeschePerson(freund);
-        		a.speicherePerson(freundneu);
-    			
-    		}
-    		
-    	}
-    }
 }

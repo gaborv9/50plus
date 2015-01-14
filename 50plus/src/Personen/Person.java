@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import Data.Serialisierung;
+import Management.PersonDAO;
+
 
 public abstract class Person implements Serializable {
 	/**
@@ -130,7 +133,17 @@ public abstract class Person implements Serializable {
 	 */
 	public ArrayList<Person> getFreunde(){
 		if(freunde==null) freunde= new ArrayList<Person>();
-		return freunde;
+		PersonDAO p = new Serialisierung();
+		ArrayList<Person> alleuser = p.getPersonList();
+		ArrayList<Person> freundeneu = new ArrayList<Person>();
+		for(Person test: freunde){
+			for(Person test2: alleuser){
+				if(test.getID().equals(test2.getID()))freundeneu.add(test);
+			}
+		}
+		this.freunde = freundeneu;
+
+		return this.freunde;
 	}
 	
 	
@@ -152,30 +165,19 @@ public abstract class Person implements Serializable {
 			if(addrem == true){
 				for(Person test: freunde){
 					if(test.equals(user)) return;
-				}
-		
+				}	
 				freunde.add(user);
 				return;
 			}
-			
-			/*
-			else if(addrem == false){
-				for(Person test: freunde){
-					if(test.equals(user)){
-						freunde.remove(user);
-						return;
-					}
-				}*/
+		else{
 			ArrayList<Person> test = new ArrayList<Person>();
 			for(Person test2: freunde){
 				if(!(test2.getID().equals(user.getID()))) test.add(test2);
-			}
-			freunde = test;
-			for(Person test2: freunde)
-				System.out.println(test2.getID()+ " ");
-			return;
+				}
+			freunde = test;			
 			}
 		}
+	}
 	
 	/**
 	 * @param role
