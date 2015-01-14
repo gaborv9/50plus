@@ -123,11 +123,11 @@
 					<div class="btn-group">
 						<button type="button" data-toggle="dropdown"
 							class="btn btn-default dropdown-toggle">
-							Adden/Entfernen <span class="caret"></span>
+							als Person adden<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" method="get" action="Freunde">
 							<li><a
-								href="/50plus/Freunde?freundname=<%=test.getID()%>&wunsch=adden">Freund adden</a></li>
+								href="/50plus/Freunde?freundname=<%=test.getID()%>&wunsch=adden">als Freund adden</a></li>
 							
 						</ul>
 
@@ -140,7 +140,7 @@
 						</button>
 						<ul class="dropdown-menu" method="get" action="Meldung">
 							<li><a
-								href="/50plus/Meldung?personname=<%=test.getID()%>&wunsch=meldung">Person melden</a></li>
+								href="/50plus/Meldung?freundname=<%=test.getID()%>&wunsch=meldung">Person melden</a></li>
 							
 						</ul>
 

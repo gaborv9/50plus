@@ -53,37 +53,58 @@ public class Meldung extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setContentType("text/html");
+		int zeit = 0;
 		Serialisierung a = new Serialisierung();
 		HttpSession session = request.getSession();
 		String username =(String) session.getAttribute("username");
-    	String personname = request.getParameter("personname");
+    	String personname = request.getParameter("freundname");
+    	String personname2 =(String) session.getAttribute("freundname");
     	String wunsch = request.getParameter("wunsch");
     	PrintWriter out = response.getWriter();
     	String Ziel = "Admin.jsp";
     	String bitte = "nichterlaubt";
     	Person ich = a.getPersonbyid(username);
     	Person person = a.getPersonbyid(personname);
+    	Person person2 = a.getPersonbyid(personname2);
+    	String zeitString = request.getParameter("zeit");
+    	if(zeitString==null) {
+    		zeitString = "0";
+    		zeit = Integer.parseInt(zeitString);
+    	}
+    	else zeit = Integer.parseInt(zeitString);
+    	//out.println(zeit);
+    	if(zeit>0) wunsch = "befsperren";
+    	//out.println(ich.getRole());
     	
-    	if(wunsch=="meldung"){
+    	if(wunsch.equals("meldung")){
     		meldungmachen(person,ich);
     		out.println("ich komme bis zur meldung");
     		Ziel="Suche.jsp";
     	}
-    	
-    	if(wunsch=="befsperren"){
-    		int zeit = Integer.parseInt(request.getParameter("zeit"));
-    		befsperren(person,zeit);
+    	if(wunsch.equals("befsperren")){
+    		befsperren(person2,zeit);
     		Ziel = "Admin.jsp";
     	}
-    	if(wunsch=="unbefsperren"){
+    	if(wunsch.equals("unbefsperren")){
     		unbefsperren(person);
     		Ziel = "Admin.jsp";
     	}
-    	if(wunsch=="liste"){
+    	if(wunsch.equals("liste")){
     		ArrayList<Person> sperrliste = sperrliste();
     		session.setAttribute("sperrliste",sperrliste);
+    		//out.println(bitte+"=sperrliste?");
     		if(ich.getRole()==1) bitte = "personensperren";
+    		//out.println(bitte+"=personensperren?");
+    		session.setAttribute("bitte", bitte);
     		Ziel = "Admin.jsp";
+    	}
+    	if(wunsch.equals("meldenbeheben")){
+    		ArrayList<Person> neulist = new ArrayList<Person>();
+    		person.setgemeldetvon(neulist);
+    		person.setmeldunganz(0);
+    		Person personneu = person;
+    		a.loeschePerson(person);
+    		a.speicherePerson(personneu);
     	}
     	
     	session.setAttribute("bitte", bitte);
@@ -103,24 +124,31 @@ public class Meldung extends HttpServlet {
 		ArrayList<Person> meldung = person.getgemeldetvon();
 		boolean pruef = false;
 		for(Person test: meldung){
-			if(test.getID()==ich.getID()) pruef=true;
+			if(test.getID().equals(ich.getID())) pruef=true;
 		}
 		if(pruef==false){
 			meldung.add(ich);
 		}
-		ich.setgemeldetvon(meldung);
-		anzmeldung=ich.getmeldunganz();
+		person.setgemeldetvon(meldung);
+		anzmeldung=person.getgemeldetvon().size();
 		if(pruef==false){
 			anzmeldung++;
 		}
-		ich.setmeldunganz(anzmeldung);
-		Person ichneu = ich;
-		a.loeschePerson(ich);
-		a.speicherePerson(ichneu);
+		person.setmeldunganz(anzmeldung);
+		Person personneu = person;
+		a.loeschePerson(person);
+		a.speicherePerson(personneu);
 	}
 	
 	public void befsperren(Person person, int zeit){
 		person.setsperrdatum(zeit);
+		PersonDAO a = new Serialisierung();
+		Person personneu = person;
+		ArrayList<Person> meld = new ArrayList<Person>();
+		personneu.setgemeldetvon(meld);
+		personneu.setmeldunganz(0);
+		a.loeschePerson(person);
+		a.speicherePerson(personneu);
 	}
 	
 	public void unbefsperren(Person person){

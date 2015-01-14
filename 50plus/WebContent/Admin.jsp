@@ -120,7 +120,7 @@
 
 					else if (session.getAttribute("bitte").equals("nichterlaubt")) {
 				%>
-				Sie sind kein Administrator - Kein Zugriff!
+				Nur fuer Administratoren verfuegbar!
 
 				<%
 					}
@@ -131,20 +131,25 @@
 						}
 						else{
 							for(Person test:sperrliste){
-							
+								out.print("User "+test.getID()+" wurde "+test.getmeldunganz()+" mal gemeldet.");
+								session.setAttribute("freundname",test.getID());
 									%>
+									<br>
 									
-									Befristet sperren:
-									<a class="btn btn-default" href="/50plus/Meldung?wunsch=unbefsperren" role="button">unbefristet sperren</a>
+									Tage befristet sperren:
 									<div class="input-group">
 										<form class="form-search" method="get" action="Meldung"
 											role="form">
 											<input type="text" name="zeit" class="form-control"
 												placeholder="Anzahl der Tage">
 										</form>
+									<a class="btn btn-default" href="/50plus/Meldung?wunsch=unbefsperren&freundname=<%=test.getID()%>" role="button">unbefristet sperren</a>
+									<a class="btn btn-default" href="/50plus/Meldung?wunsch=meldenbeheben&freundname=<%=test.getID()%>" role="button">aus Liste entfernen</a>
+									
 									</div>
+									<br>
 								<% 
-								out.print("User "+test.getID()+" wurde "+test.getmeldunganz()+" mal gemeldet.");
+								
 							}
 						}
 					}

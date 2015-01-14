@@ -26,6 +26,7 @@ public abstract class Person implements Serializable {
 	private GregorianCalendar sperrdatum;
 	
 	public GregorianCalendar getsperrdatum(){
+		if(sperrdatum == null ) sperrdatum = new GregorianCalendar();
 		return sperrdatum;
 	}
 	
@@ -34,9 +35,7 @@ public abstract class Person implements Serializable {
 		sperrdatum.add(GregorianCalendar.DAY_OF_MONTH, day);
 	}
 	
-	public int getmeldunganz(){
-		return meldunganz;
-	}
+	
 	public void setmeldunganz(int zahl){
 		meldunganz = zahl;
 	}
@@ -44,8 +43,12 @@ public abstract class Person implements Serializable {
 		if(gemeldetvon==null) gemeldetvon = new ArrayList<Person>();
 		return gemeldetvon;
 	}
+	public int getmeldunganz(){
+		meldunganz = getgemeldetvon().size();
+		return meldunganz;
+	}
 	public void setgemeldetvon(ArrayList<Person> melder){
-		gemeldetvon=melder;
+		if(melder!=null) gemeldetvon=melder;
 	}
 	public String getPicturelink() {
 		return picturelink;
