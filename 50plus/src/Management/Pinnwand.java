@@ -73,10 +73,11 @@ public class Pinnwand extends HttpServlet
 		{
 			//neues Post wird erstellt
 			Post p = new Post(username, inhalt, zeitpunkt);
+			int postNumber = 0;
 			
 			//Post wird spreichert
 		    PinnwandManagement pm = new PinnwandManagement();
-			pm.addPost(p);
+			pm.addPost(p, postNumber);
 		    
 			//neue postlist wird erstellt und aktualisiert und in session gesetzt
 		    ArrayList<Post> postlist = pm.getOwnpostlist(username);

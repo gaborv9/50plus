@@ -67,7 +67,6 @@
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
 						<li><a href="/50plus/Profil.jsp">Profil</a></li>
-						<li><a href="/50plus/Admin.jsp">Admin</a></li>
 						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 		
 		
@@ -134,10 +133,7 @@
 					</form> 
 					<!--<input type="submit" name="posten" value="posten"> -->
 						               		
-					<%
-						String postDeleteSuccess = (String)session.getAttribute("postDeleteSuccess");
-					
-					%>		            
+		            
 		           
 					
 					<%
@@ -152,24 +148,49 @@
 					if(postlist.size() != 0)
 					{
 						int i = postlist.size()-1;
-						for ( ; i >=0; i--)
+						for ( ;i >=0; i--)
 							 
 										//for (Post test: postlist )
 					    {
 							//out.println(test.getOwnPostcounter() + ":    "); 
 							out.println(username + ", ");
-							out.println(postlist.get(i).getZeitpunkt() + "<br />"); 
-							%>
-							<div class="panel panel-default">
-								<div class="panel-body" style="width: 1100px; word-wrap: break-word"><% out.println(postlist.get(i).getInhalt()); %></div>
-							</div>
+							out.println(postlist.get(i).getZeitpunkt()); 
+							//out.println(postlist.get(i).getOwnPostcounter()); 
+							
+					       	if (postlist.get(i).getFlagged())
+							{
+							%> 
+								<span style="float:right">gemeldet </span>
+							<% 
+							}
+					       	else
+					       	{
+					       		%>
+					       		<span style="float:right">
+					       		<a href="/50plus/Pinnwand_Melden?postNumber=<%= (postlist.get(i).getOwnPostcounter())%>">Melden</a>
+					       		</span>
+					       		<% 
+					       	}
 
-							<%
-		               //		out.println(test.getInhalt() + "<br />"); 
-		             %>
-		               	
-		               <a href="/50plus/Pinnwand_Delete?postNumber=<%= (postlist.get(i).getOwnPostcounter())%>">Delete</a><br> 	
-		               <br>
+							
+							
+							
+							
+					%>
+					<div class="panel panel-default">
+						<div class="panel-body" style="width: 1100px; word-wrap: break-word"><% out.println(postlist.get(i).getInhalt()); %></div>
+					</div>
+
+				               	
+	               <a href="/50plus/Pinnwand_Delete?postNumber=<%= (postlist.get(i).getOwnPostcounter())%>">Delete</a>
+	      
+	             	
+	      
+	             
+	             	
+	             	
+	               <br> 	
+	               <br>
 		               		
 		               		
 		            <% 
