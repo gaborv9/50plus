@@ -77,13 +77,19 @@ public class Management extends HttpServlet {
 		
 			PersonManagement a = new PersonManagement();
 			
+	
 			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
 				a.changerole(a.getPerson(username), role);
 			}
 			else{
 				 
 			}
-		
+			
+
+			
+			
+			
+			
 		response.sendRedirect("Profil.jsp");
 		}
 	

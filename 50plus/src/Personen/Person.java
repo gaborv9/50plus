@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import Data.Serialisierung;
+import Management.PersonDAO;
+
 
 public abstract class Person implements Serializable {
 	/**
@@ -18,8 +21,38 @@ public abstract class Person implements Serializable {
 	private String pw;
 	private GregorianCalendar datum;
 	private ArrayList<Person> freunde;
+	private ArrayList<Person> eingehendeAnfragen;
+	private ArrayList<Person> gesendeteAnfragen;
+	private ArrayList<Person> gemeldetvon;
+	private int meldunganz;
 	private String picturelink;
+	private GregorianCalendar sperrdatum;
 	
+	public GregorianCalendar getsperrdatum(){
+		if(sperrdatum == null ) sperrdatum = new GregorianCalendar();
+		return sperrdatum;
+	}
+	
+	public void setsperrdatum(int day){
+		sperrdatum = new GregorianCalendar();
+		sperrdatum.add(GregorianCalendar.DAY_OF_MONTH, day);
+	}
+	
+	
+	public void setmeldunganz(int zahl){
+		meldunganz = zahl;
+	}
+	public ArrayList<Person> getgemeldetvon(){
+		if(gemeldetvon==null) gemeldetvon = new ArrayList<Person>();
+		return gemeldetvon;
+	}
+	public int getmeldunganz(){
+		meldunganz = getgemeldetvon().size();
+		return meldunganz;
+	}
+	public void setgemeldetvon(ArrayList<Person> melder){
+		if(melder!=null) gemeldetvon=melder;
+	}
 	public String getPicturelink() {
 		return picturelink;
 	}
@@ -32,15 +65,85 @@ public abstract class Person implements Serializable {
 			return 1;
 		}
 	}
-
-
+	public ArrayList<Person> getgesendeteAnfragen(){
+		if(gesendeteAnfragen==null) gesendeteAnfragen = new ArrayList<Person>();
+		return gesendeteAnfragen;
+	}
+	public ArrayList<Person> geteingehendeAnfragen(){
+		if(eingehendeAnfragen==null) eingehendeAnfragen = new ArrayList<Person>();
+		return eingehendeAnfragen;
+	}
+	
+	public void addgesendeteAnfragen(Person zufuegen){
+		ArrayList<Person> altlist = getgesendeteAnfragen();
+			if((altlist!=null)){
+				boolean doppelt = false;
+				for(Person test : altlist){
+					if(test.getID().equals(zufuegen.getID())) doppelt = true;
+				}
+				if(doppelt==false){
+					altlist.add(zufuegen);
+					gesendeteAnfragen = altlist;
+				}
+			}
+	}
+	public void remgesendeteAnfragen(Person loeschen){
+		ArrayList<Person> altlist = getgesendeteAnfragen();
+			if(altlist.size()!=0){
+				ArrayList<Person> neulist = new ArrayList<Person>();
+				for(Person test: altlist){
+					if(test.getID().equals(loeschen.getID())){}
+					else neulist.add(test);
+				}
+					gesendeteAnfragen = neulist;
+				}
+	}
+	
+	public void addeingehendeAnfragen(Person zufuegen){
+		ArrayList<Person> altlist = geteingehendeAnfragen();
+		if(altlist!=null){
+			boolean doppelt = false;
+			for(Person test : altlist){
+				if(test.getID().equals(zufuegen.getID())) doppelt = true;
+			}
+			if(doppelt==false){
+				altlist.add(zufuegen);
+				eingehendeAnfragen = altlist;
+			}
+		
+		}
+	}
+	public void remeingehendeAnfragen(Person loeschen){
+		ArrayList<Person> altlist = geteingehendeAnfragen();
+			if(altlist.size()!=0){
+				ArrayList<Person> neulist = new ArrayList<Person>();
+				for(Person test: altlist){
+					if(test.getID().equals(loeschen.getID())){}
+					else neulist.add(test);
+				}
+					eingehendeAnfragen = neulist;
+				
+			}
+	}
+	
 	/**
 	 * 
 	 * @return freunde
 	 * Alle Freunde der Person zurueckgeben
 	 */
 	public ArrayList<Person> getFreunde(){
-		return freunde;
+		if(freunde==null) freunde= new ArrayList<Person>();
+		PersonDAO p = new Serialisierung();
+		ArrayList<Person> alleuser = p.getPersonList();
+		ArrayList<Person> freundeneu = new ArrayList<Person>();
+		for(Person test: freunde){
+			for(Person test2: alleuser){
+				if(test.getID().equals(test2.getID()))freundeneu.add(test);
+			}
+		}
+		this.freunde = freundeneu;
+
+		return this.freunde;
 	}
 	
 	
@@ -58,34 +161,23 @@ public abstract class Person implements Serializable {
 	 * 
 	 */
 	public void setFreunde(Person user, boolean addrem){
-		if(!(freunde==null)){
+		if(getFreunde()!=null){
 			if(addrem == true){
 				for(Person test: freunde){
 					if(test.equals(user)) return;
-				}
-		
+				}	
 				freunde.add(user);
 				return;
 			}
-			
-			/*
-			else if(addrem == false){
-				for(Person test: freunde){
-					if(test.equals(user)){
-						freunde.remove(user);
-						return;
-					}
-				}*/
+		else{
 			ArrayList<Person> test = new ArrayList<Person>();
 			for(Person test2: freunde){
 				if(!(test2.getID().equals(user.getID()))) test.add(test2);
-			}
-			freunde = test;
-			for(Person test2: freunde)
-				System.out.println(test2.getID()+ " ");
-			return;
+				}
+			freunde = test;			
 			}
 		}
+	}
 	
 	/**
 	 * @param role
@@ -227,6 +319,7 @@ public abstract class Person implements Serializable {
 			}
 			else{
 			this.datum = gebdate;
+			this.sperrdatum = gebdate;
 			return 1;
 			}
 

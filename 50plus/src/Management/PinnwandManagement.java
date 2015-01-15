@@ -20,9 +20,9 @@ public class PinnwandManagement
 	 * @param p Post, der hinzugefuegt wird
      */
 
-    public void addPost(Post p) 
+    public void addPost(Post p, int postNumber) 
     {
-    	ps.speicherePost(p);
+    	ps.speicherePost(p, postNumber);
     }
 	
     /**
@@ -55,12 +55,23 @@ public class PinnwandManagement
     	return ps.getPostNumbers(username);
     } 
    
-    /*
-    public Post getPost(int postNumber) 
+    //du bekommst den Post nach postNumber
+    public Post getPostbyNumber (int postNumber) 
     {
-    	return ps.getPost(postNumber);
+    	return ps.getPostbyNumber(postNumber);
     
     }    
-    */
+    
+  //du kannst den Post auf flagged/not flagged setzen
+    public void changeFlag(boolean flag, int postNumber)
+    {
+    	ps.changeFlag(flag, postNumber);
+    }
 
+  //du bekommst die Liste der flagged Posts zurueck
+    public void getFlaggedPostlist()
+    {
+    	ps.getFlaggedPostlist();
+    }
+    
 }

@@ -73,6 +73,7 @@
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
 						<li><a href="/50plus/Profil.jsp">Profil</a></li>
+						<li><a href="/50plus/Admin.jsp">Admin</a></li>
 						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 					<form class="form-signin" method="post" action="Suche" role="form">
 						<div class="form-group">
@@ -97,9 +98,10 @@
 
 
 	<div class="container">
-		<div class="row">
-			<div class="col-lg-12" id="content">
-				<br> <br>
+			<div class="row">
+					<div class="col-md-6">
+				<br />
+				<br />
 
 				<%
 					//	out.println((String) session.getAttribute("username")
@@ -110,31 +112,48 @@
 					}
 					//<jsp:include page="/Forschung" flush="true" />
 				%>
-
+				<h3>Informationen zu einer Person:</h3>
 				<div class="input-group">
-					<form class="form-search" method="get" action="Forschung"
-						role="form">
+					<form class="form-search" method="get" action="Forschung" role="form">
+					<div class="form-group">
 						<input type="text" name="searchperson" class="form-control"
-							placeholder="Person suchen..">
-
+							placeholder="Person suchen.." required>
+							</div>
+							<button class="btn btn-default" type="submit">Submit</button>
 					</form>
-
 				</div>
-				<a class="btn btn-default"
-					href="/50plus/Forschung?information=information" role="button">Allgemeine
-					Informationen</a>
+				<h3>Vernetzung von 2 Personen:</h3>
+				<div class="input-group">
+					<form class="form-search" method="get" action="Forschung" role="form">
+						<div class="form-group">
+						<input type="text" name="vperson1" class="form-control"
+							placeholder="Person suchen.." required>
+						</div>
+						<div class="form-group">
+						<input type="text" name="vperson2" class="form-control"
+							placeholder="Person suchen.." required>
+							</div>
+							 <button class="btn btn-default" type="submit">Submit</button>
+					</form>
+				</div>
+				<h3>Informationen:</h3>
+				<a class="btn btn-default" 	href="/50plus/Forschung?information=information" role="button">Allgemeine Informationen</a>
 				<br />
-
+			
+				</div>
+				<div class="col-md-6">
+				<br />
 				<%
 					if (session.getAttribute("anfrage").equals("keine")) {
 					}
 
 					else if (session.getAttribute("anfrage").equals("keinzugriff")) {
-				%>
-				Sie sind kein Forscher - Kein Zugriff.
-
-				<%
-					} else if (session.getAttribute("anfrage").equals("info")) {
+						%>
+						Sie sind kein Forscher - Kein Zugriff.
+		
+						<%
+					} 
+					else if (session.getAttribute("anfrage").equals("info")) {
 						ArrayList<Integer> allgemeinwerte = (ArrayList<Integer>) session.getAttribute("allgemeinwerte");
 						out.println("<br />");
 						out.println("Anzahl aller registrierten Personen: "
@@ -162,8 +181,17 @@
 						out.println("<br />");
 						out.println("Durchschnitt von Posts pro Person: "
 								+ allgemeinwerte.get(9));
-
-					} else if (session.getAttribute("anfrage").equals("person")) {
+						session.setAttribute("anfrage", "keine");
+					}		
+					else if (session.getAttribute("anfrage").equals("vert")){
+							out.println("<br />");
+							out.println("Verteilung: "+ (String) session.getAttribute("verteilungzahl"));
+							out.println("<br />");
+							out.println("Verteilung: "+ (String) session.getAttribute("verteilung"));
+							session.setAttribute("anfrage", "keine");
+						
+					}
+					else if (session.getAttribute("anfrage").equals("person")) {
 
 						if (session.getAttribute("personfound").equals("true")) {
 							ArrayList<Integer> searchedpersonwerte = (ArrayList<Integer>) session.getAttribute("searchedpersonwerte");
@@ -185,35 +213,39 @@
 								String postpermonth[] = new String[12];
  
 							
-				%>
-				<script type="text/javascript">
-				
-				var werte = [[1, 5], [2, 5], [3, 20], [4, 0], [5, 10], [6, 100], [7, 30], [8, 10], [9, 5], [10, 3], [11, 2], [12, 1]];
- 
-				$(document).ready(function () {
-				    $.plot($("#placeholder"), [werte]);
-				});
-				</script>
-			    <br />
-			    <br />
-			    <div id="placeholder"></div>
-			    x-Achse: Monat
-			    <br />
-			    y-Achse: Post-Anzahl
-				<%
-					} else {
-							out.println("<br />");
-							out.println("Person nicht gefunden!");
+					%>
+					<script type="text/javascript">
+					
+					var werte = [[1, 5], [2, 5], [3, 20], [4, 0], [5, 10], [6, 100], [7, 30], [8, 10], [9, 5], [10, 3], [11, 2], [12, 1]];
+	 
+					$(document).ready(function () {
+					    $.plot($("#placeholder"), [werte]);
+					});
+					</script>
+				    <br />
+				    <br />
+				    <div id="placeholder"></div>
+				    x-Achse: Monat
+				    <br />
+				    y-Achse: Post-Anzahl
+					<%session.setAttribute("anfrage", "keine");
+						} else {
+								out.println("<br />");
+								out.println("Person nicht gefunden!");
+								session.setAttribute("anfrage", "keine");
+							}
+	
 						}
-
-					} else {
+					
+					else {
 					}
 
 					session.setAttribute("postDeleteSuccess", "nichts");
 				%>
+				</div>
 			</div>
 		</div>
-	</div>
+ 
 	<!-- /.container -->
 	<!-- Bootstrap Core JavaScript -->
 	<script src="dist/js/bootstrap.min.js"></script>

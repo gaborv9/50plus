@@ -36,12 +36,20 @@ public class Post_Serialisierung
 	 * Die Methode speicherePost speichert ein Post Objekt in post.ser
 	 * @param p Post, der gespeichert wird
 	 */  
-    public void speicherePost(Post p) 
+    public void speicherePost(Post p, int postNumber) 
     {
         
+      	
     	globalPostlist = getGlobalpostlist();
     	
-    	p.setOwnPostcounter(getMaxPostNumber() + 1);
+    	if (postNumber == 0)
+    	{
+    		p.setOwnPostcounter(getMaxPostNumber() + 1);
+    	}
+    	else
+    	{
+    		p.setOwnPostcounter(postNumber);
+    	}
  
     	/*
     	System.out.println("Alle Counter");
@@ -278,8 +286,8 @@ public class Post_Serialisierung
    	}    
     
     
-    
-   /* public Post getPost(int postNumber)
+   
+   public Post getPostbyNumber(int postNumber)
    	{
     	globalPostlist = getGlobalpostlist();
       	    	  	
@@ -297,6 +305,66 @@ public class Post_Serialisierung
     	System.out.println("ich habe den Post nicht gefunden");
 		return null;
    	}   
-    */
+    
+   
+   public void changeFlag(boolean flag, int postNumber)
+   {
+	 	   
+	   globalPostlist = getGlobalpostlist();
+	   
+
+	   
+	   
+	   for(int i = 0; i < globalPostlist.size(); i++)
+	   {
+			if(globalPostlist.get(i).getOwnPostcounter() == postNumber)
+			{
+				/*System.out.println("gefunden");
+				System.out.println(globalPostlist.get(i).getOwnPostcounter());
+				System.out.println(postNumber);
+				*/
+				Post p =  getPostbyNumber(postNumber);
+				p.setFlagged(flag);
+				
+				loeschePost(postNumber);			
+				speicherePost(p, postNumber);
+					
+			}
+			/*else
+			{
+				System.out.println("Post nicht gefunden.");
+			}
+			*/
+	   }
+	   
+	  
+   }
+   
+   public ArrayList<Post> getFlaggedPostlist()
+  	{
+	   
+	   	globalPostlist = getGlobalpostlist();
+	   	ArrayList<Post> flaggedPostlist = new ArrayList<Post>();
+	   	    	  	
+	   	int j = 0;
+	   	Post temp_post;
+	   	    	
+	   	for(int i = 0; i < globalPostlist.size(); i++)
+			{
+				if(globalPostlist.get(i).getFlagged() == true) //works because they are primitives (boolean) and not objects (Boolean)
+				{
+					temp_post = globalPostlist.get(i);
+					flaggedPostlist.add(j, temp_post);
+					j++;
+				}
+			}
+		return flaggedPostlist;
+  	}
+   
+   
+   
+   
+   
+   
 }
 

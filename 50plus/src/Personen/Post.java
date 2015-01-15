@@ -3,6 +3,7 @@ package Personen;
 import java.io.Serializable;
 
 
+
 public class Post implements Serializable
 {
 
@@ -12,10 +13,11 @@ public class Post implements Serializable
 	private static final long serialVersionUID = 5232046163819389300L;
 	
 	private int ownPostcounter;
-	//private static int globalPostcounter;
 	private String username;
 	private String inhalt;
 	private String zeitpunkt;
+	private boolean flagged;
+	
 	/**
 	 * Default Konstruktor der Klassen Post
 	 * @param username User, der den Post gepostet hat
@@ -29,6 +31,7 @@ public class Post implements Serializable
 		this.username = username;
 		this.inhalt = inhalt;
 		this.zeitpunkt = zeitpunkt;
+		this.flagged = false; 
 	}
 	
 	/**
@@ -49,16 +52,15 @@ public class Post implements Serializable
 		ownPostcounter = nummer;
 	} 
 	
-	/*public int getGlobalPostcounter()
+	public boolean getFlagged()
 	{
-		return globalPostcounter;
+		return flagged;
 	}
-
-	public void setGlobalPostcounter(int zahl)
+	
+	public void setFlagged(boolean flagged)
 	{
-		globalPostcounter = zahl;
+		this.flagged = flagged;
 	} 
-	*/
 	
 	/**
 	 * Die Methode getUsername gibt den Username zurueck
@@ -111,5 +113,8 @@ public class Post implements Serializable
 	
 	
 	
+
 	
 }
+
+

@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -83,6 +84,8 @@ public class Forschung extends HttpServlet {
 		PinnwandManagement pinman= new PinnwandManagement();
 		// String information =request.getParameter("information");
 		String searchedperson = request.getParameter("searchperson");
+		String vperson1 = request.getParameter("vperson1");
+		String vperson2 = request.getParameter("vperson2");
 		int check = 0;
 
 		// User Statistik -----
@@ -166,10 +169,8 @@ public class Forschung extends HttpServlet {
 			session.setAttribute("anfrage", "keinzugriff");
 			response.sendRedirect("Forschung.jsp");
 		}
-		if (role == 2 && searchedperson == null) { // Ausgabe fuer allgemeine
-													// Informationen
-			session.setAttribute("anfrage", "info");
-
+		if (role == 2 && searchedperson == null && vperson1==null ) { // Ausgabe fuer allgemeine Informationen
+	
 			ArrayList<Integer> allgemeinwerte = new ArrayList<>();
 			allgemeinwerte.add(anzahlpersonen);
 			allgemeinwerte.add(gesamtpost);
@@ -183,15 +184,19 @@ public class Forschung extends HttpServlet {
 			allgemeinwerte.add(postdurchschnitt);
 			allgemeinwerte.add(anzahlgruppen);
 			session.setAttribute("allgemeinwerte", allgemeinwerte);
+			session.setAttribute("anfrage", "info");
 			response.sendRedirect("Forschung.jsp");
+			
+			
 
-		} else if (role == 2 && searchedperson != null) {// Ausgabe fuer Person
+		} else if (role == 2 && searchedperson != null && vperson1 ==null && vperson2 ==null) {// Ausgabe fuer Person
 
 			if (check == 0) {
 				session.setAttribute("anfrage", "person");
 				session.setAttribute("personfound", "false"); // Person wurde nicht gefunden
 				response.sendRedirect("Forschung.jsp");
-			} else {
+			} 
+			else {
 				int friendc=0;
 				session.setAttribute("personfound", "true");
 				session.setAttribute("anfrage", "person");
@@ -217,8 +222,36 @@ public class Forschung extends HttpServlet {
 				session.setAttribute("searchedpersonwerte", personwerte);
 				response.sendRedirect("Forschung.jsp");
 			}
-		}
 
+		}else if (role ==2 && searchedperson == null) {
+		//&& vperson1!=null && vperson2!=null)
+		/*	if (vperson1.isEmpty() && vperson2.isEmpty()){
+			
+				session.setAttribute("verteilungzahl", "0");
+				session.setAttribute("verteilung", "Bitte 2 Personen angeben!");
+				//response.sendRedirect("Forschung.jsp");
+				
+			}*/
+			VernetzungClass g= new VernetzungClass();
+			List result = g.calc(vperson1, vperson2);
+			
+			if (result == null){
+				session.setAttribute("anfrage", "vert");
+				session.setAttribute("verteilungzahl", "0");
+				session.setAttribute("verteilung", "Bitte 2 Personen angeben!");
+				response.sendRedirect("Forschung.jsp");
+			}
+			else{
+			
+			session.setAttribute("anfrage", "vert");
+			session.setAttribute("verteilungzahl", Integer.toString(result.size()));
+			session.setAttribute("verteilung", result.toString());
+			response.sendRedirect("Forschung.jsp");
+			}
+		
+		}else{}
+		
+		//response.sendRedirect("Forschung.jsp");
 		// processRequest(request, response);
 
 	}

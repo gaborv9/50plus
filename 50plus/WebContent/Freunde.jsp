@@ -64,6 +64,7 @@
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
 						<li><a href="/50plus/Profil.jsp">Profil</a></li>
+						<li><a href="/50plus/Admin.jsp">Admin</a></li>
 						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 					<form class="form-signin" method="post" action="Suche" role="form">
 						<div class="form-group">
@@ -85,16 +86,81 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12" id="content">
-				 
+				<form action="Freunde" method="post">
+					<%
+					//response.sendRedirect("Freunde.java");
+					String username = (String) session.getAttribute("username");
+ 					PersonManagement a = new PersonManagement();
+ 					ArrayList<Person> geffreunde = a.getPerson(username).getFreunde();
+ 					ArrayList<Person> ausstehendeAnfragen = a.getPerson(username).getgesendeteAnfragen();
+ 					ArrayList<Person> eingehendeAnfragen = a.getPerson(username).geteingehendeAnfragen();
+ 					boolean prufaus = false;
+ 					boolean prufein = false;
+ 					boolean freund = false;
+ 					
+ 					
+ 					
+ 					if(ausstehendeAnfragen==null) prufaus=true;
+ 					if(ausstehendeAnfragen.size()==0) prufaus=true;
+ 					
+ 					if(eingehendeAnfragen==null) prufein=true;
+ 					if(eingehendeAnfragen.size()==0) prufein=true;
+ 					
+ 					if(geffreunde.size()==0) freund = true;
+ 					
+					%>
+					<h2>Meine ausstehenden Anfragen:</h2>
+					
+					<% 
+					
+					
+					if(!prufaus){
+						for(Person test: ausstehendeAnfragen){
+							out.println(test.getID() +" hat noch nicht geantwortet");
+						}
+					}
+					else { out.println("Du hast noch keine Anfragen verschickt.");}
+						
+					
+					%>
+					
+					<h2>Meine Freundschaftsanfragen:</h2>
+					  
+				 	<%
+				 	
+				 	
+					if(!prufein){
+						for(Person test: eingehendeAnfragen){
+							
+							%>
+							<div class="btn-group">
+						<button type="button" data-toggle="dropdown"
+							class="btn btn-default dropdown-toggle">
+							Akzeptieren <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" method="get" action="Freunde">
+							<li><a
+								href="/50plus/Freunde?adddelete=1&freundname=<%=test.getID()%>&wunsch=zufuegen">Akzeptieren</a></li>
+							 <li><a
+								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>&wunsch=zufuegen">Nicht Akzeptieren</a></li>
+							 
+						</ul>
+		</div>
+							<%
+							
+							out.println(test.getID() +" will dich als Freund. <br>");
+						}
+					}
+					else out.println("Du hast zurzeit keine Freundschaftsanfragen.");
+					
+				 	%>
+				 	
 					<h2>Meine Freunde:</h2>
 					<%
 				
 					
-					String username = (String) session.getAttribute("username");
- 					PersonManagement a = new PersonManagement();
- 					ArrayList<Person> geffreunde =a.getPerson(username).getFreunde();
- 					
-							if(geffreunde.size() == 0) out.println("Du hast noch keine Freunde");
+					
+							if(freund) out.println("Du hast noch keine Freunde");
 							else{
 								for(Person test: geffreunde){
 									%>
@@ -105,13 +171,13 @@
 						</button>
 						<ul class="dropdown-menu" method="get" action="Freunde">
 							<li><a
-								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>">Entfernen</a></li>
+								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>&wunsch=loeschen">Entfernen</a></li>
 							 
 						</ul>
 
 
 					</div>
-									<% 
+					<% 
 										out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+"<br>");		
 									}
 								}
@@ -120,7 +186,7 @@
 							  	}
 					%>
 
-				 
+				</form> 
 			</div>
 		</div>
 	</div>
