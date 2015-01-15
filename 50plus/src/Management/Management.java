@@ -77,19 +77,15 @@ public class Management extends HttpServlet {
 		
 			PersonManagement a = new PersonManagement();
 			
-			//_____________________________________________________________________________________________________________________________________________
-			//GABOR hat das vorlaeufig geaendert, weil sonst man als User (Rolle 3) niemals einen Admin einstellen kann, so wird es keine Admins im System geben :)
-			/*
+	
 			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
 				a.changerole(a.getPerson(username), role);
 			}
 			else{
 				 
 			}
-			*/
-			//_____________________________________________________________________________________________________________________________________________
 			
-			a.changerole(a.getPerson(username), role);
+
 			
 			
 			
