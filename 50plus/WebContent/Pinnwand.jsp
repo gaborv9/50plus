@@ -167,7 +167,7 @@
 					       	{
 					       		%>
 					       		<span style="float:right">
-					       		<a href="/50plus/Pinnwand_Melden?postNumber=<%= (postlist.get(i).getOwnPostcounter())%>">Melden</a>
+					       		<a href="/50plus/Pinnwand?postNumber_melden=<%= (postlist.get(i).getOwnPostcounter())%>">Melden</a>
 					       		</span>
 					       		<% 
 					       	}
@@ -182,7 +182,7 @@
 					</div>
 
 				               	
-	               <a href="/50plus/Pinnwand_Delete?postNumber=<%= (postlist.get(i).getOwnPostcounter())%>">Delete</a>
+	               <a href="/50plus/Pinnwand?postNumber_delete=<%= (postlist.get(i).getOwnPostcounter())%>">Delete</a>
 	      
 	             	
 	      

@@ -36,14 +36,7 @@
     <servlet-name>PinnwandManagement</servlet-name>
     <servlet-class>Management.PinnwandManagement</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>Pinnwand_Delete</servlet-name>
-    <servlet-class>Management.Pinnwand_Delete</servlet-class>
-  </servlet>
-   <servlet>
-    <servlet-name>Pinnwand_Melden</servlet-name>
-    <servlet-class>Management.Pinnwand_Melden</servlet-class>
-  </servlet>
+
    
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
@@ -81,14 +74,7 @@
     <servlet-name>PinnwandManagement</servlet-name>
     <url-pattern>/PinnwandManagement</url-pattern>
   </servlet-mapping>
-   <servlet-mapping>
-    <servlet-name>Pinnwand_Delete</servlet-name>
-    <url-pattern>/Pinnwand_Delete</url-pattern>
-  </servlet-mapping>
-     <servlet-mapping>
-    <servlet-name>Pinnwand_Melden</servlet-name>
-    <url-pattern>/Pinnwand_Melden</url-pattern>
-  </servlet-mapping>
+
   
   <session-config>
     <session-timeout>30</session-timeout>
