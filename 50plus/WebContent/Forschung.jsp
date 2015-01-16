@@ -206,17 +206,44 @@
 							out.println("Gruppenanzahl: " + searchedpersonwerte.get(2));
 							
 						 
+							//ArrayList<String> tagesposts = (ArrayList<String>) session.getAttribute("tagesposts");
+						/*	ArrayList<String> monatspostsx = (ArrayList<String>) session.getAttribute("monatsposts");
+						    ArrayList<Integer> monatsposts = new ArrayList<Integer>();
+						    for ( String temp : monatspostsx){
+						    	monatsposts.add(Integer.parseInt(temp));
+						    }
+						  int[] mcount= new int[11];
+						    for (int i=1; i <=12; i++){
+						    	for (int tempi : monatsposts){
+						    		if (i == tempi){
+						    			mcount[i] = mcount[i]+1;
+						    		}
+						    	}
+						    	
+						    }*/
+						
+						    int[] mcount = (int[]) session.getAttribute("monatsposts");
 								
-								String username = (String) session.getAttribute("username");
-								ArrayList<Post> postlist = 	(ArrayList<Post>) session.getAttribute("postlist");
-							   
-								String postpermonth[] = new String[12];
- 
-							
+							 
 					%>
 					<script type="text/javascript">
 					
-					var werte = [[1, 5], [2, 5], [3, 20], [4, 0], [5, 10], [6, 100], [7, 30], [8, 10], [9, 5], [10, 3], [11, 2], [12, 1]];
+					var a =  <%=mcount[0]%>;
+			    	var b =  <%=mcount[1]%>;
+			    	var c =  <%=mcount[2]%>;
+			    	var d =  <%=mcount[3]%>;
+			    	var e =  <%=mcount[4]%>;
+			    	var f =  <%=mcount[5]%>;
+			    	var g =  <%=mcount[6]%>;
+			    	var h =  <%=mcount[7]%>;
+			    	var i =  <%=mcount[8]%>;
+			    	var j =  <%=mcount[9]%>;
+			    	var k =  <%=mcount[10]%>;
+			    	var l =  <%=mcount[11]%>;
+			  
+					var werte = [[1, a], [2, b], [3, c], [4, d], [5, e], [6, f], [7, g], [8, h], [9, i], [10, j], [11, k], [12, l]]; 
+					
+ 
 	 
 					$(document).ready(function () {
 					    $.plot($("#placeholder"), [werte]);

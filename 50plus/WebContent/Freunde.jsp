@@ -104,11 +104,10 @@
  					if(ausstehendeAnfragen.size()==0) prufaus=true;
  					
  					if(eingehendeAnfragen==null) prufein=true;
-<<<<<<< HEAD
  					if(eingehendeAnfragen.size()==0) prufein=true;
-=======
+
  					if(ausstehendeAnfragen.size()==0) prufaus=true;
->>>>>>> ccc32e827c3a1e6d251bc472af5be9c6ef79e2a1
+
  					
  					if(geffreunde.size()==0) freund = true;
  					

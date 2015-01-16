@@ -207,20 +207,41 @@ public class Forschung extends HttpServlet {
 
 				personwerte.add(postser.getOwnpostlist(searchedperson).size());// postanzahl des users
 				
-				/*String zeitpunkt = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
+				//String zeitpunkt = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
 				ArrayList<Post> postlist = pinman.getOwnpostlist(searchedperson);
-				ArrayList<Integer> monatposts = new ArrayList<>();
+				ArrayList<String> monatsposts= new ArrayList<>();
+			//	ArrayList<String> tagesposts= new ArrayList<>();
+			    
 				for (Post post : postlist){
-					for (int i=1; i < 13;i++){
+					monatsposts.add(post.getZeitpunkt().substring(3,5));
+					//tagesposts.add(post.getZeitpunkt().substring(0, 1));
 					
-					}
-				}*/
+				}
+				 
+			  ArrayList<Integer> mpostint = new ArrayList<>();
+			    for ( String temp : monatsposts){
+			    	mpostint.add(Integer.parseInt(temp));
+			    }
+			    
+			  int[] mcount= new int[12];
+			    for (int i=1; i <=12; i++){
+			    	for (int tempi : mpostint){
+			    		if (i == tempi){
+			    			mcount[i-1] = mcount[i-1]+1;
+			    		}
+			    	}
+			    	
+			    }
 				
 				personwerte.add(friendc);
 				personwerte.add(usergroups);
+			//	session.setAttribute("tagesposts", tagesposts); //Monats und Tagesposts werden in Stringform uebergeben.
+				session.setAttribute("monatsposts", mcount);
 				session.setAttribute("searchedusername", pser.getPersonbyid(searchedperson).getID());
 				session.setAttribute("searchedpersonwerte", personwerte);
 				response.sendRedirect("Forschung.jsp");
+			    
+
 			}
 
 		}else if (role ==2 && searchedperson == null) {
