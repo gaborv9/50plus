@@ -36,10 +36,13 @@
     <servlet-name>PinnwandManagement</servlet-name>
     <servlet-class>Management.PinnwandManagement</servlet-class>
   </servlet>
+<<<<<<< HEAD
   <servlet>
     <servlet-name>Gruppenpinnwand</servlet-name>
     <servlet-class>Management.Gruppenpinnwand</servlet-class>
   </servlet>
+=======
+>>>>>>> 55eaeeb7c73f174c1d1d8756bd9e86bee594ae0b
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
@@ -76,10 +79,13 @@
     <servlet-name>PinnwandManagement</servlet-name>
     <url-pattern>/PinnwandManagement</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
     <servlet-mapping>
     <servlet-name>Gruppenpinnwand</servlet-name>
     <url-pattern>/Gruppenpinnwand</url-pattern>
   </servlet-mapping>
+=======
+>>>>>>> 55eaeeb7c73f174c1d1d8756bd9e86bee594ae0b
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>

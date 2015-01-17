@@ -60,11 +60,19 @@
 			id="bs-example-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
+<<<<<<< HEAD
 						<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+=======
+						<li><a href="/50plus/Pinnwand?pinnwandOwner=<%= (String) session.getAttribute("username")%>">Pinnwand</a></li>
+>>>>>>> 55eaeeb7c73f174c1d1d8756bd9e86bee594ae0b
 						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
 						<li><a href="/50plus/Profil.jsp">Profil</a></li>
+<<<<<<< HEAD
+=======
+						<li><a href="/50plus/Admin.jsp">Admin</a></li>
+>>>>>>> 55eaeeb7c73f174c1d1d8756bd9e86bee594ae0b
 						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 				<form class="form-signin" method="post" action="Suche" role="form">
 					<div class="form-group">
