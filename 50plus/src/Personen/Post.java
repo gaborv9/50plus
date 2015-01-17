@@ -17,6 +17,7 @@ public class Post implements Serializable
 	private String inhalt;
 	private String zeitpunkt;
 	private boolean flagged;
+	private String pinnwandOwner;
 	
 	/**
 	 * Default Konstruktor der Klassen Post
@@ -24,15 +25,38 @@ public class Post implements Serializable
 	 * @param inhalt Inhalt des Posts
 	 * @param zeitpunkt Zeitpunkt, wann der Post gepostet wurde
 	 */
-	public Post (String username, String inhalt, String zeitpunkt)
+	public Post (String username, String inhalt, String zeitpunkt, String pinnwandOwner)
 	{
 	
 		this.ownPostcounter = 0; //spaeter wird es in Post_Serialisierung gesetzt werden
 		this.username = username;
 		this.inhalt = inhalt;
 		this.zeitpunkt = zeitpunkt;
+		this.pinnwandOwner = pinnwandOwner;
+		
 		this.flagged = false; 
 	}
+	
+	
+	public String getPinnwandOwner()
+	{
+		return pinnwandOwner;
+	}
+	/**
+	 * Die Methode setUsername setzt den Username eines User, der gepostet hat
+	 * @param username Username eines User
+	 */	
+	public void setPinnwandOwner(String pinnwandOwner)
+	{
+		this.pinnwandOwner = pinnwandOwner;
+	} 
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Die Methode getOwnPostcounter gibt die Nummer eines Posts zurueck

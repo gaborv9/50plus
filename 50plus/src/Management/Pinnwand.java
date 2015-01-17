@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import Data.Post_Serialisierung;
+import Personen.Person;
 import Personen.Post;
 
 /**
@@ -51,6 +52,9 @@ public class Pinnwand extends HttpServlet
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");	
+		String pinnwandOwner = request.getParameter("pinnwandOwner");
+		
+				
 		PinnwandManagement pm = new PinnwandManagement();
 		
 		//Delete
@@ -62,19 +66,30 @@ public class Pinnwand extends HttpServlet
 		
 		//Melden
 		int postNumber_melden = (request.getParameter("postNumber_melden") == null) ? 0 : Integer.parseInt(request.getParameter("postNumber_melden"));
+		
+		/*
+		System.out.println("postNumber_melden:  " + postNumber_melden);
+		System.out.println("Pinnwand von Freund: Username: " + username);
+		System.out.println("Pinnwand von Freund: pinnwandOwner: " + pinnwandOwner);
+		*/
+		
 		if (postNumber_melden != 0)
 		{
 			pm.changeFlag(true, postNumber_melden);
 		}
 		
+
 		
-		ArrayList<Post> postlist = pm.getOwnpostlist(username);
+		
+		
+		
+		ArrayList<Post> postlist = pm.getOwnpostlist(pinnwandOwner);
 		
 		//wenn Post gemeldet ist, dann sortieren
 		if (postNumber_melden != 0)
 		{
 						
-			//sortieren nach postNumber=ownPostCounter, weil ich die Attribute eines Posts geandert habe, den alten Post geloescht habe, dann habe ich den neuen, geanderten Post gespeichert,
+			//sortieren nach postNumber=ownPostCounter, weil ich die Attribute eines Posts geaendert habe, den alten Post geloescht habe, dann habe ich den neuen, geanderten Post gespeichert,
 			//so wird die Reihenfolge in der Datei geaendert
 			//http://stackoverflow.com/questions/2784514/sort-arraylist-of-custom-objects-by-property
 			class counterComparator implements java.util.Comparator<Post> 
@@ -87,11 +102,39 @@ public class Pinnwand extends HttpServlet
 			Collections.sort(postlist, new counterComparator());
 		}
 		
-		session.setAttribute("postlist", postlist);
-		response.sendRedirect("Pinnwand.jsp");
+		
+		PersonManagement perman = new PersonManagement();
+		Person p = perman.getPerson(username);
+		int role = p.getRole();
+		session.setAttribute("role", role);
+		
+		//Postmeldung
+		int getFlaggedPosts = (request.getParameter("getFlaggedPosts") == null) ? 0 : Integer.parseInt(request.getParameter("getFlaggedPosts"));
+		
+		//System.out.println("getFlaggedPosts:  " + getFlaggedPosts);
+				
+		if(getFlaggedPosts != 0)
+		{
+			/*
+			PersonManagement perman = new PersonManagement();
+			Person p = perman.getPerson(username);
+			int role = p.getRole();
+			session.setAttribute("role", role);
+			*/
+			ArrayList<Post> flaggedPostlist = pm.getFlaggedPostlist();
+			
+			//System.out.println("role:  " + role);
+						
+			session.setAttribute("flaggedPostlist", flaggedPostlist);
+			response.sendRedirect("Admin.jsp");
+		}	
+		else
+		{
+			session.setAttribute("pinnwandOwner", pinnwandOwner);
+			session.setAttribute("postlist", postlist);
+			response.sendRedirect("Pinnwand.jsp");
+		}
 
-		
-		
 		
 	}
 
@@ -111,7 +154,7 @@ public class Pinnwand extends HttpServlet
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
-		//String username = request.getParameter("user");
+		String pinnwandOwner = request.getParameter("pinnwandOwner");
 		
 		//requests von Pinnwand.jsp
 		String inhalt = request.getParameter("inhalt");
@@ -120,7 +163,7 @@ public class Pinnwand extends HttpServlet
 		if(!inhalt.isEmpty())
 		{
 			//neues Post wird erstellt
-			Post p = new Post(username, inhalt, zeitpunkt);
+			Post p = new Post(username, inhalt, zeitpunkt, pinnwandOwner);
 			int postNumber = 0;
 			
 			//Post wird spreichert
@@ -128,11 +171,27 @@ public class Pinnwand extends HttpServlet
 			pm.addPost(p, postNumber);
 		    
 			//neue postlist wird erstellt und aktualisiert und in session gesetzt
-		    ArrayList<Post> postlist = pm.getOwnpostlist(username);
+		    ArrayList<Post> postlist = pm.getOwnpostlist(pinnwandOwner);
  		    
+		    class counterComparator implements java.util.Comparator<Post> 
+			{
+			    public int compare(Post p1, Post p2) {
+			        return p1.getOwnPostcounter() - p2.getOwnPostcounter() ;
+			    }
+			}	
+			
+			Collections.sort(postlist, new counterComparator());
+		    
+		    
 		    session.setAttribute("postlist", postlist);
  
 		}
+		
+		/*
+		System.out.println("Pinnwand von Freund: Username: " + username);
+		System.out.println("Pinnwand von Freund: pinnwandOwner: " + pinnwandOwner);
+		*/
+		
 		  response.sendRedirect("Pinnwand.jsp");
  	}
 

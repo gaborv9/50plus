@@ -62,7 +62,7 @@
 					id="bs-example-navbar-collapse-1">
 		
 					<ul class="nav navbar-nav">
-						<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+						<li><a href="/50plus/Pinnwand?pinnwandOwner=<%= (String) session.getAttribute("username")%>">Pinnwand</a></li>
 						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
@@ -98,12 +98,20 @@
 			<div class="row">
 				<div class="col-lg-12" id="content">
 					 
-				<!--	bei der Ausgabe statt Scriplets sollten wir eher Taglibs and EL nutzen:
-					http://stackoverflow.com/questions/3177733/how-to-avoid-java-code-in-jsp-files
-  -->
-  <br>
+
+
+  					<br>
  
 					<br>
+					
+					
+				    <%
+					String username = (String) session.getAttribute("username");
+					String pinnwandOwner = (String) session.getAttribute("pinnwandOwner");
+					ArrayList<Post> postlist = 	(ArrayList<Post>) session.getAttribute("postlist");
+				     %>	
+					
+					
 					<div class="well">
 					<form class="form-horizontal" action="Pinnwand" method="post"
 						role="form">
@@ -111,8 +119,8 @@
 						<div class="form-group">
 							<textarea class="form-control" rows="4" name=inhalt
 								placeholder="Neue Nachricht eingeben.."></textarea>
-							<button class="btn btn-primary" input type="submit" name="posten"
-								value="posten" type="button">Post</button>
+							<button class="btn btn-primary" input type="submit" name="posten" value="posten" type="button">Post</button>
+							<input type="hidden" name="pinnwandOwner" value = ${pinnwandOwner}>
 						</div>
 					</form>
 				</div>
@@ -137,41 +145,44 @@
 		            
 		           
 					
-					<%
-					String username = (String) session.getAttribute("username");
-					ArrayList<Post> postlist = 	(ArrayList<Post>) session.getAttribute("postlist");
-				     %>
+	
 					 
-					<h4>Pinnwand von <%=username%></h4>
+					<h4>Pinnwand von <%=pinnwandOwner%></h4>
 					<br>
 					
 					<% 
 					if(postlist.size() != 0)
 					{
 						int i = postlist.size()-1;
-						for ( ;i >=0; i--)
+						for ( ; i >=0; i--)
 							 
 										//for (Post test: postlist )
 					    {
 							//out.println(test.getOwnPostcounter() + ":    "); 
-							out.println(username + ", ");
+							out.println(postlist.get(i).getUsername() + ", ");
+							//out.println(postlist.get(i).getPinnwandOwner() + ", ");
 							out.println(postlist.get(i).getZeitpunkt()); 
 							//out.println(postlist.get(i).getOwnPostcounter()); 
 							
-					       	if (postlist.get(i).getFlagged())
+							
+							if(!username.equals(postlist.get(i).getPinnwandOwner()))
 							{
-							%> 
-								<span style="float:right">gemeldet </span>
-							<% 
+						       	if (postlist.get(i).getFlagged())
+								{
+								%> 
+									<span style="float:right">gemeldet </span>
+								<% 
+								}
+						       	else
+						       	{
+						       		%>
+						       		<span style="float:right">
+						       		<a href="/50plus/Pinnwand?postNumber_melden=<%= (postlist.get(i).getOwnPostcounter())%>&pinnwandOwner=<%=pinnwandOwner%>">Melden</a>
+						       		</span>
+						       		<% 
+						       	}
 							}
-					       	else
-					       	{
-					       		%>
-					       		<span style="float:right">
-					       		<a href="/50plus/Pinnwand?postNumber_melden=<%= (postlist.get(i).getOwnPostcounter())%>">Melden</a>
-					       		</span>
-					       		<% 
-					       	}
+
 
 							
 							
@@ -182,13 +193,20 @@
 						<div class="panel-body" style="width: 1100px; word-wrap: break-word"><% out.println(postlist.get(i).getInhalt()); %></div>
 					</div>
 
-				               	
-	               <a href="/50plus/Pinnwand?postNumber_delete=<%= (postlist.get(i).getOwnPostcounter())%>">Delete</a>
-	      
-	             	
-	      
-	             
-	             	
+				   <% 
+				   
+				   Integer role =  (session.getAttribute("role") == null) ? 0 : (Integer)(session.getAttribute("role"));
+				   
+				   if(username.equals(postlist.get(i).getPinnwandOwner()) || role == 1)
+				   {
+				    %>   
+				    <a href="/50plus/Pinnwand?postNumber_delete=<%= (postlist.get(i).getOwnPostcounter())%>&pinnwandOwner=<%=pinnwandOwner%>">Delete</a>
+				    <%
+				   }
+				   
+				   %>
+	               
+	      	             	
 	             	
 	               <br> 	
 	               <br>

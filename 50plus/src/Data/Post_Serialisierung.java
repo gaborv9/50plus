@@ -176,7 +176,7 @@ public class Post_Serialisierung
     	    	
     	for(int i = 0; i < globalPostlist.size(); i++)
 		{
-			if(globalPostlist.get(i).getUsername().equals(username))
+			if(globalPostlist.get(i).getPinnwandOwner().equals(username))
 			{
 				temp_post = globalPostlist.get(i);
 				ownPostlist.add(j, temp_post);

@@ -59,7 +59,7 @@
 				id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav">
-						<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+						<li><a href="/50plus/Pinnwand?pinnwandOwner=<%= (String) session.getAttribute("username")%>">Pinnwand</a></li>
 						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
@@ -181,7 +181,10 @@
 
 					</div>
 					<% 
-										out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+"<br>");		
+										out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname());	
+					%>
+										<a href="/50plus/Pinnwand?pinnwandOwner=<%= test.getID()%>">&nbsp&nbsp&nbsp&nbspZur Pinnwand</a> <br>
+					<%					
 									}
 								}
 								if (session.getAttribute("username")==null){

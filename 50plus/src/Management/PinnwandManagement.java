@@ -69,9 +69,9 @@ public class PinnwandManagement
     }
 
   //du bekommst die Liste der flagged Posts zurueck
-    public void getFlaggedPostlist()
+    public  ArrayList<Post> getFlaggedPostlist()
     {
-    	ps.getFlaggedPostlist();
+    	return ps.getFlaggedPostlist();
     }
     
 }

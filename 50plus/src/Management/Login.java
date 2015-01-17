@@ -123,6 +123,7 @@ public class Login extends HttpServlet {
 		{
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
+			session.setAttribute("pinnwandOwner", username);
 		 	session.setAttribute("postlist", postlist);
 		 	session.setAttribute("grouplist", grouplist);
 		 	session.setAttribute("grouplist", grouplist);

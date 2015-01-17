@@ -44,7 +44,7 @@
 </head>
 
 <body>
-		<%@ page import="java.util.ArrayList" import="Personen.Person"%>
+		<%@ page import="java.util.ArrayList" import="Personen.Person, Personen.Post"%>
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -67,7 +67,7 @@
 				id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav">
-					<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+						<li><a href="/50plus/Pinnwand?pinnwandOwner=<%= (String) session.getAttribute("username")%>">Pinnwand</a></li>
 						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
@@ -160,14 +160,60 @@
 				<br>
 				<br>
 				<br>
-				<%
+				
 		
+				<a class="btn btn-default" href="/50plus/Pinnwand?getFlaggedPosts=1" role="button">gemeldete Posts anzeigen</a>
+			    
+			    <br/>
+
+			<%
+	
+			    Integer role =  (session.getAttribute("role") == null) ? 0 : (Integer)(session.getAttribute("role"));
+			    
+			
+			
+				if (role == 1) 
+				{
+					
+					ArrayList<Post> flaggedPostlist = (ArrayList<Post>) session.getAttribute("flaggedPostlist");
+					
+					if(flaggedPostlist.size() == 0)
+					{
+						out.println("Es wurden noch keine Posts gemeldet.");
+					}
+					else
+					{
+						for (int i = 0; i < flaggedPostlist.size(); i++)
+						{
+							out.println(flaggedPostlist.get(i).getUsername() + ", ");
+							//out.println(flaggedPostlist.get(i).getPinnwandOwner() + ", ");
+							out.println(flaggedPostlist.get(i).getZeitpunkt()); 
+							//out.println(flaggedPostlist.get(i).getOwnPostcounter()); 
+							
+							%>
+							<div class="panel panel-default">
+								<div class="panel-body" style="width: 1100px; word-wrap: break-word"><% out.println(flaggedPostlist.get(i).getInhalt()); %></div>
+							</div>
+				  
+						    <a href="/50plus/Pinnwand?postNumber_delete=<%= (flaggedPostlist.get(i).getOwnPostcounter())%>&getFlaggedPosts=1">Delete</a>
+						    <br>
+						    <br>
+						    <%
+							
+						}
+					}
+								
+				}
+				else if(role == 2 || role == 3)
+				{
+					out.println("Nur fuer Administratoren verfuegbar!");
+				}
+				else{}
+			
+			
 				
 				
-				
-				
-				
-				%>
+			%>
 				
 			</div>
 		</div>
