@@ -50,7 +50,7 @@
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="#"> <img
-				src="http://placehold.it/150x150&text=BILD" alt="">
+				src="<%out.print(session.getAttribute("picturelink"));%>" alt="">
 			</a>
 
 		</div>
@@ -63,7 +63,9 @@
 				<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
 				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
 				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
-				<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+			    <li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+				<li><a href="/50plus/Profil.jsp">Profil</a></li>
+				<li><a href="/50plus/Admin.jsp">Admin</a></li>
 				<li><a href="/50plus/Login?logout=true">Logout</a></li>
 				<form class="form-signin" method="post" action="Suche" role="form">
 					<div class="form-group">
@@ -123,7 +125,7 @@
 						for (int i=0; i < grouplist.size(); i++)
 					    {
 							%>
-							<a href="/50plus/Gruppenpinnwand.jsp">
+							<a href="/50plus/Gruppenpinnwand?gn=<%=grouplist.get(i).getName()%>&wunsch=pinnwand">
 							<%out.println(grouplist.get(i).getName() + "<br>"); 
 					    }
 					}			

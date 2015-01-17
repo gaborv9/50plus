@@ -8,6 +8,7 @@ package Management;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,7 @@ import Management.PinnwandManagement;
  * 
  * @author master
  */
+@SuppressWarnings("serial")
 public class Login extends HttpServlet {
 
 	/**
@@ -59,7 +61,7 @@ public class Login extends HttpServlet {
 	// <editor-fold defaultstate="collapsed"
 	// desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
-	 * Handles the HTTP <code>GET</code> method.
+	 * Handles the HTTP <code>GET</code> method. Invalidates session.
 	 * 
 	 * @param request
 	 *            servlet request
@@ -88,7 +90,7 @@ public class Login extends HttpServlet {
 	}
 
 	/**
-	 * Handles the HTTP <code>POST</code> method.
+	 * Handles the HTTP <code>POST</code> method. Sets attributes to the session.
 	 * 
 	 * @param request
 	 *            servlet request
@@ -115,16 +117,25 @@ public class Login extends HttpServlet {
 		
 		
 		
-		Serialisierung a = new Serialisierung();
-		if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW())) 
+		PersonDAO a = new Serialisierung();
+		GregorianCalendar test = new GregorianCalendar();
+		if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW()) && ((!(test.before(a.getPersonbyid(username).getsperrdatum()))||(test.get(GregorianCalendar.DAY_OF_MONTH)==a.getPersonbyid(username).getsperrdatum().get(GregorianCalendar.DAY_OF_MONTH)&&test.get(GregorianCalendar.MONTH)==a.getPersonbyid(username).getsperrdatum().get(GregorianCalendar.MONTH)&&test.get(GregorianCalendar.YEAR)==a.getPersonbyid(username).getsperrdatum().get(GregorianCalendar.YEAR))))) // &&(a.getPersonbyid(username).getsperrdatum()<=test) 
 		{
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
+			session.setAttribute("pinnwandOwner", username);
 		 	session.setAttribute("postlist", postlist);
 		 	session.setAttribute("grouplist", grouplist);
 		 	session.setAttribute("grouplist", grouplist);
 		 	session.setAttribute("postDeleteSuccess", "nichts");
+		 	session.setAttribute("anfrage", "keine");
+		 	session.setAttribute("bitte", "keine");
 		 	
+		 	if (a.getPersonbyid(username).getPicturelink() ==null){
+		 		session.setAttribute("picturelink","http://placehold.it/150x150&text=BILD");
+		 	}else{		
+		 	session.setAttribute("picturelink", a.getPersonbyid(username).getPicturelink());
+		 	}
 			response.sendRedirect("Pinnwand.jsp");
 		} 
 		else 
@@ -133,8 +144,15 @@ public class Login extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			out.println(username);
 			out.println(password);
-			out.println("falsche Eingabe");
-
+			
+			if((test.before(a.getPersonbyid(username).getsperrdatum()))){ //fuer Gesperrtdatum ausgeben
+				GregorianCalendar test2 = a.getPersonbyid(username).getsperrdatum();
+				out.println(" Sie sind noch bis "+GregTag(test2)+". "+GregMon(test2)+1+". "+GregJahr(test2)+" gesperrt!");
+			}
+			else{
+			
+				out.println("falsche Eingabe");
+			}
 		}
 	}
 
@@ -149,5 +167,17 @@ public class Login extends HttpServlet {
 	public String getServletInfo() {
 		return "Short description";
 	}// </editor-fold>
+	
+	public int GregTag(GregorianCalendar test3){
+        return test3.get(GregorianCalendar.DAY_OF_MONTH);
+    }
+   
+    public int GregMon(GregorianCalendar test3){
+        return test3.get(GregorianCalendar.MONTH);
+    }
+       
+    public int GregJahr(GregorianCalendar test3){
+        return test3.get(GregorianCalendar.YEAR);
+    }
 
 }

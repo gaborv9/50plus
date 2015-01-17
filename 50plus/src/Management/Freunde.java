@@ -63,75 +63,29 @@ public class Freunde extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        	
-    	response.setContentType("text/html");
-    	String freundname = request.getParameter("freundname");
-    	HttpSession session = request.getSession();
-    	PrintWriter out = response.getWriter();
-    	String Ziel = "Suche.jsp";
-	    
-    	if(!(request.getParameter("freundname").isEmpty())){
-    		String adddelete = (String) request.getParameter("adddelete");
-    		String zufuegen = "1";
-    		String loeschen = "0";
-    		
-    		if(adddelete.equals(zufuegen)){
-    			String username = (String) session.getAttribute("username");
-    			Serialisierung a = new Serialisierung();
-    			Person freund,useralt;
-    			freund = a.getPersonbyid(freundname);
-    			useralt = a.getPersonbyid(username);
-    			
-    			boolean check=false;
-    			
-    			for (Person per : useralt.getFreunde()){
-    				if (freundname.equals(per.getID())){
-    					check=true;
-	    				}
-    				}
-    			if (check==false){
-    					useralt.setFreunde(freund,true);
-    					Person userneu = useralt;
-    					a.loeschePerson(useralt);
-    					a.speicherePerson(userneu);
-    				}
-	 	 
-	    	
-    			}
-    		
-    	else if(adddelete.equals(loeschen)){
-    		//out.println("Ich loesche jetzt!");
-    		String username = (String) session.getAttribute("username");
-			Serialisierung a = new Serialisierung();
-			Person freund,useralt;
-			freund = a.getPersonbyid(freundname);
-			useralt = a.getPersonbyid(username);
-			ArrayList<Person> freundlist = new ArrayList<Person>();
-			freundlist = useralt.getFreunde();
-			
-			boolean check=false;
-			
-			for (Person per : freundlist){
-				if (freundname.equals(per.getID())){
-					check=true;
-    				}
-				}
-			if (check==true){
-					
-					
-					useralt.setFreunde(freund,false);
-					Person userneu = useralt;
-					a.loeschePerson(useralt);
-					a.speicherePerson(userneu);
-					Ziel = "Freunde.jsp";
-					
-				
-				}
-    		}
     	
+    	response.setContentType("text/html");
+    	PrintWriter out = response.getWriter();
+    	String Ziel = "Freunde.jsp";
+    	FreundeManagement f = new FreundeManagement();
+    	
+    	String wunsch = request.getParameter("wunsch");
+    	if(wunsch.equals("zufuegen")){
+    		f.freundzufuegen(request, response);
+    		out.println("Ich bin in zufuegen");
+    		Ziel = "Freunde.jsp";
     	}
+    	else if(wunsch.equals("loeschen")){
+    		f.freundloeschen(request,response);
+    		Ziel = "Freunde.jsp";
+    	}
+    	else if(wunsch.equals("adden")){
+    		f.freundanfragen(request,response);
+    		    		Ziel = "Freunde.jsp";
+    	}
+    	
+    	
     	response.sendRedirect(Ziel);
-        
         //processRequest(request, response);
     }
 
@@ -168,5 +122,5 @@ public class Freunde extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
+    
 }

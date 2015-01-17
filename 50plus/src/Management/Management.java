@@ -7,6 +7,7 @@ package Management;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,27 +15,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Data.Serialisierung;
 import Personen.Person;
+import Personen.User;
 
 /**
  * 
  * @author master
  */
+@SuppressWarnings("serial")
 public class Management extends HttpServlet {
 
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-	 * methods.
-	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
-	 * @throws ServletException
-	 *             if a servlet-specific error occurs
-	 * @throws IOException
-	 *             if an I/O error occurs
-	 */
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -56,7 +47,7 @@ public class Management extends HttpServlet {
 	// <editor-fold defaultstate="collapsed"
 	// desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
-	 * Handles the HTTP <code>GET</code> method.
+	 * Handles the HTTP <code>GET</code> method. Alters the role
 	 * 
 	 * @param request
 	 *            servlet request
@@ -68,31 +59,40 @@ public class Management extends HttpServlet {
 	 *             if an I/O error occurs
 	 */
 	@Override
+ 
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+		HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String onlineuser = (String) session.getAttribute("username");
-		   /* PrintWriter out = response.getWriter();
-		    out.println(onlineuser);*/
-		
+ 
+		if (request.getParameter("picturelink")!=null) {
+			PersonManagement a= new PersonManagement();
+			a.changelink(a.getPerson(onlineuser), request.getParameter("picturelink"));
+		//	session.setAttribute("picturelink", a.getPerson(onlineuser));
+			response.sendRedirect("Profil.jsp");
+		} 
 		if (request.getParameter("role") != null && request.getParameter("username") !=null) {
 			int role = Integer.parseInt(request.getParameter("role"));
 			String username = request.getParameter("username");
 		
 			PersonManagement a = new PersonManagement();
 			
+	
 			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
-					/*response.setContentType("text/html");
-					PrintWriter out = response.getWriter();
-					out.println(username + " ist eingeloggt");*/
-					a.setRole(username, role);
+				a.changerole(a.getPerson(username), role);
 			}
-			else{//nichts :p
+			else{
 				 
 			}
+			
+
+			
+			
+			
+			
+		response.sendRedirect("Profil.jsp");
 		}
-		response.sendRedirect("Suche.jsp");
-		//href="/50plus/Management?role=1&username=<%=(String) session.getAttribute("username")%>">Admin(1)</a></li>
+	
 		// processRequest(request, response);
 	}
 
@@ -111,8 +111,70 @@ public class Management extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		//String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String vorname = request.getParameter("vorname");
+		String nachname = request.getParameter("nachname");
+		String year = request.getParameter("datum3");
+		String month = request.getParameter("datum2");
+		String day = request.getParameter("datum1");
 
-		processRequest(request, response);
+		HttpSession session = request.getSession();
+		PersonManagement ser = new PersonManagement();
+		String usernamenow =(String) session.getAttribute("username");
+		Person p= ser.getPerson((String) session.getAttribute("username"));
+
+		
+		int fc = 0; // failcheck
+		if (p.setID("/////////##//////////") == 0) {
+			out.println("Username darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
+			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+			fc = 1;
+		}
+		if (p.setVorname(vorname) == 0) {
+			out.println("Vorname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
+			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+			fc = 1;
+
+		}
+		if (p.setNachname(nachname) == 0) {
+			out.println("Nachname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
+			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+			fc = 1;
+		}
+		if (p.setPW(password) == 0) {
+			out.println("Passwort darf nicht mehr als 25 oder weniger als 6 Zeichen haben");
+			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+			fc = 1;
+		}
+		if (p.setDatum(year, month, day) == 0) {
+			out.println("Sie müssen alt genug sein und ein korrektes Datum eingeben!");
+			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
+			fc = 1;
+		}
+	     else {
+			out.println("<a href=\"/50plus/Profil.jsp\"> Hier klicken um zur Startseite zurückzukommen</a>");
+		}
+		
+		if (fc == 1) {
+			ser.delete("/////////##//////////");
+			 
+		}
+		else{
+			ser.delete(usernamenow);
+			p.setID(usernamenow);
+			ser.add(p);
+ 
+		}
+ 
+		response.sendRedirect("Profil.jsp");
+		
+		
+		 
+		//processRequest(request, response);
 	}
 
 	/**

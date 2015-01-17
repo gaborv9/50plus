@@ -51,7 +51,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#"> <img
-					src="http://placehold.it/150x150&text=BILD" alt="">
+					src="<%out.print(session.getAttribute("picturelink"));%>" alt="">
 				</a>
 
 			</div>
@@ -61,12 +61,13 @@
 				id="bs-example-navbar-collapse-1">
 
 				<ul class="nav navbar-nav">
-					<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
-					<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
-					<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
-					<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
-					<li><a href="/50plus/Login?logout=true">Logout</a></li>
-
+						<li><a href="/50plus/Pinnwand?pinnwandOwner=<%= (String) session.getAttribute("username")%>">Pinnwand</a></li>
+						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
+						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
+						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+						<li><a href="/50plus/Profil.jsp">Profil</a></li>
+						<li><a href="/50plus/Admin.jsp">Admin</a></li>
+						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 
 
 					<form class="form-signin" method="post" action="Suche" role="form">
@@ -94,23 +95,15 @@
 
 					<%
 						ArrayList<Person> gefperliste = (ArrayList<Person>) session.getAttribute("gefperliste");
-																ArrayList<GruppeClass> gefgrpliste = (ArrayList<GruppeClass>) session.getAttribute("gefgrpliste");
-																String username = (String) session.getAttribute("username");
+						ArrayList<GruppeClass> gefgrpliste = (ArrayList<GruppeClass>) session.getAttribute("gefgrpliste");
+						String username = (String) session.getAttribute("username");
 					%>
-					<h2>Freunde:</h2>
+					<h2>Personen:</h2>
 					<br>
 					<%
 						for(Person test: gefperliste){
 					%>
-					<!-- 			
-					<div class="btn-group" role="toolbar" aria-label="">
 					
-						<button type="button" class="btn btn-default" onclick="<ul method='get' action='Management' href='/50plus/Management?role=1&user='> </ul>">Administrator</button>
-					    <button type="button" class="btn btn-default" onclick="<ul method='get' action='Management' href='/50plus/Management?role=2&user='> </ul>">Forscher</button>
-					 	<button type="button" class="btn btn-default" onclick="<ul method='get' action='Management' href='/50plus/Management?role=3&user='> </ul>">User</button>
-					 	
-					</div>
-					-->
 					<div class="btn-group">
 						<button type="button" data-toggle="dropdown"
 							class="btn btn-default dropdown-toggle">
@@ -130,18 +123,30 @@
 					<div class="btn-group">
 						<button type="button" data-toggle="dropdown"
 							class="btn btn-default dropdown-toggle">
-							Adden/Entfernen <span class="caret"></span>
+							als Person adden<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" method="get" action="Freunde">
 							<li><a
-								href="/50plus/Freunde?adddelete=1&freundname=<%=test.getID()%>">Freund adden</a></li>
-							<li><a
-								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>">Entfernen</a></li>
-							 
+								href="/50plus/Freunde?freundname=<%=test.getID()%>&wunsch=adden">als Freund adden</a></li>
+							
 						</ul>
 
 
 					</div>
+					<div class="btn-group">
+						<button type="button" data-toggle="dropdown"
+							class="btn btn-default dropdown-toggle">
+							Person melden <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" method="get" action="Meldung">
+							<li><a
+								href="/50plus/Meldung?freundname=<%=test.getID()%>&wunsch=meldung">Person melden</a></li>
+							
+						</ul>
+
+
+					</div>
+					
 
 					<%
 						out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname()+" Rolle: "+test.getRole()+"<br>");

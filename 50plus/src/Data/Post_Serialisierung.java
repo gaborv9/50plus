@@ -11,28 +11,45 @@ import java.util.ArrayList;
 
 import Personen.Post;
 
-
+/**
+ * Die Klasse Post_Serialisierung ist fuer die Serialisierung und Deserialisierung von 
+ * Post-Objekten(Posts) zustaendig
+ */
 public class Post_Serialisierung 
 {
 	private String pfad;
 	private ArrayList<Post> globalPostlist;
 
- 
+	/**
+	 * default Konstruktor der Klasse Post_Serialisierung
+	 * der Pfad zur Datei wird gesetzt, wohin die Posts gespeichert werden
+	 */
 	
     public Post_Serialisierung()
     {
         String dir = System.getProperty("user.dir"); //Gibt Pfad von Eclipse
-        this.pfad= dir + "/post.ser"; //das veraendern wir noch
+        this.pfad= dir + "/post.ser";
         globalPostlist = new ArrayList<Post>();
     }
 	
-    
-    public void speicherePost(Post p) 
+	/**
+	 * Die Methode speicherePost speichert ein Post Objekt in post.ser
+	 * @param p Post, der gespeichert wird
+	 */  
+    public void speicherePost(Post p, int postNumber) 
     {
         
+      	
     	globalPostlist = getGlobalpostlist();
     	
-    	p.setOwnPostcounter(getMaxPostNumber() + 1);
+    	if (postNumber == 0)
+    	{
+    		p.setOwnPostcounter(getMaxPostNumber() + 1);
+    	}
+    	else
+    	{
+    		p.setOwnPostcounter(postNumber);
+    	}
  
     	/*
     	System.out.println("Alle Counter");
@@ -58,7 +75,7 @@ public class Post_Serialisierung
         }
         catch (IOException ex) 
         {
-           System.out.println("Konnte postlist nicht speichern. " + ex);
+           System.out.println("Konnte globalPostlist nicht speichern. " + ex);
         }
         finally
         {
@@ -73,7 +90,11 @@ public class Post_Serialisierung
 			}
          }
      }
-        
+    
+	/**
+	 * Die Methode getGlobalpostlist gibt alle Posts zurueck
+	 * @return globalPostList - Liste aller Posts eines Users
+	 */         
 	public ArrayList<Post> getGlobalpostlist()
 	{
     	File file = new File(pfad);
@@ -122,7 +143,7 @@ public class Post_Serialisierung
     				is.close();
     			}
     			
-    			catch(Exception e)
+    			catch(IOException e)
     			{
     				System.err.println("Konnte Streams nicht schliessen. " + e);
     			}
@@ -131,6 +152,12 @@ public class Post_Serialisierung
         }
   	}
     
+	/**
+	 * Die Methode getOwnpostlist gibt alle Posts eines Users zurueck
+	 * @param username User, dessen Posts zurueckgegeben werden
+	 * @return alle Posts eines Users
+	 */ 	
+	
     public ArrayList<Post> getOwnpostlist(String username)
    	{
     	globalPostlist = getGlobalpostlist();
@@ -149,7 +176,7 @@ public class Post_Serialisierung
     	    	
     	for(int i = 0; i < globalPostlist.size(); i++)
 		{
-			if(globalPostlist.get(i).getUsername().equals(username))
+			if(globalPostlist.get(i).getPinnwandOwner().equals(username))
 			{
 				temp_post = globalPostlist.get(i);
 				ownPostlist.add(j, temp_post);
@@ -159,6 +186,11 @@ public class Post_Serialisierung
 		return ownPostlist;
    	}
     
+	/**
+	 * Die Methode loeschePost loescht einen Post
+	 * @param postNumber Post mit dieser Nummer wird geloescht
+	 *
+	 */    
     public void loeschePost(int postNumber) 
     {
         
@@ -175,8 +207,7 @@ public class Post_Serialisierung
 			}
 	
 		}
-    	
-    	
+    	    	
     	FileOutputStream out = null;
     	ObjectOutputStream output = null;
     	    	
@@ -191,7 +222,7 @@ public class Post_Serialisierung
         }
         catch (IOException ex) 
         {
-           System.out.println("Konnte postlist nicht speichern. " + ex);
+           System.out.println("Konnte globalPostlist nicht speichern. " + ex);
         }
         finally
         {
@@ -207,6 +238,11 @@ public class Post_Serialisierung
          }
      }
     
+	/**
+	 * Die Methode getPostNumbers gibt die Anzahl der Posts eines Users zurueck
+	 * @param username User, dessen Posts zurueckgegeben werden
+	 * @return die Anzahl der Posts eines Users
+	 */      
     public ArrayList<Integer> getPostNumbers(String username)
    	{
  
@@ -227,9 +263,15 @@ public class Post_Serialisierung
 			}
 		}
 		return ownPostNumbers;
-   	}    
+   	}
     
-    private int getMaxPostNumber()
+    
+    
+	/**
+	 * Die Methode getMaxPostNumber gibt die hoechste Nummer der Posts, die je gepostet wurden
+	 * @return die hoechste Nummer der Posts
+	 */     
+    public int getMaxPostNumber()
    	{
     	int max = 0;
     	
@@ -244,8 +286,8 @@ public class Post_Serialisierung
    	}    
     
     
-    
-   /* public Post getPost(int postNumber)
+   
+   public Post getPostbyNumber(int postNumber)
    	{
     	globalPostlist = getGlobalpostlist();
       	    	  	
@@ -260,9 +302,69 @@ public class Post_Serialisierung
 				return p;
 			}
 		}
-    	System.out.println("nem talaltam a postot");
+    	System.out.println("ich habe den Post nicht gefunden");
 		return null;
    	}   
-    */
+    
+   
+   public void changeFlag(boolean flag, int postNumber)
+   {
+	 	   
+	   globalPostlist = getGlobalpostlist();
+	   
+
+	   
+	   
+	   for(int i = 0; i < globalPostlist.size(); i++)
+	   {
+			if(globalPostlist.get(i).getOwnPostcounter() == postNumber)
+			{
+				/*System.out.println("gefunden");
+				System.out.println(globalPostlist.get(i).getOwnPostcounter());
+				System.out.println(postNumber);
+				*/
+				Post p =  getPostbyNumber(postNumber);
+				p.setFlagged(flag);
+				
+				loeschePost(postNumber);			
+				speicherePost(p, postNumber);
+					
+			}
+			/*else
+			{
+				System.out.println("Post nicht gefunden.");
+			}
+			*/
+	   }
+	   
+	  
+   }
+   
+   public ArrayList<Post> getFlaggedPostlist()
+  	{
+	   
+	   	globalPostlist = getGlobalpostlist();
+	   	ArrayList<Post> flaggedPostlist = new ArrayList<Post>();
+	   	    	  	
+	   	int j = 0;
+	   	Post temp_post;
+	   	    	
+	   	for(int i = 0; i < globalPostlist.size(); i++)
+			{
+				if(globalPostlist.get(i).getFlagged() == true) //works because they are primitives (boolean) and not objects (Boolean)
+				{
+					temp_post = globalPostlist.get(i);
+					flaggedPostlist.add(j, temp_post);
+					j++;
+				}
+			}
+		return flaggedPostlist;
+  	}
+   
+   
+   
+   
+   
+   
 }
 

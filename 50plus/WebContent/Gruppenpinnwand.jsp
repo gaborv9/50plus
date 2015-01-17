@@ -37,7 +37,7 @@
 
 
 <body>
-		<%@ page import="java.util.ArrayList, Management.GruppeClass, Data.Gruppe_Serialisierung" %> 
+		<%@ page import="java.util.ArrayList, Data.GruppenPost_Serialisierung, Personen.GruppePost, Management.Gruppenpinnwand" %> 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
@@ -50,7 +50,7 @@
 					class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand" href="#"> <img
-				src="http://placehold.it/150x150&text=BILD" alt="">
+				src="<%out.print(session.getAttribute("picturelink"));%>" alt="">
 			</a>
 
 		</div>
@@ -60,11 +60,12 @@
 			id="bs-example-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
-				<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
-				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
-				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
-				<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
-				<li><a href="/50plus/Login?logout=true">Logout</a></li>
+						<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
+						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
+						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+						<li><a href="/50plus/Profil.jsp">Profil</a></li>
+						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 				<form class="form-signin" method="post" action="Suche" role="form">
 					<div class="form-group">
 						<input type="suche" class="form-control" name="suche"
@@ -74,7 +75,7 @@
 			</ul>
 
 		</div>
-		<span style="color:grey; padding-left:40px"> <%=(String) session.getAttribute("gruppenname") %> </span>	
+		<span style="color:grey; padding-left:40px"> <%=(String) session.getAttribute("username") %> </span>	
 		<!-- /.navbar-collapse -->
 	</div>
 
@@ -88,16 +89,54 @@
 		
 			<br><br>
 			
-			<form action="Gruppen" method="post">
+			
 			
 			<%
 					String username = (String) session.getAttribute("username");
-					ArrayList<GruppeClass> grouplist = (ArrayList<GruppeClass>) session.getAttribute("grouplist");
-				%>
+					String gn = (String) session.getAttribute("gn");
+					ArrayList<GruppePost> gplist = (ArrayList<GruppePost>) session.getAttribute("gplist");
+			%>
+					
+			<h2><% out.println("Gruppe: "+gn);%></h2>
+			
+			<br>
+					<div class="well">
+					<form class="form-horizontal" action="Gruppenpinnwand" method="post"
+						role="form">
+						<h4>Neue Nachricht</h4>
+						<div class="form-group">
+							<textarea class="form-control" rows="4" name=inhalt
+								placeholder="Neue Nachricht eingeben..."></textarea>
+							<button class="btn btn-primary" input type="submit" name="posten"
+								value="posten" type="button">Post</button>
+						</div>
+					</form>
+				</div>
+			
+						
+			<% 
+					if(gplist.size() != 0)
+					{
+						int i = gplist.size()-1;
+						for ( ; i >=0; i--)
+							 
+					    {
+							out.println(username + ", ");
+							out.println(gplist.get(i).getPostGruppenZeit() + "<br />"); 
+							%>
+							<div class="panel panel-default">
+								<div class="panel-body" style="width: 1100px; word-wrap: break-word"><% out.println(gplist.get(i).getPostGruppenInhalt()); %></div>
+							</div>
+			<%
+					    }
+					}
+			%>
+			
 			
 
-
-			</form>
+			
+			
+			
 			<%
 				if (session.getAttribute("username") == null) {
 
@@ -105,9 +144,7 @@
 				}
 			%>
 			
-			<%
-				session.setAttribute("postDeleteSuccess", "nichts");
-			%>
+
 			
 		</div>
 	</div>

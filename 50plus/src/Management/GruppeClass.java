@@ -19,7 +19,9 @@ public class GruppeClass implements Serializable{
 	private int groupcounter;
 	
 	/**Der Konstruktor ruft die setter Methoden auf um Werte zu setzen.
-	 * @param name, admin, mitglied  Name der Gruppe, ein Person-Objekt, ArrayList mit PersonObjekten
+	 * @param name - Name der Gruppe,
+	 * @param admin - ein Person-Objekt,
+	 * @param mitglied - ArrayList mit PersonObjekten
 	 */
 	public GruppeClass (String name, Person admin, ArrayList<Person> mitglied)
 	{
@@ -36,7 +38,7 @@ public class GruppeClass implements Serializable{
 		return this.name;
 	}
 	
-	/**setzt name mit übergebenen String
+	/**setzt name mit uebergebenen String
 	 * 
 	 * @param n String mit dem Namen der Gruppe
 	 */
