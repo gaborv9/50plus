@@ -142,7 +142,7 @@ public class Gruppe_Serialisierung
 	   * @param username Username eines Person-Objektes
 	   * @return ArrayList mit Gruppen
 	   */	
-    public ArrayList<GruppeClass> getOwnGruppenlist(String username)
+    public ArrayList<GruppeClass> getGruppenbyAdmin(String username)
    	{
     	gruppelist = getGruppenlist();
     	ArrayList<GruppeClass> ownGruppen = new ArrayList<GruppeClass>();
@@ -214,9 +214,27 @@ public class Gruppe_Serialisierung
 			} 
             catch (IOException e) 
             {
-            	System.out.println("Die Streams konnten beim speichern nicht geschlossen werden. " + e);
+            	System.out.println("Die Streams konnten beim loeschen nicht geschlossen werden. " + e);
 			}
          }
      }
+    
+    
+    public ArrayList<GruppeClass> getOwnGruppenlist(String username)
+   	{
+    	gruppelist = getGruppenlist();
+    	ArrayList<GruppeClass> ownGruppen = new ArrayList<GruppeClass>();
+    	    
+
+    	for(GruppeClass temp:gruppelist){
+    		for(Person p:temp.getMitglied()){
+    			if(p.getID().equals(username)){
+    				ownGruppen.add(temp);
+    			}
+    		}
+    	}
+
+		return ownGruppen;
+   	}
     
 }

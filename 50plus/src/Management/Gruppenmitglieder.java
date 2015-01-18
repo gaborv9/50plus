@@ -126,12 +126,16 @@ public class Gruppenmitglieder extends HttpServlet {
 		mitgl.add(p);
 		
 		gc=se.getGruppebyName(gn);
-
+		System.out.println(gc.getName());
+		
     	if(gc!=null){
     		se.loescheGruppe(gc);
+    		System.out.println("Hello");
     		gc.setMitglied(mitgl);
-    		se.speichereGruppe(gc);
-    		out.println("Das Mitglied wurde gespeichert!");
+    		//se.speichereGruppe(gc);
+    		System.out.println("Das Mitglied wurde gespeichert!");
+    	}
+    	else{
     	}
     	response.sendRedirect("Gruppenmitglieder.jsp");
 		
