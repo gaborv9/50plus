@@ -162,4 +162,61 @@ public class Gruppe_Serialisierung
 		return ownGruppen;
    	}
     
+    /**
+     * Der Methode wird ein Gruppenname übergeben und sie liefert das Gruppen-Objekt zurück.
+     * @param gn
+     * @return
+     */
+    
+    public GruppeClass getGruppebyName(String gn){
+    	
+    	gruppelist = getGruppenlist();
+    	    	  	
+    
+    	for(GruppeClass temp:gruppelist){
+    		if(temp.getName().equals(gn)){
+    			return temp;
+    		}
+    	}
+    	return null;
+   	}
+    
+    
+    public void loescheGruppe(GruppeClass gr) 
+    {
+        
+    	gruppelist = getGruppenlist();
+    	
+    	gruppelist.remove(gr);
+
+    	FileOutputStream out= null;
+    	ObjectOutputStream output = null;
+   
+        try 
+        {
+            //Ausgabestrom der zur Datei fuehrt wird geoeffnet
+            out = new FileOutputStream(pfad);
+            //Stream wird geoeffnet, um Objekte zu speichern 
+            output = new ObjectOutputStream(out);
+            //Objekt wird gespeichert
+            output.writeObject(gruppelist);
+        }
+        catch (IOException ex) 
+        {
+           System.out.println("Die Gruppenliste konnte nicht gespeichert werden. " + ex);
+        }
+        finally
+        {
+            try 
+            {
+				output.close();
+				out.close();
+			} 
+            catch (IOException e) 
+            {
+            	System.out.println("Die Streams konnten beim speichern nicht geschlossen werden. " + e);
+			}
+         }
+     }
+    
 }

@@ -37,7 +37,7 @@
 
 
 <body>
-		<%@ page import="java.util.ArrayList, Management.GruppeClass, Data.Gruppe_Serialisierung" %> 
+		<%@ page import="java.util.ArrayList, Data.GruppenPost_Serialisierung, Personen.GruppePost, Management.Gruppenpinnwand, Personen.Person" %> 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
@@ -60,13 +60,13 @@
 			id="bs-example-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
-				<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
-				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
-				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
-			    <li><a href="/50plus/Forschung.jsp">Forschung</a></li>
-				<li><a href="/50plus/Profil.jsp">Profil</a></li>
-				<li><a href="/50plus/Admin.jsp">Admin</a></li>
-				<li><a href="/50plus/Login?logout=true">Logout</a></li>
+						<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
+						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
+						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+						<li><a href="/50plus/Profil.jsp">Profil</a></li>
+						<li><a href="/50plus/Admin.jsp">Admin</a></li>
+						<li><a href="/50plus/Login?logout=true">Logout</a></li>
 				<form class="form-signin" method="post" action="Suche" role="form">
 					<div class="form-group">
 						<input type="suche" class="form-control" name="suche"
@@ -89,49 +89,44 @@
 		<div class="col-lg-12" id="content">
 		
 			<br><br>
-			<form method="post" action="Gruppen">
-			<div class="form-group">
-               <label for="Name">Bitte den Namen der neuen Gruppe eingeben: </label>
-                <input type="gruppenname" class="form-control" name="gruppenname" placeholder="Name der Gruppe" required>
-            
-            	<button type="register" class="btn btn-default">Gruppe gründen</button>
-            	</div>
-			</form>
-
 			
-			<form action="Gruppen" method="post">
 			
-				<%
-					if(session.getAttribute("gruppenname")!=null){
-				
-						out.println((String) session.getAttribute("gruppenname")+ " Gruppe wurde erstellt!");
-						out.println("Der Nachname des Administrators: "+(String) session.getAttribute("admin"));
-					}
-					else{	
-					}
-				%>
 			
 			<%
 					String username = (String) session.getAttribute("username");
-					ArrayList<GruppeClass> grouplist = (ArrayList<GruppeClass>) session.getAttribute("grouplist");
-				%>
+					String gn = (String) session.getAttribute("gn");
+					ArrayList<Person> mitgl = (ArrayList<Person>) session.getAttribute("mitgl");
+			%>
+						
+			
+			<h2><% out.println("Mitglieder der Gruppe "+gn +" :");%></h2><br><br>
 			
 			
-			<br>
-			<h3>Liste der Gruppen: </h3>
-			<%
-					if(grouplist.size() != 0)
+			<b>Geben Sie bitte den Nutzernamen der Person ein, die Sie zur Gruppe hinzufügen wollen.</b>
+			<form method="post" action="Gruppenmitglieder">
+			<div class="form-group">
+                <input type="nutzername" class="form-control" name="nutzername" placeholder="Nutzername eingeben" required>
+            	<button type="register" class="btn btn-default">Nutzer zur Gruppe hinzufügen</button>
+            	</div>	
+			
+			<br><br>
+			<b><%out.println("Anzahl der Mitglieder: "+mitgl.size()); %></b><br><br>			
+			
+			<% 
+					if(mitgl.size() != 0)
 					{
-						for (int i=0; i < grouplist.size(); i++)
-					    {
-							%>
-							<a href="/50plus/Gruppenpinnwand?gn=<%=grouplist.get(i).getName()%>&wunsch=pinnwand">
-							<%out.println(grouplist.get(i).getName() + "<br>"); 
-					    }
-					}			
-		      %></a>
+						for(Person temp: mitgl){
+							out.println(temp.getVorname()+", "+temp.getNachname()+"<br>");
+						}
+					}
 
-			</form>
+			%>
+			
+			
+
+			
+			
+			
 			<%
 				if (session.getAttribute("username") == null) {
 
@@ -139,9 +134,7 @@
 				}
 			%>
 			
-			<%
-				session.setAttribute("postDeleteSuccess", "nichts");
-			%>
+
 			
 		</div>
 	</div>

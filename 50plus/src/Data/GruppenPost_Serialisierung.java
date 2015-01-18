@@ -84,12 +84,10 @@ public class GruppenPost_Serialisierung implements GruppePostDAO{
             try 
             {
                 file.createNewFile();
-                System.out.println("getAlleGruppen1");
             } 
             catch (IOException ex) 
             {
             	System.out.println("IO Exception" + ex);
-            	System.out.println("getAlleGruppen2");
             }
             return globalPostlist;
          }
@@ -121,7 +119,7 @@ public class GruppenPost_Serialisierung implements GruppePostDAO{
     		{
     			try
     			{
-    				//ois.close();
+    				ois.close();
     				is.close();
     			}
     			
