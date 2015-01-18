@@ -99,7 +99,7 @@
 			%>
 						
 			
-			<h2><% out.println("Mitglieder der Gruppe "+gn +" :");%></h2><br><br>
+			<h2><% out.println("Mitglieder der Gruppe "+gn +":");%></h2><br><br>
 			
 			
 			<b>Geben Sie bitte den Nutzernamen der Person ein, die Sie zur Gruppe hinzufügen wollen.</b>

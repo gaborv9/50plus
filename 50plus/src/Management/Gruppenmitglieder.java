@@ -122,18 +122,15 @@ public class Gruppenmitglieder extends HttpServlet {
 		GruppeClass gc;
 		
 		
-		p=ser.getPersonbyid(nutzername);
-		mitgl.add(p);
-		
+		p=ser.getPersonbyid(nutzername);	
 		gc=se.getGruppebyName(gn);
-		System.out.println(gc.getName());
+		//String name=gc.getName();
 		
     	if(gc!=null){
     		se.loescheGruppe(gc);
-    		System.out.println("Hello");
+    		mitgl.add(p);
     		gc.setMitglied(mitgl);
-    		//se.speichereGruppe(gc);
-    		System.out.println("Das Mitglied wurde gespeichert!");
+    		se.speichereGruppe(gc);
     	}
     	else{
     	}

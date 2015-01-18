@@ -134,7 +134,7 @@
 						for ( ; i >=0; i--)
 							 
 					    {
-							out.println(username + ", ");
+							out.println(gplist.get(i).getPostGruppenUsername() + ", ");
 							out.println(gplist.get(i).getPostGruppenZeit() + "<br />"); 
 							%>
 							<div class="panel panel-default">

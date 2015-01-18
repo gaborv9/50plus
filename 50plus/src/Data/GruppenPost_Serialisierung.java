@@ -119,7 +119,7 @@ public class GruppenPost_Serialisierung implements GruppePostDAO{
     		{
     			try
     			{
-    				ois.close();
+    				//ois.close();
     				is.close();
     			}
     			

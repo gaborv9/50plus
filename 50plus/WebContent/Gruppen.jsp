@@ -101,15 +101,6 @@
 			
 			<form action="Gruppen" method="post">
 			
-				<%
-					if(session.getAttribute("gruppenname")!=null){
-				
-						out.println((String) session.getAttribute("gruppenname")+ " Gruppe wurde erstellt!");
-						out.println("Der Nachname des Administrators: "+(String) session.getAttribute("admin"));
-					}
-					else{	
-					}
-				%>
 			
 			<%
 					String username = (String) session.getAttribute("username");

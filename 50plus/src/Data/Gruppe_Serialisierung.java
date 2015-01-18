@@ -16,7 +16,7 @@ import Personen.User;
 /**Die Klasse Gruppe_Serialisierung ist fuer die Serialisierung und Deserialisierung von 
  * GruppeClass-Objekten(Gruppen) zustaendig
  */
-public class Gruppe_Serialisierung 
+public class Gruppe_Serialisierung implements GruppeDAO
 {
 	private String pfad;
 	private ArrayList<GruppeClass> gruppelist;
@@ -182,12 +182,20 @@ public class Gruppe_Serialisierung
    	}
     
     
+    
     public void loescheGruppe(GruppeClass gr) 
     {
         
     	gruppelist = getGruppenlist();
-    	
     	gruppelist.remove(gr);
+    	/*for(GruppeClass temp: gruppelist){
+    		if(temp.getName().equals(gr)){
+    			
+    			System.out.println(temp.getName());
+    			gruppelist.remove(temp);
+    		}
+    	}*/
+    	
 
     	FileOutputStream out= null;
     	ObjectOutputStream output = null;
