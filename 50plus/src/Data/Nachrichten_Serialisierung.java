@@ -69,52 +69,38 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
     public ArrayList<Nachricht> getAlleNachrichten(){
     	File file = new File(pfad);
     	
-        if (!file.exists())
-        {
-            try 
-            {
+        if (!file.exists()){
+            try{
                 file.createNewFile();
             } 
-            catch (IOException ex) 
-            {
+            catch (IOException ex){
             	System.out.println("IO Exception" + ex);
             }
             return globallist;
          }
         
-        else
-        {
+        else{
           	InputStream is = null;
     		ObjectInputStream ois = null;
     		
-    		try
-    		{
+    		try{
     			is = new FileInputStream(pfad);
     			ois = new ObjectInputStream(is);
-    			
     			globallist = (ArrayList<Nachricht>) ois.readObject();
     		}
-    		
-    		catch(IOException e)
-    		{
+    		catch(IOException e){
     			System.err.println("IOException" + e);
     		}
-    		
-    		catch(ClassNotFoundException e)
-    		{
+    		catch(ClassNotFoundException e){
     			System.err.println("globalPostlist not found" + e);
     		}
-    		
-    		finally
-    		{
-    			try
-    			{
-    				ois.close();
+    		finally{
+    			try{
+    				//ois.close();
     				is.close();
     			}
     			
-    			catch(IOException e)
-    			{
+    			catch(IOException e){
     				System.err.println("Konnte Streams nicht schliessen. " + e);
     			}
     		}
@@ -122,6 +108,35 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
         }
   	}
         
-
+    public ArrayList<Nachricht> getNachrichtenbySender(String sender){
+    	
+    	globallist=getAlleNachrichten();
+    	ArrayList<Nachricht> senderlist=new ArrayList<Nachricht>();
+    	
+    	for(Nachricht temp: globallist){
+    		if(temp.getNachrichtSender().equals(sender)){
+    			senderlist.add(temp);
+    		}
+    	}
+    	return senderlist;
+    	
+    }
     
+    
+public ArrayList<Nachricht> getNachrichtenbyEmpfaenger(String empfaenger){
+    	
+    	globallist=getAlleNachrichten();
+    	ArrayList<Nachricht> empflist=new ArrayList<Nachricht>();
+    	
+    	for(Nachricht temp: globallist){
+    		if(temp.getNachrichtEmpfaenger().equals(empfaenger)){
+    			empflist.add(temp);
+    		}
+    	}
+    	return empflist;
+    	
+    }
+
+
+
 }

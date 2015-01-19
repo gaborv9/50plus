@@ -37,7 +37,7 @@
 
 
 <body>
-		<%@ page import="java.util.ArrayList, Management.GruppeClass, Data.Gruppe_Serialisierung" %> 
+		<%@ page import="java.util.ArrayList, Personen.Nachricht, Data.Nachrichten_Serialisierung" %> 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
@@ -101,16 +101,30 @@
             	</div>
 			</form>
 
-			
-			
-			
+	
 				<%
 					String username = (String) session.getAttribute("username");
-
+					ArrayList<Nachricht> senderliste= (ArrayList<Nachricht>) session.getAttribute("senderliste");//Postausgang
+					ArrayList<Nachricht> empfaengerliste= (ArrayList<Nachricht>) session.getAttribute("empfaengerliste");//Posteingang
 				%>
+	
+			<br><br>
+
+
+			<h3 align="right">Nachrichtenausgang</h3>
+			<table align="right">
 			
-			
-			<br>
+			<%for(Nachricht temp: senderliste){
+				%>
+				<tr>
+					<td><%out.println(temp.getNachrichtEmpfaenger()); %></td>
+				</tr>	
+
+			<%} %>
+			</tr>		
+			</table>
+
+
 
 
 			<%

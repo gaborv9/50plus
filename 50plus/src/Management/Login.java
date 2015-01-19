@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Data.Nachrichten_Serialisierung;
 import Data.Serialisierung;
+import Personen.Nachricht;
 import Personen.Post;
 import Management.PinnwandManagement;
 
@@ -111,10 +113,12 @@ public class Login extends HttpServlet {
 				
 		PinnwandManagement pm = new PinnwandManagement();
 		GruppeManagement gr = new GruppeManagement();
+		Nachrichten_Serialisierung nser=new Nachrichten_Serialisierung();
 		
 		ArrayList<Post> postlist = pm.getOwnpostlist(username);
 		ArrayList<GruppeClass> grouplist = gr.getOwnGruppelist(username);
-		
+		ArrayList<Nachricht> senderliste = nser.getNachrichtenbySender(username);
+		ArrayList<Nachricht> empfaengerliste = nser.getNachrichtenbyEmpfaenger(username);
 		
 		
 		PersonDAO a = new Serialisierung();
@@ -126,7 +130,8 @@ public class Login extends HttpServlet {
 			session.setAttribute("pinnwandOwner", username);
 		 	session.setAttribute("postlist", postlist);
 		 	session.setAttribute("grouplist", grouplist);
-		 	session.setAttribute("grouplist", grouplist);
+		 	session.setAttribute("senderliste", senderliste);
+		 	session.setAttribute("empfaengerliste", empfaengerliste);
 		 	session.setAttribute("postDeleteSuccess", "nichts");
 		 	session.setAttribute("anfrage", "keine");
 		 	session.setAttribute("bitte", "keine");

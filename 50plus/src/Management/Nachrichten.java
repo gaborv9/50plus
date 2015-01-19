@@ -76,6 +76,7 @@ public class Nachrichten extends HttpServlet {
 			
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
+		
 
 			response.sendRedirect("Nachrichten.jsp");
 		
@@ -101,26 +102,42 @@ public class Nachrichten extends HttpServlet {
 		String empfaenger = request.getParameter("empf");
 		String inhalt = request.getParameter("inhalt");
 		String zeitpunkt = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
+		
+		Nachrichten_Serialisierung nser=new Nachrichten_Serialisierung();
 
 		//holt sich Empfänger Person aus Serialisierung
 		Person p=new User();
 		Serialisierung ser=new Serialisierung();
 		p=ser.getPersonbyid(empfaenger);
 		
-		//erstellt neue Nachricht
-		Nachricht nachricht=new Nachricht(sender, empfaenger, inhalt, zeitpunkt);
+		if(p==null){
+			out.println("Dieser Nutzer ist uns leider nicht bekannt! Bitte überprüfen Sie Ihre Eingabedaten!");
+		}
+		else{
+			//erstellt neue Nachricht
+			Nachricht nachricht=new Nachricht(sender, empfaenger, inhalt, zeitpunkt);
 		
-		//Nachricht speichern in Nachrichten_Serialisierung
-		Nachrichten_Serialisierung nser=new Nachrichten_Serialisierung();
-		nser.speichereNachricht(nachricht);
-		
-		
-		System.out.println("Nachricht gespeichert!");
-		
-		
-		
-		
+			//Nachricht speichern in Nachrichten_Serialisierung
+			nser.speichereNachricht(nachricht);
 
+			System.out.println("Nachricht gespeichert!");
+		}
+		
+		
+		//holt Nachrichten des Senders (Postausgang)
+		String username=(String) session.getAttribute("username");
+		ArrayList<Nachricht> senderliste = new ArrayList<Nachricht>();
+		senderliste = nser.getNachrichtenbySender(username);
+		
+		//holt Nachrichten des Empfaengers (Posteingang)
+		ArrayList<Nachricht> empfaengerliste = new ArrayList<Nachricht>();
+		empfaengerliste = nser.getNachrichtenbyEmpfaenger(empfaenger);
+
+		
+		//in Session speichern
+		session.setAttribute("senderliste", senderliste);
+		session.setAttribute("empfaengerliste", empfaengerliste);
+		
     	response.sendRedirect("Nachrichten.jsp");
 		
 
