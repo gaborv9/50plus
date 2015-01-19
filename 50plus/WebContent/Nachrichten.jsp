@@ -37,7 +37,7 @@
 
 
 <body>
-		<%@ page import="java.util.ArrayList, Data.GruppenPost_Serialisierung, Personen.GruppePost, Management.Gruppenpinnwand" %> 
+		<%@ page import="java.util.ArrayList, Management.GruppeClass, Data.Gruppe_Serialisierung" %> 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
@@ -60,14 +60,14 @@
 			id="bs-example-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
-						<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
-						<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
-						<li><a href="/50plus/Nachrichten.jsp">Nachrichten</a></li>
-						<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
-						<li><a href="/50plus/Forschung.jsp">Forschung</a></li>
-						<li><a href="/50plus/Profil.jsp">Profil</a></li>
-						<li><a href="/50plus/Admin.jsp">Admin</a></li>
-						<li><a href="/50plus/Login?logout=true">Logout</a></li>
+				<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
+				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
+				<li><a href="/50plus/Nachrichten.jsp">Nachrichten</a></li>
+				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
+			    <li><a href="/50plus/Forschung.jsp">Forschung</a></li>
+				<li><a href="/50plus/Profil.jsp">Profil</a></li>
+				<li><a href="/50plus/Admin.jsp">Admin</a></li>
+				<li><a href="/50plus/Login?logout=true">Logout</a></li>
 				<form class="form-signin" method="post" action="Suche" role="form">
 					<div class="form-group">
 						<input type="suche" class="form-control" name="suche"
@@ -89,76 +89,36 @@
 	<div class="row">
 		<div class="col-lg-12" id="content">
 		
+		
+		
 			<br><br>
-			
-			
-			
-			<%
-					String username = (String) session.getAttribute("username");
-					String gn = (String) session.getAttribute("gn");
-					ArrayList<GruppePost> gplist = (ArrayList<GruppePost>) session.getAttribute("gplist");
-			%>
-					
-			<h2><% out.println("Gruppe: "+gn);%></h2>
-			
-			<div class="btn-group">
-			<button type="button" data-toggle="dropdown"
-					class="btn btn-default dropdown-toggle">
-					Mitglieder<span class="caret"></span>
-			</button>
-				<ul class="dropdown-menu" method="post" action="Gruppenmitglieder">
-					<li><a
-						href="/50plus/Gruppenmitglieder?wunsch=anzeigen">Mitglieder anzeigen</a></li>		 
-				</ul>
-			</div>
-			<br>
-			
-			<br>
-					<div class="well">
-					<form class="form-horizontal" action="Gruppenpinnwand" method="post"
-						role="form">
-						<h4>Neue Nachricht</h4>
-						<div class="form-group">
-							<textarea class="form-control" rows="4" name=inhalt
-								placeholder="Neue Nachricht eingeben..."></textarea>
-							<button class="btn btn-primary" input type="submit" name="posten"
-								value="posten" type="button">Post</button>
-						</div>
-					</form>
-				</div>
-			
-						
-			<% 
-					if(gplist.size() != 0)
-					{
-						int i = gplist.size()-1;
-						for ( ; i >=0; i--)
-							 
-					    {
-							out.println(gplist.get(i).getPostGruppenUsername() + ", ");
-							out.println(gplist.get(i).getPostGruppenZeit() + "<br />"); 
-							%>
-							<div class="panel panel-default">
-								<div class="panel-body" style="width: 1100px; word-wrap: break-word"><% out.println(gplist.get(i).getPostGruppenInhalt()); %></div>
-							</div>
-			<%
-					    }
-					}
-			%>
-			
-			
+			<h2>Neue Nachricht schreiben:</h2>
+			<form method="post" action="Nachrichten">
+			<div class="form-group">
+			<input type="text" class="form-control" name="empf" placeholder="Bitte Nutzername des Empfängers eingeben" required>
+			<textarea class="form-control" rows="4" name=inhalt placeholder="Nachricht schreiben..."></textarea>
+            	<button type="register" class="btn btn-default">Nachricht senden!</button>
+            	</div>
+			</form>
 
 			
 			
 			
+				<%
+					String username = (String) session.getAttribute("username");
+
+				%>
+			
+			
+			<br>
+
+
 			<%
 				if (session.getAttribute("username") == null) {
 
 					response.sendRedirect("index.jsp");
 				}
 			%>
-			
-
 			
 		</div>
 	</div>
