@@ -181,21 +181,16 @@ public class Gruppe_Serialisierung implements GruppeDAO
     	return null;
    	}
     
-    
-    
+
+    /**
+     * Der Methode wird ein Gruppenobjekt uebergeben und loescht dieses Objekt aus der Datei.
+     * @param gr
+     */
     public void loescheGruppe(GruppeClass gr) 
     {
         
     	gruppelist = getGruppenlist();
     	gruppelist.remove(gr);
-    	/*for(GruppeClass temp: gruppelist){
-    		if(temp.getName().equals(gr)){
-    			
-    			System.out.println(temp.getName());
-    			gruppelist.remove(temp);
-    		}
-    	}*/
-    	
 
     	FileOutputStream out= null;
     	ObjectOutputStream output = null;
@@ -227,7 +222,11 @@ public class Gruppe_Serialisierung implements GruppeDAO
          }
      }
     
-    
+    /**
+     * Der Methode wird ein Username uebergeben und sie liefert alle Gruppen des Users zurueck.
+     * @param username
+     * @return ownGruppen
+     */
     public ArrayList<GruppeClass> getOwnGruppenlist(String username)
    	{
     	gruppelist = getGruppenlist();

@@ -90,7 +90,12 @@
 	<div class="row">
 		<div class="col-lg-12" id="content">
 		
-		
+				<%
+					String username = (String) session.getAttribute("username");
+					ArrayList<Nachricht> senderliste= (ArrayList<Nachricht>) session.getAttribute("senderliste");//Postausgang
+					ArrayList<Nachricht> empfaengerliste= (ArrayList<Nachricht>) session.getAttribute("empfaengerliste");//Posteingang
+					String personname = (String) session.getAttribute("personname");
+				%>		
 		
 			<br><br>
 			<h2>Neue Nachricht schreiben:</h2>
@@ -103,11 +108,7 @@
 			</form>
 
 	
-				<%
-					String username = (String) session.getAttribute("username");
-					ArrayList<Nachricht> senderliste= (ArrayList<Nachricht>) session.getAttribute("senderliste");//Postausgang
-					ArrayList<Nachricht> empfaengerliste= (ArrayList<Nachricht>) session.getAttribute("empfaengerliste");//Posteingang
-				%>
+
 
 
 			
