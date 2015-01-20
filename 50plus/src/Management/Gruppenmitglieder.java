@@ -22,10 +22,10 @@ import Personen.User;
 import Data.Gruppe_Serialisierung;
 import Data.Serialisierung;
 
-
 /**
+ * 
+ * Mit Servlet Gruppenmitglieder erfolgt das Anzeigen und Hinzufuegen von Gruppenmitgliedern
  *
- * @author master
  */
 public class Gruppenmitglieder extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -114,17 +114,17 @@ public class Gruppenmitglieder extends HttpServlet {
 		String nutzername = request.getParameter("nutzername");
 		
 		
-		Gruppe_Serialisierung se = new Gruppe_Serialisierung();//Gruppen
-		Serialisierung ser = new Serialisierung();	//Personen
+		Gruppe_Serialisierung se = new Gruppe_Serialisierung();//Gruppen Serialisierung
+		Serialisierung ser = new Serialisierung();	//Personen Seriailsierung
 		ArrayList<GruppeClass> gruppelist = new ArrayList<GruppeClass>();
-		ArrayList<Person> mitgl = (ArrayList<Person>) session.getAttribute("mitgl");
+		ArrayList<Person> mitgl = (ArrayList<Person>) session.getAttribute("mitgl"); //Liste mit Mitglieder einer Gruppe
 		Person p = new User();
 		GruppeClass gc;
 		
 		
-		p=ser.getPersonbyid(nutzername);	
-		gc=se.getGruppebyName(gn);
-		//String name=gc.getName();
+		p=ser.getPersonbyid(nutzername);	//holt Person Objekt aus Serialisierung
+		gc=se.getGruppebyName(gn);			//holt Gruppen Objekt aus Gruppe_Serialisierung
+		
 		
     	if(gc!=null){
     		se.loescheGruppe(gc);
