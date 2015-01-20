@@ -10,12 +10,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import Personen.Post;
+import Management.PinnwandDAO;
 
 /**
  * Die Klasse Post_Serialisierung ist fuer die Serialisierung und Deserialisierung von 
  * Post-Objekten(Posts) zustaendig
  */
-public class Post_Serialisierung 
+public class Post_Serialisierung implements PinnwandDAO
 {
 	private String pfad;
 	private ArrayList<Post> globalPostlist;
@@ -60,35 +61,8 @@ public class Post_Serialisierung
     	*/
     	
     	globalPostlist.add(p);
-
-    	FileOutputStream out = null;
-    	ObjectOutputStream output = null;
-    	    	
-        try 
-        {
-            //Ausgabestrom der zur Datei führt wird geöffnet
-            out = new FileOutputStream(pfad);
-            //Stream wird geoeffnet, um Objekte zu speichern 
-            output = new ObjectOutputStream(out);
-            //Objekt wird gespeichert
-            output.writeObject(globalPostlist);
-        }
-        catch (IOException ex) 
-        {
-           System.out.println("Konnte globalPostlist nicht speichern. " + ex);
-        }
-        finally
-        {
-            try 
-            {
-				output.close();
-				out.close();
-			} 
-            catch (IOException e) 
-            {
-            	System.out.println("Konnte Streams nicht schliessen. " + e);
-			}
-         }
+    	setGlobalpostlist(globalPostlist);
+    	
      }
     
 	/**
@@ -151,6 +125,48 @@ public class Post_Serialisierung
     		return globalPostlist;
         }
   	}
+	
+	
+	private void setGlobalpostlist(ArrayList<Post> globalPostlist)
+	{
+		
+		
+		FileOutputStream out = null;
+    	ObjectOutputStream output = null;
+    	    	
+        try 
+        {
+            //Ausgabestrom der zur Datei führt wird geöffnet
+            out = new FileOutputStream(pfad);
+            //Stream wird geoeffnet, um Objekte zu speichern 
+            output = new ObjectOutputStream(out);
+            //Objekt wird gespeichert
+            output.writeObject(globalPostlist);
+        }
+        catch (IOException ex) 
+        {
+           System.out.println("Konnte globalPostlist nicht speichern. " + ex);
+        }
+        finally
+        {
+            try 
+            {
+				output.close();
+				out.close();
+			} 
+            catch (IOException e) 
+            {
+            	System.out.println("Konnte Streams nicht schliessen. " + e);
+			}
+         }
+		
+	}
+	
+	
+	
+	
+	
+	
     
 	/**
 	 * Die Methode getOwnpostlist gibt alle Posts eines Users zurueck
@@ -208,34 +224,7 @@ public class Post_Serialisierung
 	
 		}
     	    	
-    	FileOutputStream out = null;
-    	ObjectOutputStream output = null;
-    	    	
-        try 
-        {
-            //Ausgabestrom der zur Datei führt wird geöffnet
-            out = new FileOutputStream(pfad);
-            //Stream wird geoeffnet, um Objekte zu speichern 
-            output = new ObjectOutputStream(out);
-            //Objekt wird gespeichert
-            output.writeObject(globalPostlist);
-        }
-        catch (IOException ex) 
-        {
-           System.out.println("Konnte globalPostlist nicht speichern. " + ex);
-        }
-        finally
-        {
-            try 
-            {
-				output.close();
-				out.close();
-			} 
-            catch (IOException e) 
-            {
-            	System.out.println("Konnte Streams nicht schliessen. " + e);
-			}
-         }
+    	setGlobalpostlist(globalPostlist);
      }
     
 	/**
@@ -319,10 +308,6 @@ public class Post_Serialisierung
 	   {
 			if(globalPostlist.get(i).getOwnPostcounter() == postNumber)
 			{
-				/*System.out.println("gefunden");
-				System.out.println(globalPostlist.get(i).getOwnPostcounter());
-				System.out.println(postNumber);
-				*/
 				Post p =  getPostbyNumber(postNumber);
 				p.setFlagged(flag);
 				
@@ -330,11 +315,6 @@ public class Post_Serialisierung
 				speicherePost(p, postNumber);
 					
 			}
-			/*else
-			{
-				System.out.println("Post nicht gefunden.");
-			}
-			*/
 	   }
 	   
 	  
@@ -361,7 +341,24 @@ public class Post_Serialisierung
 		return flaggedPostlist;
   	}
    
-   
+   public void loescheAllPosts(String username)
+  	{
+	   	globalPostlist = getGlobalpostlist();
+		
+	   	for(int i = 0; i < globalPostlist.size(); i++)
+		{
+	   		
+			if(globalPostlist.get(i).getUsername().equals(username) || globalPostlist.get(i).getPinnwandOwner().equals(username))
+			{
+			
+				
+				globalPostlist.remove(globalPostlist.get(i));
+				i--; //wenn if true ist, dann globalPostlist.remove(globalPostlist.get(i), danach globalPostlist.size()=size von vorigeren globalPostlist - 1, so waere nur jeden 2. Post geloescht 
+				
+			}
+		}
+	   	setGlobalpostlist(globalPostlist);
+ 	}
    
    
    

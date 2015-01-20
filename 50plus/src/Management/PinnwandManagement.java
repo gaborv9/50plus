@@ -3,6 +3,7 @@ package Management;
 import java.util.ArrayList;
 
 import Data.Post_Serialisierung;
+import Data.Serialisierung;
 import Personen.Post;
 
 /**
@@ -10,17 +11,16 @@ import Personen.Post;
  * 
  */
 
-public class PinnwandManagement 
+public class PinnwandManagement implements PinnwandDAO
 {
-
-	Post_Serialisierung ps = new Post_Serialisierung();
+	PinnwandDAO ps = new Post_Serialisierung();
 	
 	/**
 	 * Die Methode addPost ruft die Methode speicherePost auf, mit Hilfe derer man einen Post speichern kann
 	 * @param p Post, der hinzugefuegt wird
      */
 
-    public void addPost(Post p, int postNumber) 
+    public void speicherePost(Post p, int postNumber) 
     {
     	ps.speicherePost(p, postNumber);
     }
@@ -40,7 +40,7 @@ public class PinnwandManagement
      * Die Methode deletePost ruft die Methode loeschePost auf, mit Hilfe derer man einen Post loeschen kann
 	 * @param postNumber Post mit dieser Number wird geloescht
 	 */   
-    public void deletePost(int postNumber) 
+    public void loeschePost(int postNumber) 
     {
     	ps.loeschePost(postNumber);
     }
@@ -72,6 +72,11 @@ public class PinnwandManagement
     public  ArrayList<Post> getFlaggedPostlist()
     {
     	return ps.getFlaggedPostlist();
+    }
+    
+    public void loescheAllPosts(String username)
+    {
+    	ps.loescheAllPosts(username);
     }
     
 }

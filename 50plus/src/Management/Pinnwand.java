@@ -61,7 +61,7 @@ public class Pinnwand extends HttpServlet
 		int postNumber_delete = (request.getParameter("postNumber_delete") == null) ? 0 : Integer.parseInt(request.getParameter("postNumber_delete"));
 		if (postNumber_delete != 0)
 		{
-			pm.deletePost(postNumber_delete);
+			pm.loeschePost(postNumber_delete);
 		}
 		
 		//Melden
@@ -107,6 +107,10 @@ public class Pinnwand extends HttpServlet
 		PersonManagement perman = new PersonManagement();
 		Person p = perman.getPerson(username);
 		int role = p.getRole();
+		/*
+		System.out.println(p.getID());
+		System.out.println(role);
+		*/
 		session.setAttribute("role", role);
 		
 		//Postmeldung
@@ -169,7 +173,7 @@ public class Pinnwand extends HttpServlet
 			
 			//Post wird spreichert
 		    PinnwandManagement pm = new PinnwandManagement();
-			pm.addPost(p, postNumber);
+			pm.speicherePost(p, postNumber);
 		    
 			//neue postlist wird erstellt und aktualisiert und in session gesetzt
 		    ArrayList<Post> postlist = pm.getOwnpostlist(pinnwandOwner);

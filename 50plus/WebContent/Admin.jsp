@@ -178,7 +178,12 @@
 					
 					ArrayList<Post> flaggedPostlist = (ArrayList<Post>) session.getAttribute("flaggedPostlist");
 					
-					if(flaggedPostlist.size() == 0)
+					
+					if(flaggedPostlist == null)
+					{
+						
+					}
+					else if(flaggedPostlist.size() == 0)
 					{
 						out.println("Es wurden noch keine Posts gemeldet.");
 					}

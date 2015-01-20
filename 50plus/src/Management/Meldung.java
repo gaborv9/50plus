@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import Data.Serialisierung;
 import Personen.Person;
+import Personen.Post;
 
 /**
  * Servlet implementation class Meldung
@@ -86,6 +87,10 @@ public class Meldung extends HttpServlet {
     	}
     	if(wunsch.equals("unbefsperren")){
     		m.unbefsperren(person,a.getPersonList());
+    		
+    		PinnwandManagement pm = new PinnwandManagement();
+    		pm.loescheAllPosts(personname);
+   		
     		Ziel = "Admin.jsp";
     	}
     	if(wunsch.equals("liste")){
@@ -102,6 +107,7 @@ public class Meldung extends HttpServlet {
     		Person personneu = person;
     		a.loeschePerson(person);
     		a.speicherePerson(personneu);
+
     	}
     	
     	session.setAttribute("bitte", bitte);
