@@ -37,7 +37,7 @@
 
 
 <body>
-		<%@ page import="java.util.ArrayList, Personen.Nachricht, Data.Nachrichten_Serialisierung" %> 
+		<%@ page import="java.util.ArrayList, Personen.Nachricht, Data.Nachrichten_Serialisierung, java.util.Collections;" %> 
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -115,6 +115,7 @@
 			
 		<h3>Nachrichteneingang</h3>
 		<%
+		Collections.reverse(empfaengerliste);
 		for(Nachricht temp: empfaengerliste){%>
 			<div class="btn-group">
 			<button type="button" data-toggle="dropdown"
@@ -140,7 +141,8 @@
 
 
 		<h3>Nachrichtenausgang</h3>
-		<%for(Nachricht temp: senderliste){%>
+		<%Collections.reverse(senderliste);
+		for(Nachricht temp: senderliste){%>
 			<div class="btn-group">
 			<button type="button" data-toggle="dropdown"
 					class="btn btn-default dropdown-toggle">

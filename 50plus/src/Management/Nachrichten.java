@@ -11,7 +11,6 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -118,24 +117,23 @@ public class Nachrichten extends HttpServlet {
 			nser.speichereNachricht(nachricht);
 
 			System.out.println("Nachricht gespeichert!");
-		
+		}
 
 		
 		//holt Nachrichten des Senders (Postausgang)
 		String username=(String) session.getAttribute("username");//aktuell angemeldeter user
 		ArrayList<Nachricht> senderliste = new ArrayList<Nachricht>();
 		senderliste = nser.getNachrichtenbySender(username);
-		Collections.reverse(senderliste);
 		
 		//holt Nachrichten des Empfaengers (Posteingang)
 		ArrayList<Nachricht> empfaengerliste = new ArrayList<Nachricht>();
 		empfaengerliste = nser.getNachrichtenbyEmpfaenger(username);
-		Collections.reverse(empfaengerliste);
+		
 		
 		//in Session speichern
 		session.setAttribute("senderliste", senderliste);
 		session.setAttribute("empfaengerliste", empfaengerliste);
-		}
+		
 		
     	response.sendRedirect("Nachrichten.jsp");
 		
