@@ -107,66 +107,23 @@ public class Register extends HttpServlet {
 
 		PersonManagement a = new PersonManagement();
 		Person p = new User();
-		ArrayList<Person> list = new ArrayList<>();
-		p.setArrayList(list);
 		
-		int fc = 0; // failcheck
-		if (p.setID(username) == 0) {
-			out.println("Username darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
+		try{
+			p.setID(username);
+			p.setVorname(vorname);
+			p.setNachname(nachname);
+			p.setPW(password);
+			p.setDatum(year, month, day);
+			p.setRole(3);
+			a.add(p);
+			out.println("Registierung erfolgreich.");
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
 		}
-		if (p.setVorname(vorname) == 0) {
-			out.println("Vorname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
+		catch(Exception e){
+			out.println(e.getMessage());
 			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-
+		
 		}
-		if (p.setNachname(nachname) == 0) {
-			out.println("Nachname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
-			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-		}
-		if (p.setPW(password) == 0) {
-			out.println("Passwort darf nicht mehr als 25 oder weniger als 6 Zeichen haben");
-			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-		}
-		if (p.setDatum(year, month, day) == 0) {
-			out.println("Sie müssen alt genug sein und ein korrektes Datum eingeben!");
-			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-		}
-		if (username.equals("admin1")){
-			p.setRole(1);
-		}
-
-		if (a.add(p) == 0) {
-			out.println("username schon vorhanden");
-			out.println("<a href=\"/50plus/index.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-		} else {
-			out.println("<a href=\"/50plus/index.jsp\"> Hier klicken um zur Startseite zurückzukommen</a>");
-		}
-
-		if (fc == 1) {
-			a.delete(username);
-		}
-
-		// Bessere Darstellung wäre gut, funktionieren tut es mal. Mit einem
-		// direkten Forward könnte man gleich auf die Index-Seite verweisen.
-
-		// processRequest(request, response);
+		
 	}
-
-	/**
-	 * Returns a short description of the servlet.
-	 * 
-	 * @return a String containing servlet description
-	 */
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}// </editor-fold>
-
 }

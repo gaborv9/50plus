@@ -60,8 +60,9 @@
 			id="bs-example-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
-				<li><a href="/50plus/Pinnwand?pinnwandOwner=<%= (String) session.getAttribute("username")%>">Pinnwand</a></li>
+				<li><a href="/50plus/Pinnwand.jsp">Pinnwand</a></li>
 				<li><a href="/50plus/Gruppen.jsp">Gruppen</a></li>
+				<li><a href="/50plus/Nachrichten.jsp">Nachrichten</a></li>
 				<li><a href="/50plus/Freunde.jsp">Freunde</a></li>
 			    <li><a href="/50plus/Forschung.jsp">Forschung</a></li>
 				<li><a href="/50plus/Profil.jsp">Profil</a></li>
@@ -101,15 +102,6 @@
 			
 			<form action="Gruppen" method="post">
 			
-				<%
-					if(session.getAttribute("gruppenname")!=null){
-				
-						out.println((String) session.getAttribute("gruppenname")+ " Gruppe wurde erstellt!");
-						out.println("Der Nachname des Administrators: "+(String) session.getAttribute("admin"));
-					}
-					else{	
-					}
-				%>
 			
 			<%
 					String username = (String) session.getAttribute("username");
@@ -125,7 +117,7 @@
 						for (int i=0; i < grouplist.size(); i++)
 					    {
 							%>
-							<a href="/50plus/Gruppenpinnwand.jsp">
+							<a href="/50plus/Gruppenpinnwand?gn=<%=grouplist.get(i).getName()%>&wunsch=pinnwand">
 							<%out.println(grouplist.get(i).getName() + "<br>"); 
 					    }
 					}			

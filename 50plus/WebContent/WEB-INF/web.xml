@@ -36,6 +36,18 @@
     <servlet-name>PinnwandManagement</servlet-name>
     <servlet-class>Management.PinnwandManagement</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Gruppenpinnwand</servlet-name>
+    <servlet-class>Management.Gruppenpinnwand</servlet-class>
+  </servlet>
+   <servlet>
+    <servlet-name>Gruppenmitglieder</servlet-name>
+    <servlet-class>Management.Gruppenmitglieder</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Nachrichten</servlet-name>
+    <servlet-class>Management.Nachrichten</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
     <url-pattern>/Register</url-pattern>
@@ -71,6 +83,18 @@
   <servlet-mapping>
     <servlet-name>PinnwandManagement</servlet-name>
     <url-pattern>/PinnwandManagement</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gruppenpinnwand</servlet-name>
+    <url-pattern>/Gruppenpinnwand</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Gruppenmitglieder</servlet-name>
+    <url-pattern>/Gruppenmitglieder</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Nachrichten</servlet-name>
+    <url-pattern>/Nachrichten</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>30</session-timeout>

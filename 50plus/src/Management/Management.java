@@ -26,26 +26,6 @@ import Personen.User;
 @SuppressWarnings("serial")
 public class Management extends HttpServlet {
 
-	protected void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		try (PrintWriter out = response.getWriter()) {
-			/* TODO output your page here. You may use following sample code. */
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet Management</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet Management at " + request.getContextPath()
-					+ "</h1>");
-			out.println("</body>");
-			out.println("</html>");
-		}
-	}
-
-	// <editor-fold defaultstate="collapsed"
-	// desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 	/**
 	 * Handles the HTTP <code>GET</code> method. Alters the role
 	 * 
@@ -85,15 +65,9 @@ public class Management extends HttpServlet {
 				 
 			}
 			
-
-			
-			
-			
-			
 		response.sendRedirect("Profil.jsp");
 		}
-	
-		// processRequest(request, response);
+	 
 	}
 
 	/**
@@ -113,8 +87,7 @@ public class Management extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-		
-		//String username = request.getParameter("username");
+		  
 		String password = request.getParameter("password");
 		String vorname = request.getParameter("vorname");
 		String nachname = request.getParameter("nachname");
@@ -125,66 +98,25 @@ public class Management extends HttpServlet {
 		HttpSession session = request.getSession();
 		PersonManagement ser = new PersonManagement();
 		String usernamenow =(String) session.getAttribute("username");
-		Person p= ser.getPerson((String) session.getAttribute("username"));
-
+		Person a= ser.getPerson((String) session.getAttribute("username"));
+		Person temp = a;
+		Person p = a;
 		
-		int fc = 0; // failcheck
-		if (p.setID("/////////##//////////") == 0) {
-			out.println("Username darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
-			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-		}
-		if (p.setVorname(vorname) == 0) {
-			out.println("Vorname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
-			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-
-		}
-		if (p.setNachname(nachname) == 0) {
-			out.println("Nachname darf nicht mehr als 25 Zeichen haben und darf nicht leer sein");
-			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-		}
-		if (p.setPW(password) == 0) {
-			out.println("Passwort darf nicht mehr als 25 oder weniger als 6 Zeichen haben");
-			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-		}
-		if (p.setDatum(year, month, day) == 0) {
-			out.println("Sie müssen alt genug sein und ein korrektes Datum eingeben!");
-			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zur Startseite zurückzukommen</a>");
-			fc = 1;
-		}
-	     else {
-			out.println("<a href=\"/50plus/Profil.jsp\"> Hier klicken um zur Startseite zurückzukommen</a>");
-		}
-		
-		if (fc == 1) {
-			ser.delete("/////////##//////////");
-			 
-		}
-		else{
+		try{
 			ser.delete(usernamenow);
-			p.setID(usernamenow);
+			p.setVorname(vorname);
+			p.setNachname(nachname);
+			p.setPW(password);
+			p.setDatum(year, month, day);
 			ser.add(p);
- 
+			response.sendRedirect("Profil.jsp");
 		}
- 
-		response.sendRedirect("Profil.jsp");
+		catch(Exception e){
+			ser.add(temp);
+			out.println(e.getMessage());
+			out.println("<a href=\"/50plus/Profil.jsp\">Hier klicken um zum Profil zurückzukommen</a>");
+		}
 		
-		
-		 
-		//processRequest(request, response);
 	}
-
-	/**
-	 * Returns a short description of the servlet.
-	 * 
-	 * @return a String containing servlet description
-	 */
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}// </editor-fold>
-
+ 
 }

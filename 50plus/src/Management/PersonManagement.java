@@ -62,7 +62,8 @@ public class PersonManagement {
 
 	public int add(Person a) {
 		if (ser.speicherePerson(a) == 0) {
-			return 0; // username existiert bereits
+			throw new IllegalArgumentException("Nutzername bereits vergeben");
+			//return 0; // username existiert bereits
 		} else {
 			return 1; // Hat geklappt
 		}

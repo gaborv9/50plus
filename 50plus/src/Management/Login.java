@@ -16,8 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Data.Nachrichten_Serialisierung;
 import Data.Serialisierung;
+import Personen.Nachricht;
+import Personen.Person;
 import Personen.Post;
+import Personen.User;
 import Management.PinnwandManagement;
 
 /**
@@ -27,39 +31,26 @@ import Management.PinnwandManagement;
 @SuppressWarnings("serial")
 public class Login extends HttpServlet {
 
-	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-	 * methods.
-	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
-	 * @throws ServletException
-	 *             if a servlet-specific error occurs
-	 * @throws IOException
-	 *             if an I/O error occurs
-	 */
-	protected void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		try (PrintWriter out = response.getWriter()) {
-			/* TODO output your page here. You may use following sample code. */
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet Login</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet Login at " + request.getContextPath()
-					+ "</h1>");
-			out.println("</body>");
-			out.println("</html>");
+	
+ /**
+  * Registers admin.
+  */
+	public void init(){
+	 
+		PersonManagement a = new PersonManagement();
+		if (a.getPerson("admin")==null){
+			Person p = new User();
+			 
+			p.setID("admin");
+			p.setVorname("adminv");
+			p.setNachname("adminn");
+			p.setPW("123456");
+			p.setDatum("1", "1", "1");
+			a.add(p);
 		}
 	}
-
-	// <editor-fold defaultstate="collapsed"
-	// desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+	
+ 
 	/**
 	 * Handles the HTTP <code>GET</code> method. Invalidates session.
 	 * 
@@ -111,10 +102,12 @@ public class Login extends HttpServlet {
 				
 		PinnwandManagement pm = new PinnwandManagement();
 		GruppeManagement gr = new GruppeManagement();
+		Nachrichten_Serialisierung nser=new Nachrichten_Serialisierung();
 		
 		ArrayList<Post> postlist = pm.getOwnpostlist(username);
 		ArrayList<GruppeClass> grouplist = gr.getOwnGruppelist(username);
-		
+		ArrayList<Nachricht> senderliste = nser.getNachrichtenbySender(username);
+		ArrayList<Nachricht> empfaengerliste = nser.getNachrichtenbyEmpfaenger(username);
 		
 		
 		PersonDAO a = new Serialisierung();
@@ -126,7 +119,8 @@ public class Login extends HttpServlet {
 			session.setAttribute("pinnwandOwner", username);
 		 	session.setAttribute("postlist", postlist);
 		 	session.setAttribute("grouplist", grouplist);
-		 	session.setAttribute("grouplist", grouplist);
+		 	session.setAttribute("senderliste", senderliste);
+		 	session.setAttribute("empfaengerliste", empfaengerliste);
 		 	session.setAttribute("postDeleteSuccess", "nichts");
 		 	session.setAttribute("anfrage", "keine");
 		 	session.setAttribute("bitte", "keine");

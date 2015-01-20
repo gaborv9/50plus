@@ -234,7 +234,8 @@ public abstract class Person implements Serializable {
 	 */
 	public int setVorname(String vorname) {
 		if ((vorname.length() > 25) || (vorname.isEmpty() == true)) {
-			return 0;
+			throw new IllegalArgumentException("Vorname darf nicht leer sein und muss weniger als 25 Zeichen haben.");
+			//return 0;
 		}
 		this.vorname = vorname;
 		return 1;
@@ -254,7 +255,8 @@ public abstract class Person implements Serializable {
 	 */
 	public int setNachname(String nachname) {
 		if ((nachname.length() > 25) || (nachname.isEmpty() == true)) {
-			return 0;
+			throw new IllegalArgumentException("Nachname darf nicht leer sein und muss weniger als 25 Zeichen haben.");
+			//return 0;
 		}
 
 		this.nachname = nachname;
@@ -324,7 +326,8 @@ public abstract class Person implements Serializable {
 			}
 
 		} catch (Exception e) {
-			return 0;
+			throw new IllegalArgumentException("Sie müssen über 50 sein und ein korrektes Datum eingeben.");
+			//return 0;
 		}
 	}
 
@@ -342,7 +345,8 @@ public abstract class Person implements Serializable {
 	 */
 	public int setPW(String pw) {
     	if ((pw.length() >25) || (pw.isEmpty()==true) || (pw.length() < 6)){
-    		return 0;
+    		throw new IllegalArgumentException("Passwort darf nicht leer oder weniger als 6 Zeichen haben und muss weniger als 25 Zeichen haben.");
+    		//return 0;
     	}
         this.pw = pw;
         return 1;

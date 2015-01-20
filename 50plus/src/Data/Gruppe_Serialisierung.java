@@ -16,7 +16,7 @@ import Personen.User;
 /**Die Klasse Gruppe_Serialisierung ist fuer die Serialisierung und Deserialisierung von 
  * GruppeClass-Objekten(Gruppen) zustaendig
  */
-public class Gruppe_Serialisierung 
+public class Gruppe_Serialisierung implements GruppeDAO
 {
 	private String pfad;
 	private ArrayList<GruppeClass> gruppelist;
@@ -142,7 +142,7 @@ public class Gruppe_Serialisierung
 	   * @param username Username eines Person-Objektes
 	   * @return ArrayList mit Gruppen
 	   */	
-    public ArrayList<GruppeClass> getOwnGruppenlist(String username)
+    public ArrayList<GruppeClass> getGruppenbyAdmin(String username)
    	{
     	gruppelist = getGruppenlist();
     	ArrayList<GruppeClass> ownGruppen = new ArrayList<GruppeClass>();
@@ -156,6 +156,89 @@ public class Gruppe_Serialisierung
     		name=admin.getID();
     		if(name.equals(username)){
     			ownGruppen.add(temp);
+    		}
+    	}
+
+		return ownGruppen;
+   	}
+    
+    /**
+     * Der Methode wird ein Gruppenname übergeben und sie liefert das Gruppen-Objekt zurück.
+     * @param gn
+     * @return
+     */
+    
+    public GruppeClass getGruppebyName(String gn){
+    	
+    	gruppelist = getGruppenlist();
+    	    	  	
+    
+    	for(GruppeClass temp:gruppelist){
+    		if(temp.getName().equals(gn)){
+    			return temp;
+    		}
+    	}
+    	return null;
+   	}
+    
+    
+    
+    public void loescheGruppe(GruppeClass gr) 
+    {
+        
+    	gruppelist = getGruppenlist();
+    	gruppelist.remove(gr);
+    	/*for(GruppeClass temp: gruppelist){
+    		if(temp.getName().equals(gr)){
+    			
+    			System.out.println(temp.getName());
+    			gruppelist.remove(temp);
+    		}
+    	}*/
+    	
+
+    	FileOutputStream out= null;
+    	ObjectOutputStream output = null;
+   
+        try 
+        {
+            //Ausgabestrom der zur Datei fuehrt wird geoeffnet
+            out = new FileOutputStream(pfad);
+            //Stream wird geoeffnet, um Objekte zu speichern 
+            output = new ObjectOutputStream(out);
+            //Objekt wird gespeichert
+            output.writeObject(gruppelist);
+        }
+        catch (IOException ex) 
+        {
+           System.out.println("Die Gruppenliste konnte nicht gespeichert werden. " + ex);
+        }
+        finally
+        {
+            try 
+            {
+				output.close();
+				out.close();
+			} 
+            catch (IOException e) 
+            {
+            	System.out.println("Die Streams konnten beim loeschen nicht geschlossen werden. " + e);
+			}
+         }
+     }
+    
+    
+    public ArrayList<GruppeClass> getOwnGruppenlist(String username)
+   	{
+    	gruppelist = getGruppenlist();
+    	ArrayList<GruppeClass> ownGruppen = new ArrayList<GruppeClass>();
+    	    
+
+    	for(GruppeClass temp:gruppelist){
+    		for(Person p:temp.getMitglied()){
+    			if(p.getID().equals(username)){
+    				ownGruppen.add(temp);
+    			}
     		}
     	}
 
