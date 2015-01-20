@@ -107,22 +107,34 @@
 					ArrayList<Nachricht> senderliste= (ArrayList<Nachricht>) session.getAttribute("senderliste");//Postausgang
 					ArrayList<Nachricht> empfaengerliste= (ArrayList<Nachricht>) session.getAttribute("empfaengerliste");//Posteingang
 				%>
-	
-			<br><br>
 
-
-			<h3 align="right">Nachrichtenausgang</h3>
-			<table align="right">
-			
-			<%for(Nachricht temp: senderliste){
+			<table align="left">	
+			<td><h3>Nachrichteneingang</h3></td>					
+			<%for(Nachricht temp: empfaengerliste){
 				%>
 				<tr>
-					<td><%out.println(temp.getNachrichtEmpfaenger()); %></td>
+					<td><%out.println("von: "+temp.getNachrichtSender()); %></td>
+					<td><%out.println("am: "+temp.getNachrichtZeit()); %></td>
 				</tr>	
-
 			<%} %>
 			</tr>		
 			</table>
+			
+			
+			<table align="right">
+			<td><h3 align="right">Nachrichtenausgang</h3></td>				
+			<%for(Nachricht temp: senderliste){
+				%>
+				<tr>
+					<td><%out.println("an: "+temp.getNachrichtEmpfaenger()); %></td>
+					<td><%out.println("am: "+temp.getNachrichtZeit()); %></td>
+				</tr>	
+			<%} %>
+			</tr>					
+			</table>
+
+
+
 
 
 
