@@ -34,13 +34,13 @@ public class Post_Serialisierung implements PinnwandDAO
     }
 	
 	/**
-	 * Die Methode speicherePost speichert ein Post Objekt in post.ser
+	 * Die Methode speicherePost speichert ein Post Objekt in ArrayList<Post> globalPostlist, die in der Methode setGlobalpostlist in post.ser ausschrieben werden soll
 	 * @param p Post, der gespeichert wird
+	 * @param postNumber als wievielte der Post gepostet wurde, entweder neue Nummber oder bei vorhandenem Post seine eigene Nummer
 	 */  
     public void speicherePost(Post p, int postNumber) 
     {
-        
-      	
+              	
     	globalPostlist = getGlobalpostlist();
     	
     	if (postNumber == 0)
@@ -51,23 +51,15 @@ public class Post_Serialisierung implements PinnwandDAO
     	{
     		p.setOwnPostcounter(postNumber);
     	}
- 
-    	/*
-    	System.out.println("Alle Counter");
-    	for(int i = 0; i < globalPostlist.size(); i++)
-		{
-    		System.out.println(globalPostlist.get(i).getOwnPostcounter());
-		}
-    	*/
-    	
+     	
     	globalPostlist.add(p);
     	setGlobalpostlist(globalPostlist);
     	
      }
     
 	/**
-	 * Die Methode getGlobalpostlist gibt alle Posts zurueck
-	 * @return globalPostList - Liste aller Posts eines Users
+	 * Die Methode getGlobalpostlist gibt alle Posts zurueck, die in der Datei post.ser gespeichert werden
+	 * @return Liste aller Posts 
 	 */         
 	public ArrayList<Post> getGlobalpostlist()
 	{
@@ -113,7 +105,6 @@ public class Post_Serialisierung implements PinnwandDAO
     		{
     			try
     			{
-    				//os.close();  manchmal Exception, warum?
     				is.close();
     			}
     			
@@ -126,11 +117,13 @@ public class Post_Serialisierung implements PinnwandDAO
         }
   	}
 	
-	
+	/**
+	 * Die Methode setGlobalpostlist speichert persistent die Liste aller Posts in post.ser
+	 * @param globalPostlist Liste aller Posts, die gespeichert werden soll
+	 */   
 	private void setGlobalpostlist(ArrayList<Post> globalPostlist)
 	{
-		
-		
+				
 		FileOutputStream out = null;
     	ObjectOutputStream output = null;
     	    	
@@ -161,16 +154,10 @@ public class Post_Serialisierung implements PinnwandDAO
          }
 		
 	}
-	
-	
-	
-	
-	
-	
-    
+		   
 	/**
 	 * Die Methode getOwnpostlist gibt alle Posts eines Users zurueck
-	 * @param username User, dessen Posts zurueckgegeben werden
+	 * @param username User, dessen Posts zurueckgegeben werden sollen
 	 * @return alle Posts eines Users
 	 */ 	
 	
@@ -203,7 +190,7 @@ public class Post_Serialisierung implements PinnwandDAO
    	}
     
 	/**
-	 * Die Methode loeschePost loescht einen Post
+	 * Die Methode loeschePost loescht einen Post aus einer List, ArrayList<Post> globalPostlist, die in der Methode setGlobalpostlist in post.ser ausschrieben werden soll
 	 * @param postNumber Post mit dieser Nummer wird geloescht
 	 *
 	 */    
@@ -228,9 +215,9 @@ public class Post_Serialisierung implements PinnwandDAO
      }
     
 	/**
-	 * Die Methode getPostNumbers gibt die Anzahl der Posts eines Users zurueck
-	 * @param username User, dessen Posts zurueckgegeben werden
-	 * @return die Anzahl der Posts eines Users
+	 * Die Methode getPostNumbers gibt alle Postnummern eines Users zurueck
+	 * @param username User, dessen Postnummern zurueckgegeben werden sollen
+	 * @return die Postnummern des Users
 	 */      
     public ArrayList<Integer> getPostNumbers(String username)
    	{
@@ -253,9 +240,7 @@ public class Post_Serialisierung implements PinnwandDAO
 		}
 		return ownPostNumbers;
    	}
-    
-    
-    
+  
 	/**
 	 * Die Methode getMaxPostNumber gibt die hoechste Nummer der Posts, die je gepostet wurden
 	 * @return die hoechste Nummer der Posts
@@ -275,13 +260,16 @@ public class Post_Serialisierung implements PinnwandDAO
    	}    
     
     
-   
+	/**
+	 * Die Methode getPostbyNumber gibt einen Post nach dessen Nummer zurueck
+	 * @param postNumber Postnummer, nach derer den Post zurueckgegeben wird
+	 * @return den Post mit der angegebenen Postnummer
+	 */ 
    public Post getPostbyNumber(int postNumber)
    	{
     	globalPostlist = getGlobalpostlist();
       	    	  	
-   
-    	Post p;
+       	Post p;
         	    	
     	for(int i = 0; i < globalPostlist.size(); i++)
 		{
@@ -295,15 +283,15 @@ public class Post_Serialisierung implements PinnwandDAO
 		return null;
    	}   
     
-   
+	/**
+	 * Die Methode changeFlag setzt den Status eines Posts auf flagged oder unflagged nach Postnummer
+	 * @param flag Zustand des Posts, 0 heisst unflagged oder ungemeldet, 1 heisst flagged oder gemeldet
+	 * @param postNumber Postnummer, nach derer den flagged oder gemeldeten Status eines Posts gesetzt werden soll
+	 */   
    public void changeFlag(boolean flag, int postNumber)
    {
-	 	   
 	   globalPostlist = getGlobalpostlist();
-	   
-
-	   
-	   
+		   
 	   for(int i = 0; i < globalPostlist.size(); i++)
 	   {
 			if(globalPostlist.get(i).getOwnPostcounter() == postNumber)
@@ -313,12 +301,14 @@ public class Post_Serialisierung implements PinnwandDAO
 				
 				loeschePost(postNumber);			
 				speicherePost(p, postNumber);
-					
 			}
 	   }
-	   
-	  
    }
+ 
+	/**
+	 * Die Methode getFlaggedPostlist gibt alle Posts mit flagged oder gemeldet Status
+	 * @return Liste von Posts mit flagged Status
+	 */ 
    
    public ArrayList<Post> getFlaggedPostlist()
   	{
@@ -341,6 +331,10 @@ public class Post_Serialisierung implements PinnwandDAO
 		return flaggedPostlist;
   	}
    
+	/**
+	 * Die Methode loescheAllPosts loescht alle Posts eines Users
+	 * @param username User, dessen Posts geloescht werden sollen
+	 */ 
    public void loescheAllPosts(String username)
   	{
 	   	globalPostlist = getGlobalpostlist();
@@ -359,9 +353,6 @@ public class Post_Serialisierung implements PinnwandDAO
 		}
 	   	setGlobalpostlist(globalPostlist);
  	}
-   
-   
-   
-   
+  
 }
 

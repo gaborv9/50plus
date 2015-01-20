@@ -20,7 +20,7 @@ import Personen.Person;
 import Personen.Post;
 
 /**
- * Mit Servlet Pinnwand erfolgt das Posten von Posts
+ * Mit Servlet Pinnwand erfolgt das Posten, Loeschen, Melden der Posts und das Zurueckgeben des gemeldeten Posts
  */
 
 public class Pinnwand extends HttpServlet 
@@ -28,7 +28,7 @@ public class Pinnwand extends HttpServlet
 	private static final long serialVersionUID = 1L;
        
     /**
-     * Default Konstruktor
+     * Default Konstruktor von Pinnwand
      */
     public Pinnwand() 
     {
@@ -37,7 +37,7 @@ public class Pinnwand extends HttpServlet
     }
 
     /**
-     * Handles the HTTP GET method.
+     * Handles the HTTP GET method. Hier erfolgt das Loeschen, Melden der Posts und das Zurueckgeben des gemeldeten Posts
      *
      * @param request servlet request
      * @param response servlet response
@@ -67,20 +67,10 @@ public class Pinnwand extends HttpServlet
 		//Melden
 		int postNumber_melden = (request.getParameter("postNumber_melden") == null) ? 0 : Integer.parseInt(request.getParameter("postNumber_melden"));
 		
-		/*
-		System.out.println("postNumber_melden:  " + postNumber_melden);
-		System.out.println("Pinnwand von Freund: Username: " + username);
-		System.out.println("Pinnwand von Freund: pinnwandOwner: " + pinnwandOwner);
-		*/
-		
 		if (postNumber_melden != 0)
 		{
 			pm.changeFlag(true, postNumber_melden);
 		}
-		
-
-		
-		
 		
 		
 		ArrayList<Post> postlist = pm.getOwnpostlist(pinnwandOwner);
@@ -102,34 +92,20 @@ public class Pinnwand extends HttpServlet
 			Collections.sort(postlist, new counterComparator());
 			
 		}
-		
-		
+				
 		PersonManagement perman = new PersonManagement();
 		Person p = perman.getPerson(username);
 		int role = p.getRole();
-		/*
-		System.out.println(p.getID());
-		System.out.println(role);
-		*/
+
 		session.setAttribute("role", role);
 		
 		//Postmeldung
 		int getFlaggedPosts = (request.getParameter("getFlaggedPosts") == null) ? 0 : Integer.parseInt(request.getParameter("getFlaggedPosts"));
 		
-		//System.out.println("getFlaggedPosts:  " + getFlaggedPosts);
-				
 		if(getFlaggedPosts != 0)
 		{
-			/*
-			PersonManagement perman = new PersonManagement();
-			Person p = perman.getPerson(username);
-			int role = p.getRole();
-			session.setAttribute("role", role);
-			*/
 			ArrayList<Post> flaggedPostlist = pm.getFlaggedPostlist();
 			
-			//System.out.println("role:  " + role);
-						
 			session.setAttribute("flaggedPostlist", flaggedPostlist);
 			response.sendRedirect("Admin.jsp");
 		}	
@@ -139,12 +115,10 @@ public class Pinnwand extends HttpServlet
 			session.setAttribute("postlist", postlist);
 			response.sendRedirect("Pinnwand.jsp");
 		}
-
-		
-	}
+   }
 
     /**
-     * Handles the HTTP POST method.
+     * Handles the HTTP POST method. Hier erfolgt das Erstellen des Posts.
      *
      * @param request servlet request
      * @param response servlet response
@@ -155,8 +129,7 @@ public class Pinnwand extends HttpServlet
 	{
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-	
-		
+			
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
 		String pinnwandOwner = request.getParameter("pinnwandOwner");
@@ -186,18 +159,11 @@ public class Pinnwand extends HttpServlet
 			}	
 			
 			Collections.sort(postlist, new counterComparator());
-		    
-		    
+			    
 		    session.setAttribute("postlist", postlist);
  
 		}
-		
-		/*
-		System.out.println("Pinnwand von Freund: Username: " + username);
-		System.out.println("Pinnwand von Freund: pinnwandOwner: " + pinnwandOwner);
-		*/
-		
-		  response.sendRedirect("Pinnwand.jsp");
+		response.sendRedirect("Pinnwand.jsp");
  	}
 
 }

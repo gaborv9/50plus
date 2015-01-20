@@ -37,26 +37,23 @@ public class Post implements Serializable
 		this.flagged = false; 
 	}
 	
-	
+	/**
+	 * Die Methode getOwnPostcounter gibt den User zurueck, auf dessen Pinnwand der Post gepostet wurde
+	 * @return der Name des Users, auf dessen Pinnwand der Post gepostet wurde
+	 */
 	public String getPinnwandOwner()
 	{
 		return pinnwandOwner;
 	}
+	
 	/**
-	 * Die Methode setUsername setzt den Username eines User, der gepostet hat
-	 * @param username Username eines User
-	 */	
+	 * Die Methode setPinnwandOwner setzt den Namen des Users, auf dessen Pinnwand der Post gepostet wurde
+	 * @param pinnwandOwner User, auf dessen Pinnwand der Post gepostet wurde
+	 */
 	public void setPinnwandOwner(String pinnwandOwner)
 	{
 		this.pinnwandOwner = pinnwandOwner;
 	} 
-	
-	
-	
-	
-	
-	
-	
 	
 	/**
 	 * Die Methode getOwnPostcounter gibt die Nummer eines Posts zurueck
@@ -76,11 +73,19 @@ public class Post implements Serializable
 		ownPostcounter = nummer;
 	} 
 	
+	/**
+	 * Die Methode getFlagged gibt den flagged oder gemeldet Status des Posts, 0 heisst ungemeldet oder unflagged, 1 heisst gemeldet oder flagged
+	 * @return Status des Posts
+	 */
 	public boolean getFlagged()
 	{
 		return flagged;
 	}
 	
+	/**
+	 * Die Methode setFlagged setzt den flagged oder gemeldet Status des Posts, 0 heisst ungemeldet oder unflagged, 1 heisst gemeldet oder flagged
+	 * @param flagged Status des Posts
+	 */	
 	public void setFlagged(boolean flagged)
 	{
 		this.flagged = flagged;
@@ -95,8 +100,8 @@ public class Post implements Serializable
 		return username;
 	}
 	/**
-	 * Die Methode setUsername setzt den Username eines User, der gepostet hat
-	 * @param username Username eines User
+	 * Die Methode setUsername setzt den Username des Users, der gepostet hat
+	 * @param username Username des Users
 	 */	
 	public void setUsername(String username)
 	{
