@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Management;
 
 import java.io.IOException;
@@ -19,7 +14,7 @@ import Data.Serialisierung;
 import Personen.Person;
 import Personen.User;
 
-/**
+/**Management veraendert die Daten von Personen.
  * 
  * @author master
  */
@@ -27,7 +22,7 @@ import Personen.User;
 public class Management extends HttpServlet {
 
 	/**
-	 * Handles the HTTP <code>GET</code> method. Alters the role
+	 * Handles the HTTP <code>GET</code> method. Alters the role and the picture link.
 	 * 
 	 * @param request
 	 *            servlet request
@@ -49,7 +44,7 @@ public class Management extends HttpServlet {
 			PersonManagement a= new PersonManagement();
 			a.changelink(a.getPerson(onlineuser), request.getParameter("picturelink"));
 		//	session.setAttribute("picturelink", a.getPerson(onlineuser));
-			response.sendRedirect("Profil.jsp");
+			//response.sendRedirect("Profil.jsp");
 		} 
 		if (request.getParameter("role") != null && request.getParameter("username") !=null) {
 			int role = Integer.parseInt(request.getParameter("role"));
@@ -65,13 +60,13 @@ public class Management extends HttpServlet {
 				 
 			}
 			
-		response.sendRedirect("Profil.jsp");
+		response.sendRedirect("Suche.jsp");
 		}
 	 
 	}
 
 	/**
-	 * Handles the HTTP <code>POST</code> method.
+	 * Handles the HTTP <code>POST</code> method. Alters the data of a person.
 	 * 
 	 * @param request
 	 *            servlet request

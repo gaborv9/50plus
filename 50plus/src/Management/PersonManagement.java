@@ -2,7 +2,11 @@ package Management;
 
 import Data.Serialisierung;
 import Personen.Person;
-
+/**PersonManagement stellt Methoden zur Verwaltung von Personen zur Verfuegung.
+ * 
+ * @author master
+ *
+ */
 public class PersonManagement {
 	private PersonDAO ser = new Serialisierung();
 
@@ -58,8 +62,6 @@ public class PersonManagement {
 	 * @param a Personen-Objekt
 	 * @return int 1, falls erfolgreich
 	 */
-
-
 	public int add(Person a) {
 		if (ser.speicherePerson(a) == 0) {
 			throw new IllegalArgumentException("Nutzername bereits vergeben");

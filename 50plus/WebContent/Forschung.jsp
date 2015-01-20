@@ -45,7 +45,7 @@
 </head>
 
 <body>
-		<%@ page import="java.util.ArrayList" import="Personen.Post"%>
+		<%@ page import="java.util.ArrayList" import="Personen.Post" import="java.util.List"%>
 	<!-- Navigation -->
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -99,8 +99,9 @@
 
 
 	<div class="container">
-			<div class="row">
-					<div class="col-md-6">
+	 
+		<div class="row">
+		 <div class="col-md-6">
 				<br />
 				<br />
 
@@ -186,9 +187,15 @@
 					}		
 					else if (session.getAttribute("anfrage").equals("vert")){
 							out.println("<br />");
-							out.println("Verteilung: "+ (String) session.getAttribute("verteilungzahl"));
+							out.println("<h4>Verteilungsweite: </h4>");
+							out.println((String) session.getAttribute("verteilungzahl"));
 							out.println("<br />");
-							out.println("Verteilung: "+ (String) session.getAttribute("verteilung"));
+							out.println("<h4>Verteilung: </h4>");
+						 
+							for ( String temp :  (ArrayList<String>) session.getAttribute("verteilung")){
+								out.print(temp);
+								out.println("<br />");
+							}
 							session.setAttribute("anfrage", "keine");
 						
 					}
@@ -205,23 +212,6 @@
 							out.println("Freundeanzahl: " + searchedpersonwerte.get(1));
 							out.println("<br />");
 							out.println("Gruppenanzahl: " + searchedpersonwerte.get(2));
-							
-						 
-							//ArrayList<String> tagesposts = (ArrayList<String>) session.getAttribute("tagesposts");
-						/*	ArrayList<String> monatspostsx = (ArrayList<String>) session.getAttribute("monatsposts");
-						    ArrayList<Integer> monatsposts = new ArrayList<Integer>();
-						    for ( String temp : monatspostsx){
-						    	monatsposts.add(Integer.parseInt(temp));
-						    }
-						  int[] mcount= new int[11];
-						    for (int i=1; i <=12; i++){
-						    	for (int tempi : monatsposts){
-						    		if (i == tempi){
-						    			mcount[i] = mcount[i]+1;
-						    		}
-						    	}
-						    	
-						    }*/
 						
 						    int[] mcount = (int[]) session.getAttribute("monatsposts");
 								
@@ -243,8 +233,7 @@
 			    	var l =  <%=mcount[11]%>;
 			  
 					var werte = [[1, a], [2, b], [3, c], [4, d], [5, e], [6, f], [7, g], [8, h], [9, i], [10, j], [11, k], [12, l]]; 
-					
- 
+
 	 
 					$(document).ready(function () {
 					    $.plot($("#placeholder"), [werte]);
@@ -273,7 +262,6 @@
 				</div>
 			</div>
 		</div>
- 
 	<!-- /.container -->
 	<!-- Bootstrap Core JavaScript -->
 	<script src="dist/js/bootstrap.min.js"></script>

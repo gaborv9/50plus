@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 import Management.PersonDAO;
 import Personen.Person;
- /**
+ /**Serialisierung bietet Methoden an, um Objekte dauerhaft zu speichern oder zu loeschen.
   * 
   * @author Palkovits Dominik
   *	

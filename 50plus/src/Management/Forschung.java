@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Management;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,47 +15,14 @@ import Data.Serialisierung;
 import Personen.Person;
 import Personen.Post;
 
-/**
+/**Forschung liefert Forschungsergebnisse zurueck.
  * 
  * @author master
  */
 public class Forschung extends HttpServlet {
 
 	/**
-	 * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-	 * methods.
-	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
-	 * @throws ServletException
-	 *             if a servlet-specific error occurs
-	 * @throws IOException
-	 *             if an I/O error occurs
-	 */
-	protected void processRequest(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=UTF-8");
-		try (PrintWriter out = response.getWriter()) {
-			/* TODO output your page here. You may use following sample code. */
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>Servlet Forschung</title>");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>Servlet Forschung at " + request.getContextPath()
-					+ "</h1>");
-			out.println("</body>");
-			out.println("</html>");
-		}
-	}
-
-	// <editor-fold defaultstate="collapsed"
-	// desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-	/**
-	 * Handles the HTTP <code>GET</code> method.
+	 * Handles the HTTP <code>GET</code> method. Gets different research results.
 	 * 
 	 * @param request
 	 *            servlet request
@@ -76,13 +34,12 @@ public class Forschung extends HttpServlet {
 	 *             if an I/O error occurs
 	 */
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Serialisierung pser = new Serialisierung();
 		Gruppe_Serialisierung grpser = new Gruppe_Serialisierung();
 		Post_Serialisierung postser = new Post_Serialisierung();
 		PinnwandManagement pinman= new PinnwandManagement();
-		// String information =request.getParameter("information");
+		 
 		String searchedperson = request.getParameter("searchperson");
 		String vperson1 = request.getParameter("vperson1");
 		String vperson2 = request.getParameter("vperson2");
@@ -143,22 +100,8 @@ public class Forschung extends HttpServlet {
 
 		// Post-Statistik -----
 		// Anzahl aller Posts
-		int anzahlposts = postser.getMaxPostNumber();
-
-		// Gruppen-Statistik -----
-		/*
-		 * for (Person ptemp: pser.getPersonList()){
-		 * 
-		 * 
-		 * }
-		 * 
-		 * //grpclass.getName() gibt den Namen der Gruppe zurueck // public
-		 * ArrayList<GruppeClass> getOwnGruppenlist(String username) gibt
-		 * gruppen eines nutzers zurueck int grpcount=0; //Anzahl aller Gruppen
-		 * 
-		 * for (GruppeClass grpclass : grpser.getGruppenlist()){
-		 * grpclass.getName(); grpser.getOwnGruppenlist(username); grpcount++; }
-		 */
+	     int anzahlposts = postser.getMaxPostNumber();
+ 
 		 int usergroups = grpser.getOwnGruppenlist(searchedperson).size();
 		 int anzahlgruppen= grpser.getGruppenlist().size();
 
@@ -245,64 +188,35 @@ public class Forschung extends HttpServlet {
 			}
 
 		}else if (role ==2 && searchedperson == null) {
-		//&& vperson1!=null && vperson2!=null)
-		/*	if (vperson1.isEmpty() && vperson2.isEmpty()){
 			
-				session.setAttribute("verteilungzahl", "0");
-				session.setAttribute("verteilung", "Bitte 2 Personen angeben!");
-				//response.sendRedirect("Forschung.jsp");
-				
-			}*/
-			VernetzungClass g= new VernetzungClass();
-			List result = g.calc(vperson1, vperson2);
+			String jspmessage="";
+			try{
 			
-			if (result == null){
+				VernetzungClass g= new VernetzungClass();
+				List result = g.calc(vperson1, vperson2);
+				ArrayList<String> stringresult = new ArrayList<String>();
+				for (int rcount=0; rcount < result.size(); rcount++){
+					stringresult.add(result.get(rcount).toString());
+				}
+				session.setAttribute("anfrage", "vert");
+				session.setAttribute("verteilungzahl", Integer.toString(result.size()));
+				session.setAttribute("verteilung",   stringresult);
+				response.sendRedirect("Forschung.jsp");
+
+			}catch(Exception e){
+				jspmessage = e.getMessage();
+				ArrayList<String> elist=new ArrayList<String>();
+				elist.add(e.getMessage());
 				session.setAttribute("anfrage", "vert");
 				session.setAttribute("verteilungzahl", "0");
-				session.setAttribute("verteilung", "Bitte 2 Personen angeben!");
+				session.setAttribute("verteilung", elist);
 				response.sendRedirect("Forschung.jsp");
-			}
-			else{
 			
-			session.setAttribute("anfrage", "vert");
-			session.setAttribute("verteilungzahl", Integer.toString(result.size()));
-			session.setAttribute("verteilung", result.toString());
-			response.sendRedirect("Forschung.jsp");
+				
 			}
-		
+ 
 		}else{}
-		
-		//response.sendRedirect("Forschung.jsp");
-		// processRequest(request, response);
-
+	 
 	}
-
-	/**
-	 * Handles the HTTP <code>POST</code> method.
-	 * 
-	 * @param request
-	 *            servlet request
-	 * @param response
-	 *            servlet response
-	 * @throws ServletException
-	 *             if a servlet-specific error occurs
-	 * @throws IOException
-	 *             if an I/O error occurs
-	 */
-	@Override
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
-	}
-
-	/**
-	 * Returns a short description of the servlet.
-	 * 
-	 * @return a String containing servlet description
-	 */
-	@Override
-	public String getServletInfo() {
-		return "Short description";
-	}// </editor-fold>
 
 }

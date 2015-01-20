@@ -20,7 +20,7 @@ import Personen.Post;
 import Personen.User;
 import Management.PinnwandManagement;
 
-/**
+/**Kuemmert sich um das Einloggen von Personen.
  * 
  * @author master
  */
@@ -42,6 +42,7 @@ public class Login extends HttpServlet {
 			p.setNachname("adminn");
 			p.setPW("123456");
 			p.setDatum("1", "1", "1");
+			p.setRole(1);
 			a.add(p);
 		}
 	}
