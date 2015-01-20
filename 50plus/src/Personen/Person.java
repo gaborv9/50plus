@@ -27,32 +27,57 @@ public abstract class Person implements Serializable {
 	private int meldunganz;
 	private String picturelink;
 	private GregorianCalendar sperrdatum;
-	
+	/**
+	 * 
+	 * @return sperrdatum - wichtig  um Datum bis erneutem Login festzulegen
+	 */
 	public GregorianCalendar getsperrdatum(){
 		if(sperrdatum == null ) sperrdatum = new GregorianCalendar();
 		return sperrdatum;
 	}
-	
+	/**
+	 * 
+	 * @param day - anzahl der Tage, die Benutzer gesperrt werden soll
+	 */
 	public void setsperrdatum(int day){
 		sperrdatum = new GregorianCalendar();
 		sperrdatum.add(GregorianCalendar.DAY_OF_MONTH, day);
 	}
 	
-	
+	/**
+	 * 
+	 * @param zahl - Anzahl der Meldungen
+	 */
 	public void setmeldunganz(int zahl){
 		meldunganz = zahl;
 	}
+	/**
+	 * 
+	 * @return gemeldetvon - Liste von Personen, die jene betroffene Person gemeldet haben
+	 */
 	public ArrayList<Person> getgemeldetvon(){
 		if(gemeldetvon==null) gemeldetvon = new ArrayList<Person>();
 		return gemeldetvon;
 	}
+	/**
+	 * 
+	 * @return meldunganz - gibt anzahl an meldungen zurueck
+	 */
 	public int getmeldunganz(){
 		meldunganz = getgemeldetvon().size();
 		return meldunganz;
 	}
+	/**
+	 * 
+	 * @param melder - editiert Liste von meldenden Personen
+	 */
 	public void setgemeldetvon(ArrayList<Person> melder){
 		if(melder!=null) gemeldetvon=melder;
 	}
+	/**
+	 * 
+	 * @return picturelink wichtig fuer das Bild
+	 */
 	public String getPicturelink() {
 		return picturelink;
 	}
@@ -65,15 +90,26 @@ public abstract class Person implements Serializable {
 			return 1;
 		}
 	}
+	/**
+	 * 
+	 * @return gesendeteAnfragen - alle Freundschaftsanfragen von der Person
+	 */
 	public ArrayList<Person> getgesendeteAnfragen(){
 		if(gesendeteAnfragen==null) gesendeteAnfragen = new ArrayList<Person>();
 		return gesendeteAnfragen;
 	}
+	/**
+	 * 
+	 * @return eingehendeAnfragen - alle Freundschaftsanfragen an die Person
+	 */
 	public ArrayList<Person> geteingehendeAnfragen(){
 		if(eingehendeAnfragen==null) eingehendeAnfragen = new ArrayList<Person>();
 		return eingehendeAnfragen;
 	}
-	
+	/**
+	 * 
+	 * @param zufuegen - Anfrage zu gesendeteAnfragen adden
+	 */
 	public void addgesendeteAnfragen(Person zufuegen){
 		ArrayList<Person> altlist = getgesendeteAnfragen();
 			if((altlist!=null)){
@@ -87,6 +123,10 @@ public abstract class Person implements Serializable {
 				}
 			}
 	}
+	/**
+	 * 
+	 * @param loeschen - Anfrage von gesendeteAnfragen loeschen
+	 */
 	public void remgesendeteAnfragen(Person loeschen){
 		ArrayList<Person> altlist = getgesendeteAnfragen();
 			if(altlist.size()!=0){
@@ -98,7 +138,10 @@ public abstract class Person implements Serializable {
 					gesendeteAnfragen = neulist;
 				}
 	}
-	
+	/**
+	 * 
+	 * @param zufuegen - Anfrage von eingehende Anfragen adden
+	 */
 	public void addeingehendeAnfragen(Person zufuegen){
 		ArrayList<Person> altlist = geteingehendeAnfragen();
 		if(altlist!=null){
@@ -113,6 +156,10 @@ public abstract class Person implements Serializable {
 		
 		}
 	}
+	/**
+	 * 
+	 * @param loeschen - Anfrage von eingehendeAnfragen loeschen
+	 */
 	public void remeingehendeAnfragen(Person loeschen){
 		ArrayList<Person> altlist = geteingehendeAnfragen();
 			if(altlist.size()!=0){

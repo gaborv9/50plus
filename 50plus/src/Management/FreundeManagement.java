@@ -10,9 +10,20 @@ import javax.servlet.http.HttpSession;
 
 import Data.Serialisierung;
 import Personen.Person;
-
+/**
+ * 
+ * @author Author
+ *
+ */
 public class FreundeManagement {
-	
+	/**
+	 * 
+	 * @param request - Aktuelle Daten der eingeloggten Person
+	 * @param response - sendet Daten zurück an das Objekt
+	 * @throws IOException - bei fehler wird Exception geworfen
+	 * 
+	 * in dieser Methode wird eine Freundschaftsanfrage an den Freund gesendet
+	 */
 	 public void freundanfragen(HttpServletRequest request, HttpServletResponse response) throws IOException{
 	    	response.setContentType("text/html");
 	    	PrintWriter out = response.getWriter();
@@ -66,7 +77,14 @@ public class FreundeManagement {
 	    		}
 	    	}
 	    }
-	 
+	 /**
+	  * 
+	  * @param request - Aktuelle Daten der eingeloggten Person
+	  * @param response - sendet Daten zurück an das Objekt
+	  * @throws IOException - bei fehler wird Exception geworfen
+	  * 
+	  * in dieser Methode wird ein Freund entfernt
+	  */
 	 public void freundloeschen(HttpServletRequest request, HttpServletResponse response) throws IOException{
 	    	response.setContentType("text/html");
 	    	String freundname = request.getParameter("freundname");
@@ -113,6 +131,15 @@ public class FreundeManagement {
 	        	
 	        	}
 	    }
+	 
+	 /**
+	  * 
+	  * @param request - Aktuelle Daten der eingeloggten Person
+	  * @param response - sendet Daten zurück an das Objekt
+	  * @throws IOException - bei fehler wird Exception geworfen
+	  * 
+	  * in dieser methode wird entschieden, ob eine Person als Freund hinzugefuegt wird oder nicht
+	  */
 	 public void freundzufuegen(HttpServletRequest request, HttpServletResponse response) throws IOException{
 	    	PrintWriter out = response.getWriter();
 	    	response.setContentType("text/html");

@@ -7,9 +7,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import Data.Serialisierung;
 import Personen.Person;
-
+/**
+ * 
+ * @author Lechl
+ *
+ */
 public class Meldungmanagement {
-
+	/**
+	 * 
+	 * @param person - dies ist die Person, die gemeldet werden soll
+	 * @param ich - dies ist die Person die jene Person melden will
+	 */
 	public void meldungmachen(Person person, Person ich){
 		Serialisierung a = new Serialisierung();
 		int anzmeldung = 0;
@@ -31,7 +39,11 @@ public class Meldungmanagement {
 		a.loeschePerson(person);
 		a.speicherePerson(personneu);
 	}
-
+	/**
+	 * 
+	 * @param person - dies ist jene Person die befristet gesperrt werden soll
+	 * @param zeit - dies ist jene Anzahl von tagen, die jene Person gesperrt werden soll
+	 */
 	public void befsperren(Person person, int zeit){
 		person.setsperrdatum(zeit);
 		PersonDAO a = new Serialisierung();
@@ -43,17 +55,30 @@ public class Meldungmanagement {
 		a.speicherePerson(personneu);
 	}
 	
-	public void unbefsperren(Person person,Person ich){
+	/**
+	 * 
+	 * @param person - Person die geloescht werden soll
+	 * @param ich - Person, deren Freundschaftsanfragen auch geloescht werden sollen
+	 */
+	public void unbefsperren(Person person,ArrayList<Person> list){
 		Serialisierung a = new Serialisierung();
-		ich.setFreunde(person, false);
-		ich.remeingehendeAnfragen(person);
-		ich.remgesendeteAnfragen(person);
-		Person ichneu = ich;
-		a.loeschePerson(ich);
-		a.speicherePerson(ichneu);
+		Person testneu;
+		for(Person test: list){
+			if(!(test.getID().equals(person.getID()))){
+				test.setFreunde(person, false);
+				test.remeingehendeAnfragen(person);
+				test.remgesendeteAnfragen(person);
+				testneu = test;
+				a.loeschePerson(test);
+				a.speicherePerson(testneu);
+			}
+		}
 		a.loeschePerson(person);
 	}
-	
+	/**
+	 * 
+	 * @return sperrlisteneu - liste welche alle gemeldeten Personen und deren Melder anzeigt (hier groe§er 0)
+	 */
 	public ArrayList<Person> sperrliste(){
 		Serialisierung a = new Serialisierung();
 		ArrayList<Person> sperrlisteall = new ArrayList<Person>();

@@ -161,7 +161,24 @@
 					<br>
 					<%
 						for(GruppeClass test: gefgrpliste){
-																	out.println("&nbsp; Gruppenname: "+test.getName() +"<br>");
+							out.println("&nbsp; Gruppenname: "+test.getName() + " Administrator: " + test.getAdmin()); 
+																	
+																	%>
+					<div class="btn-group">
+						<button type="button" data-toggle="dropdown"
+							class="btn btn-default dropdown-toggle">
+							Admin schreiben <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" method="get" action="PrivatNachricht"> <!-- Katrin - bitte was einfuegen!! -->
+							<li><a
+								href="/50plus/PrivatNachricht?Adminname=<%=test.getAdmin()%>&wunsch=adminschreiben">Admin kontaktieren</a></li>
+							
+						</ul>
+
+
+					</div>
+					<br>
+																	<%
 																}
 					%>
 

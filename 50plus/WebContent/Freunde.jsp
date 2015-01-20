@@ -95,7 +95,7 @@
  					ArrayList<Person> geffreunde = a.getPerson(username).getFreunde();
  					ArrayList<Person> ausstehendeAnfragen = a.getPerson(username).getgesendeteAnfragen();
  					ArrayList<Person> eingehendeAnfragen = a.getPerson(username).geteingehendeAnfragen();
- 					boolean prufaus = false;
+ 					boolean prufaus = false;		//puefung auf eingehende und gesendete Anfragen, sowie ob Freund schon existiert
  					boolean prufein = false;
  					boolean freund = false;
  					
@@ -168,7 +168,7 @@
 							else{
 								for(Person test: geffreunde){
 									%>
-									<div class="btn-group">
+						<div class="btn-group">
 						<button type="button" data-toggle="dropdown"
 							class="btn btn-default dropdown-toggle">
 							Entfernen <span class="caret"></span>
@@ -176,15 +176,14 @@
 						<ul class="dropdown-menu" method="get" action="Freunde">
 							<li><a
 								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>&wunsch=loeschen">Entfernen</a></li>
-							 
 						</ul>
-
-
-					</div>
+						</div>
 					<% 
 										out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname());	
 					%>
 										<a href="/50plus/Pinnwand?pinnwandOwner=<%= test.getID()%>">&nbsp&nbsp&nbsp&nbspZur Pinnwand</a> <br>
+										<a href="/50plus/Nachricht?personname=<%= test.getID()%>">&nbsp&nbsp&nbsp&nbspFreund anschreiben</a> <br>
+					
 					<%					
 									}
 								}

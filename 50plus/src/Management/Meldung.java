@@ -60,7 +60,6 @@ public class Meldung extends HttpServlet {
     	String personname = request.getParameter("freundname");
     	String personname2 =(String) session.getAttribute("freundname");
     	String wunsch = request.getParameter("wunsch");
-    	PrintWriter out = response.getWriter();
     	String Ziel = "Admin.jsp";
     	String bitte = "nichterlaubt";
     	Person ich = a.getPersonbyid(username);
@@ -70,7 +69,7 @@ public class Meldung extends HttpServlet {
     	Meldungmanagement m = new Meldungmanagement();
     	if(zeitString==null) {
     		zeitString = "0";
-    		zeit = Integer.parseInt(zeitString);
+    			zeit = Integer.parseInt(zeitString);	
     	}
     	else zeit = Integer.parseInt(zeitString);
     	//out.println(zeit);
@@ -86,7 +85,7 @@ public class Meldung extends HttpServlet {
     		Ziel = "Admin.jsp";
     	}
     	if(wunsch.equals("unbefsperren")){
-    		m.unbefsperren(person,ich);
+    		m.unbefsperren(person,a.getPersonList());
     		Ziel = "Admin.jsp";
     	}
     	if(wunsch.equals("liste")){

@@ -100,6 +100,7 @@ public class Pinnwand extends HttpServlet
 			}	
 			
 			Collections.sort(postlist, new counterComparator());
+			
 		}
 		
 		
