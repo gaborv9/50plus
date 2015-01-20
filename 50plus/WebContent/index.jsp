@@ -87,7 +87,7 @@
 
             <div class="checkbox">
                 <label>
-         <input type="checkbox" required> Sie erklären sich hiermit einverstanden, dass alle ihre Daten zu Forschungszwecken weitergeleitet werden, have fun. 
+         <input type="checkbox" required> Sie erklaeren sich hiermit einverstanden, dass alle ihre Daten zu Forschungszwecken weitergeleitet werden
                 </label>
             </div>
             <button type="register" class="btn btn-default">Registrieren</button>

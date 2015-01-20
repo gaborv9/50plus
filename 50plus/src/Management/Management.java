@@ -22,7 +22,7 @@ import Personen.User;
 public class Management extends HttpServlet {
 
 	/**
-	 * Handles the HTTP <code>GET</code> method. Alters the role and the picture link.
+	 * Handles the HTTP <code>GET</code> method. Alters the role and/or the picture link.
 	 * 
 	 * @param request
 	 *            servlet request
@@ -43,15 +43,12 @@ public class Management extends HttpServlet {
 		if (request.getParameter("picturelink")!=null) {
 			PersonManagement a= new PersonManagement();
 			a.changelink(a.getPerson(onlineuser), request.getParameter("picturelink"));
-		//	session.setAttribute("picturelink", a.getPerson(onlineuser));
-			//response.sendRedirect("Profil.jsp");
+			response.sendRedirect("Profil.jsp");
 		} 
 		if (request.getParameter("role") != null && request.getParameter("username") !=null) {
 			int role = Integer.parseInt(request.getParameter("role"));
-			String username = request.getParameter("username");
-		
+			String username = request.getParameter("username");	
 			PersonManagement a = new PersonManagement();
-			
 	
 			if ((a.getPerson(onlineuser)).getRole() == 1) { // Handelt sich um einen Admin, dann fuehre aus
 				a.changerole(a.getPerson(username), role);
