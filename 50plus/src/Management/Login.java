@@ -20,6 +20,8 @@ import Personen.Post;
 import Personen.User;
 import Management.PinnwandManagement;
 
+
+
 /**Kuemmert sich um das Einloggen von Personen.
  * 
  * @author master
@@ -27,6 +29,7 @@ import Management.PinnwandManagement;
 @SuppressWarnings("serial")
 public class Login extends HttpServlet {
 
+	
  /**
   * Registers admin.
   */
@@ -46,6 +49,7 @@ public class Login extends HttpServlet {
 		}
 	}
 	
+ 
 	/**
 	 * Handles the HTTP <code>GET</code> method. Invalidates session.
 	 * 
@@ -71,6 +75,8 @@ public class Login extends HttpServlet {
 
 			// response.sendRedirect("index.jsp");
 		}
+
+		// processRequest(request, response);
 	}
 
 	/**
@@ -105,7 +111,7 @@ public class Login extends HttpServlet {
 		
 		PersonDAO a = new Serialisierung();
 		GregorianCalendar test = new GregorianCalendar();
-		if ((a.getPersonbyid(username) != null) && password.equals(a.getPersonbyid(username).getPW()) && ((!(test.before(a.getPersonbyid(username).getsperrdatum()))||(test.get(GregorianCalendar.DAY_OF_MONTH)==a.getPersonbyid(username).getsperrdatum().get(GregorianCalendar.DAY_OF_MONTH)&&test.get(GregorianCalendar.MONTH)==a.getPersonbyid(username).getsperrdatum().get(GregorianCalendar.MONTH)&&test.get(GregorianCalendar.YEAR)==a.getPersonbyid(username).getsperrdatum().get(GregorianCalendar.YEAR))))) // &&(a.getPersonbyid(username).getsperrdatum()<=test) 
+		if ((a.getPersonbyid(username) != null) &&  password.equals(a.getPersonbyid(username).getPW()) && ((!(test.before(a.getPersonbyid(username).getsperrdatum()))||(test.get(GregorianCalendar.DAY_OF_MONTH)==a.getPersonbyid(username).getsperrdatum().get(GregorianCalendar.DAY_OF_MONTH)&&test.get(GregorianCalendar.MONTH)==a.getPersonbyid(username).getsperrdatum().get(GregorianCalendar.MONTH)&&test.get(GregorianCalendar.YEAR)==a.getPersonbyid(username).getsperrdatum().get(GregorianCalendar.YEAR))))) // &&(a.getPersonbyid(username).getsperrdatum()<=test) 
 		{
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
@@ -127,19 +133,27 @@ public class Login extends HttpServlet {
 		} 
 		else 
 		{
+
+		
+		
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			out.println(username);
-			out.println(password);
-			
-			if((test.before(a.getPersonbyid(username).getsperrdatum()))){ //fuer Gesperrtdatum ausgeben
-				GregorianCalendar test2 = a.getPersonbyid(username).getsperrdatum();
-				out.println(" Sie sind noch bis "+GregTag(test2)+". "+GregMon(test2)+1+". "+GregJahr(test2)+" gesperrt!");
+			out.println("Username: " + username);
+			out.println("<br>Password: " + password);
+			try
+			{
+				if((test.before(a.getPersonbyid(username).getsperrdatum()))){ //fuer Gesperrtdatum ausgeben
+					GregorianCalendar test2 = a.getPersonbyid(username).getsperrdatum();
+					out.println(" Sie sind noch bis "+GregTag(test2)+". "+GregMon(test2)+1+". "+GregJahr(test2)+" gesperrt!");
+				}
 			}
-			else{
-			
-				out.println("falsche Eingabe");
+			catch (Exception e)
+			{
+				out.println("<br><br>Falsche Eingabe.");
 			}
+		
+
+	
 		}
 	}
 
