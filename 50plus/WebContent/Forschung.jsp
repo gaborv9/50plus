@@ -151,6 +151,7 @@
 
 					else if (session.getAttribute("anfrage").equals("keinzugriff")) {
 						%>
+						<br />
 						Sie sind kein Forscher - Kein Zugriff.
 		
 						<%

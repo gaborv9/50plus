@@ -114,7 +114,8 @@
 			
 			
 		<h3>Nachrichteneingang</h3>
-		<%for(Nachricht temp: empfaengerliste){%>
+		<%
+		for(Nachricht temp: empfaengerliste){%>
 			<div class="btn-group">
 			<button type="button" data-toggle="dropdown"
 					class="btn btn-default dropdown-toggle">

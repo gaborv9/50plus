@@ -27,7 +27,6 @@ import Management.PinnwandManagement;
 @SuppressWarnings("serial")
 public class Login extends HttpServlet {
 
-	
  /**
   * Registers admin.
   */
@@ -47,7 +46,6 @@ public class Login extends HttpServlet {
 		}
 	}
 	
- 
 	/**
 	 * Handles the HTTP <code>GET</code> method. Invalidates session.
 	 * 
@@ -73,8 +71,6 @@ public class Login extends HttpServlet {
 
 			// response.sendRedirect("index.jsp");
 		}
-
-		// processRequest(request, response);
 	}
 
 	/**

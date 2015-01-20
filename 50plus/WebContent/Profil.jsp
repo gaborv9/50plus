@@ -155,6 +155,12 @@
 								out.print(a.getDatumString());
 							%>
 						</h4>
+						<h4>
+							<small>Rolle:</small>
+							<%
+								out.print(a.getRole());
+							%>
+						</h4>
 					</div>
 					<div class="col-md-4">
 						<br /> <br />
@@ -214,8 +220,7 @@
 								</div>
 						</div>
 					</form>
-					
-					
+					Fuer Aktualisierung des Bildes neu einloggen
 					</div>
 
 				</div>
