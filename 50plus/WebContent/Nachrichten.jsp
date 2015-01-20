@@ -38,6 +38,7 @@
 
 <body>
 		<%@ page import="java.util.ArrayList, Personen.Nachricht, Data.Nachrichten_Serialisierung" %> 
+
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
@@ -108,36 +109,53 @@
 					ArrayList<Nachricht> empfaengerliste= (ArrayList<Nachricht>) session.getAttribute("empfaengerliste");//Posteingang
 				%>
 
-			<table align="left">	
-			<td><h3>Nachrichteneingang</h3></td>					
-			<%for(Nachricht temp: empfaengerliste){
-				%>
-				<tr>
-					<td><%out.println("von: "+temp.getNachrichtSender()); %></td>
-					<td><%out.println("am: "+temp.getNachrichtZeit()); %></td>
-				</tr>	
-			<%} %>
-			</tr>		
-			</table>
+
 			
 			
-			<table align="right">
-			<td><h3 align="right">Nachrichtenausgang</h3></td>				
-			<%for(Nachricht temp: senderliste){
-				%>
-				<tr>
-					<td><%out.println("an: "+temp.getNachrichtEmpfaenger()); %></td>
-					<td><%out.println("am: "+temp.getNachrichtZeit()); %></td>
-				</tr>	
-			<%} %>
-			</tr>					
-			</table>
+		<h3>Nachrichteneingang</h3>
+		<%for(Nachricht temp: empfaengerliste){%>
+			<div class="btn-group">
+			<button type="button" data-toggle="dropdown"
+					class="btn btn-default dropdown-toggle">
+					<%out.println(temp.getNachrichtSender()+", "+temp.getNachrichtZeit()+"<br>"); %><span class="caret"></span>
+			</button>
+				<ul class="dropdown-menu">
+					<li><%out.println(temp.getNachrichtInhalt()); %></li>		 
+				</ul>
+			
+		</div>
+		<%} %>
+
+
+
+
+
+<br><br><br>
 
 
 
 
 
 
+		<h3>Nachrichtenausgang</h3>
+		<%for(Nachricht temp: senderliste){%>
+			<div class="btn-group">
+			<button type="button" data-toggle="dropdown"
+					class="btn btn-default dropdown-toggle">
+					<%out.println(temp.getNachrichtEmpfaenger()+", "+temp.getNachrichtZeit()+"<br>"); %><span class="caret"></span>
+			</button>
+				<ul class="dropdown-menu">
+					<li><%out.println(temp.getNachrichtInhalt()); %></li>		 
+				</ul>
+			
+		</div>
+		<%} %>
+		
+		
+		
+		
+		
+		
 
 			<%
 				if (session.getAttribute("username") == null) {
