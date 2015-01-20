@@ -182,7 +182,7 @@
 										out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname());	
 					%>
 										<a href="/50plus/Pinnwand?pinnwandOwner=<%= test.getID()%>">&nbsp&nbsp&nbsp&nbspZur Pinnwand</a> <br>
-										<a href="/50plus/Nachrichtenneu.jsp?personname=<%= test.getID()%>">&nbsp&nbsp&nbsp&nbspFreund anschreiben</a> <br>
+										<a href="/50plus/Nachrichten?personname=<%= test.getID()%>">&nbsp&nbsp&nbsp&nbspFreund anschreiben</a> <br>
 										
 										
 										
