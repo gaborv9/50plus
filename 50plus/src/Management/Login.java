@@ -19,7 +19,10 @@ import javax.servlet.http.HttpSession;
 import Data.Nachrichten_Serialisierung;
 import Data.Serialisierung;
 import Personen.Nachricht;
+<<<<<<< HEAD
 import Personen.Person;
+=======
+>>>>>>> e429057ceeedd84e68e7ebd7c629d6ebe42ece0f
 import Personen.Post;
 import Personen.User;
 import Management.PinnwandManagement;
