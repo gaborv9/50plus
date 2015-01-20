@@ -71,16 +71,12 @@ public class Nachrichten extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-    	response.setContentType("text/html");
     	PrintWriter out = response.getWriter();
-			
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute("username");
+    	HttpSession session = request.getSession();
+    	
+		String sender = (String) session.getAttribute("username");
 		
-
-			response.sendRedirect("Nachrichten.jsp");
-		
-    	//processRequest(request, response);
+    	response.sendRedirect("Nachrichten.jsp");
     }
 
     /**

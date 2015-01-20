@@ -20,10 +20,9 @@ public class GruppenPost_Serialisierung implements GruppePostDAO{
 	private ArrayList<GruppePost> globalPostlist;
 
 	/**
-	 * default Konstruktor der Klasse Post_Serialisierung
+	 * default Konstruktor der Klasse GruppenPost_Serialisierung
 	 * der Pfad zur Datei wird gesetzt, wohin die Posts gespeichert werden
-	 */
-	
+	 */	
     public GruppenPost_Serialisierung()
     {
         String dir = System.getProperty("user.dir");
@@ -32,8 +31,8 @@ public class GruppenPost_Serialisierung implements GruppePostDAO{
     }
 	
 	/**
-	 * Die Methode speicherePost speichert ein Post Objekt in post.ser
-	 * @param p Post, der gespeichert wird
+	 * Die Methode speichereGruppenPost speichert ein GruppenPost Objekt in die Datei
+	 * @param p
 	 */  
     public void speichereGruppenPost(GruppePost p) 
     {
@@ -73,8 +72,8 @@ public class GruppenPost_Serialisierung implements GruppePostDAO{
      }
     
 	/**
-	 * Die Methode getGlobalpostlist gibt alle Posts zurueck
-	 * @return globalPostList - Liste aller Posts eines Users
+	 * Die Methode getAlleGruppen gibt alle GruppenPosts zurueck
+	 * @return globalPostList - Liste aller GruppenPosts
 	 */         
 	public ArrayList<GruppePost> getAlleGruppen(){
     	File file = new File(pfad);
@@ -133,11 +132,10 @@ public class GruppenPost_Serialisierung implements GruppePostDAO{
   	}
     
 	/**
-	 * Die Methode getOwnpostlist gibt alle Posts eines Users zurueck
-	 * @param username User, dessen Posts zurueckgegeben werden
-	 * @return alle Posts eines Users
+	 * Die Methode getPostsbyGroupname gibt alle Posts einer Gruppe zurueck
+	 * @param gruppenname
+	 * @return groupPostlist
 	 */ 	
-	
     public ArrayList<GruppePost> getPostsbyGroupname(String gruppenname){
     	
     	globalPostlist = getAlleGruppen();

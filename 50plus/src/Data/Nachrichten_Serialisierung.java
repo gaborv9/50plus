@@ -12,13 +12,19 @@ import java.util.ArrayList;
 import Personen.GruppePost;
 import Personen.Nachricht;
 
-
+/**
+ * Die Klasse Nachrichten_Serialisierung ist fuer die Serialisierung und Deserialisierung von 
+ * Nachricht-Objekten(Gruppen) zustaendig
+ *  *
+ */
 public class Nachrichten_Serialisierung implements NachrichtenDAO{
 	private String pfad;
 	private ArrayList<Nachricht> globallist;
 
 
-	
+	/**
+	 * Konstruktor setzt Pfad zur Datei
+	 */
     public Nachrichten_Serialisierung()
     {
         String dir = System.getProperty("user.dir");
@@ -27,7 +33,10 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
     }
 
     
-    
+    /**
+     * Die Methode speichere Nachricht speichert Nachricht Objekte in der Datei nachricht.ser
+     * @param n
+     */
     public void speichereNachricht(Nachricht n) 
     {
  
@@ -65,7 +74,10 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
          }
      }
     
-    
+    /**
+     * Die Methode getAlleNachrichten liefert eine Liste mit allen Nachrichten, die in der Datei gespeichert sind.
+     * @return 
+     */
     public ArrayList<Nachricht> getAlleNachrichten(){
     	File file = new File(pfad);
     	
@@ -107,7 +119,11 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
     		return globallist;
         }
   	}
-        
+    /**
+     * Die Methode getNachrichtenbySender gibt alle Nachrichten zurueck, die den angegebenen Username als Sender aufweisen.    
+     * @param sender
+     * @return
+     */
     public ArrayList<Nachricht> getNachrichtenbySender(String sender){
     	
     	globallist=getAlleNachrichten();
@@ -122,7 +138,11 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
     	
     }
     
-    
+ /**
+  * Die Methode getNachrichtenbyEmpfaeinger gibt alle Nachrichten zurueck, die den angegebenen Username als Empfaenger aufweisen.   
+  * @param empfaenger
+  * @return
+  */
 public ArrayList<Nachricht> getNachrichtenbyEmpfaenger(String empfaenger){
     	
     	globallist=getAlleNachrichten();
