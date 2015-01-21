@@ -102,6 +102,7 @@
 					<h2>Personen:</h2>
 					<br>
 					<%
+					if(gefperliste.isEmpty()) out.println("Keine Personen mit dem Namen gefunden!");
 						for(Person test: gefperliste){
 					%>
 					
@@ -161,6 +162,7 @@
 					<h2>Gruppen:</h2>
 					<br>
 					<%
+					if(gefgrpliste.isEmpty()) out.println("Keine Gruppen mit dem Namen gefunden!");
 						for(GruppeClass test: gefgrpliste){
 							out.println("&nbsp; Gruppenname: "+test.getName() + " Administrator: " + test.getAdmin().getID()); 
 																	
