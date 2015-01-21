@@ -24,6 +24,7 @@ public class Post implements Serializable
 	 * @param username User, der den Post gepostet hat
 	 * @param inhalt Inhalt des Posts
 	 * @param zeitpunkt Zeitpunkt, wann der Post gepostet wurde
+	 * @param pinnwandOwner - Besitzer der Pinnwand
 	 */
 	public Post (String username, String inhalt, String zeitpunkt, String pinnwandOwner)
 	{

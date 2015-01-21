@@ -224,8 +224,8 @@ public class Gruppe_Serialisierung implements GruppeDAO
     
     /**
      * Der Methode wird ein Username uebergeben und sie liefert alle Gruppen des Users zurueck.
-     * @param username 
-     * @return ownGruppen
+     * @param username  - Username
+     * @return ownGruppen - eigene Gruppen
      */
     public ArrayList<GruppeClass> getOwnGruppenlist(String username)
    	{

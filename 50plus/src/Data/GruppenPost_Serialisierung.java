@@ -32,7 +32,7 @@ public class GruppenPost_Serialisierung implements GruppePostDAO{
 	
 	/**
 	 * Die Methode speichereGruppenPost speichert ein GruppenPost Objekt in die Datei
-	 * @param p
+	 * @param p - Post der gespeichert wird
 	 */  
     public void speichereGruppenPost(GruppePost p) 
     {
@@ -133,8 +133,8 @@ public class GruppenPost_Serialisierung implements GruppePostDAO{
     
 	/**
 	 * Die Methode getPostsbyGroupname gibt alle Posts einer Gruppe zurueck
-	 * @param gruppenname
-	 * @return groupPostlist
+	 * @param gruppenname - Gruppenname
+	 * @return groupPostlist - die Posts der Gruppe
 	 */ 	
     public ArrayList<GruppePost> getPostsbyGroupname(String gruppenname){
     	

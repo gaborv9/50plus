@@ -35,7 +35,7 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
     
     /**
      * Die Methode speichere Nachricht speichert Nachricht Objekte in der Datei nachricht.ser
-     * @param n
+     * @param n - Nachricht die gespeichert wird
      */
     public void speichereNachricht(Nachricht n) 
     {
@@ -76,7 +76,7 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
     
     /**
      * Die Methode getAlleNachrichten liefert eine Liste mit allen Nachrichten, die in der Datei gespeichert sind.
-     * @return 
+     * @return - alle Nachrichten
      */
     public ArrayList<Nachricht> getAlleNachrichten(){
     	File file = new File(pfad);
@@ -121,8 +121,8 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
   	}
     /**
      * Die Methode getNachrichtenbySender gibt alle Nachrichten zurueck, die den angegebenen Username als Sender aufweisen.    
-     * @param sender
-     * @return
+     * @param sender - der Sender der Nachricht
+     * @return - Nachricht des Senders
      */
     public ArrayList<Nachricht> getNachrichtenbySender(String sender){
     	
@@ -140,8 +140,8 @@ public class Nachrichten_Serialisierung implements NachrichtenDAO{
     
  /**
   * Die Methode getNachrichtenbyEmpfaeinger gibt alle Nachrichten zurueck, die den angegebenen Username als Empfaenger aufweisen.   
-  * @param empfaenger
-  * @return
+  * @param empfaenger - Empfaenger der Nachricht
+  * @return Nachricht des Empfaengers
   */
 public ArrayList<Nachricht> getNachrichtenbyEmpfaenger(String empfaenger){
     	
