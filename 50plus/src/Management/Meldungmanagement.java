@@ -75,6 +75,7 @@ public class Meldungmanagement {
 		}
 		a.loeschePerson(person);
 	}
+	
 	/**
 	 * 
 	 * @return sperrlisteneu - liste welche alle gemeldeten Personen und deren Melder anzeigt (hier groe§er 0)

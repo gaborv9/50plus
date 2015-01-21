@@ -162,7 +162,7 @@
 					<br>
 					<%
 						for(GruppeClass test: gefgrpliste){
-							out.println("&nbsp; Gruppenname: "+test.getName() + " Administrator: " + test.getAdmin()); 
+							out.println("&nbsp; Gruppenname: "+test.getName() + " Administrator: " + test.getAdmin().getID()); 
 																	
 																	%>
 					<div class="btn-group">

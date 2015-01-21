@@ -37,7 +37,7 @@
 
 
 <body>
-		<%@ page import="java.util.ArrayList, Personen.Nachricht, Data.Nachrichten_Serialisierung, java.util.Collections;" %> 
+		<%@ page import="java.util.ArrayList, Personen.Nachricht, Data.Nachrichten_Serialisierung, java.util.Collections" %> 
 
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
