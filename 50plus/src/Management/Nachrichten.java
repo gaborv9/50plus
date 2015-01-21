@@ -74,9 +74,12 @@ public class Nachrichten extends HttpServlet {
     	PrintWriter out = response.getWriter();
     	HttpSession session = request.getSession();
     	
-		String sender = (String) session.getAttribute("username");
+    	String sender = (String) session.getAttribute("username");
+		String empfaenger = request.getParameter("empf");
+		session.setAttribute("empf", empfaenger);
 		
-    	response.sendRedirect("Nachrichten.jsp");
+		
+    	response.sendRedirect("Nachrichtenneu.jsp");
     }
 
     /**
@@ -96,8 +99,13 @@ public class Nachrichten extends HttpServlet {
     	
 		String sender = (String) session.getAttribute("username");
 		String empfaenger = request.getParameter("empf");
+		String empf=(String) session.getAttribute("empf");
 		String inhalt = request.getParameter("inhalt");
 		String zeitpunkt = new SimpleDateFormat("dd.MM.yyyy HH:mm").format(Calendar.getInstance().getTime());
+		
+		if(empfaenger==null){
+			empfaenger=empf;
+		}
 		
 		Nachrichten_Serialisierung nser=new Nachrichten_Serialisierung();
 
