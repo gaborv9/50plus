@@ -171,20 +171,19 @@
 						<div class="btn-group">
 						<button type="button" data-toggle="dropdown"
 							class="btn btn-default dropdown-toggle">
-							Entfernen <span class="caret"></span>
+							Freund... <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" method="get" action="Freunde">
-							<li><a
-								href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>&wunsch=loeschen">Entfernen</a></li>
+							<li><a href="/50plus/Freunde?adddelete=0&freundname=<%=test.getID()%>&wunsch=loeschen">Entfernen</a></li>
+								<li><a href="/50plus/Pinnwand?pinnwandOwner=<%= test.getID()%>">Zur Pinnwand</a></li>
+								<li><a href="/50plus/Nachrichten?empf=<%= test.getID()%>">Freund anschreiben</a> </li>
 						</ul>
 						</div>
+						
 					<% 
 										out.println("&nbsp; Username: "+test.getID() + " Vorname: "+test.getVorname()+" Nachname: "+test.getNachname());	
 					%>
-										<a href="/50plus/Pinnwand?pinnwandOwner=<%= test.getID()%>">&nbsp&nbsp&nbsp&nbspZur Pinnwand</a> <br>
-										<a href="/50plus/Nachrichten?empf=<%= test.getID()%>">&nbsp&nbsp&nbsp&nbspFreund anschreiben</a> <br>
-										
-										
+						<br><br>												
 										
 					
 					<%					

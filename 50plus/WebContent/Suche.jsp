@@ -124,12 +124,13 @@
 					<div class="btn-group">
 						<button type="button" data-toggle="dropdown"
 							class="btn btn-default dropdown-toggle">
-							als Person adden<span class="caret"></span>
+							Person<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" method="get" action="Freunde">
 							<li><a
 								href="/50plus/Freunde?freundname=<%=test.getID()%>&wunsch=adden">als Freund adden</a></li>
-							
+								<li><a
+								href="/50plus/Nachrichten?empf=<%=test.getID()%>">Nachricht schreiben</a></li>							
 						</ul>
 
 
