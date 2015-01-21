@@ -109,13 +109,12 @@ public class Gruppenmitglieder extends HttpServlet {
 
     	PrintWriter out = response.getWriter();
     	HttpSession session = request.getSession();
-		//String username = (String) session.getAttribute("username");
-		String gn = (String) session.getAttribute("gn");
-		String nutzername = request.getParameter("nutzername");
+		String gn = (String) session.getAttribute("gn");		//Gruppenname der Gruppe der der Nutzer hinzugefügt werden soll
+		String nutzername = request.getParameter("nutzername");	//der Name des Nutzers der hinzugefügt werden soll
 		
 		
 		Gruppe_Serialisierung se = new Gruppe_Serialisierung();//Gruppen Serialisierung
-		Serialisierung ser = new Serialisierung();	//Personen Seriailsierung
+		Serialisierung ser = new Serialisierung();				//Personen Seriailsierung
 		ArrayList<GruppeClass> gruppelist = new ArrayList<GruppeClass>();
 		ArrayList<Person> mitgl = (ArrayList<Person>) session.getAttribute("mitgl"); //Liste mit Mitglieder einer Gruppe
 		Person p = new User();
@@ -126,14 +125,16 @@ public class Gruppenmitglieder extends HttpServlet {
 		gc=se.getGruppebyName(gn);			//holt Gruppen Objekt aus Gruppe_Serialisierung
 		
 		
-    	if(gc!=null){
-    		se.loescheGruppe(gc);
+		if(p!=null){						//nur wenn die Person in der Serialisierung exitstiert wird sie als Mitglied hinzugefügt
+    	if(gc!=null){						//nur wenn die Gruppe existiert wird ihr das Mitglied hinzugefügt
     		mitgl.add(p);
+    		se.loescheGruppe(gc);  		
     		gc.setMitglied(mitgl);
     		se.speichereGruppe(gc);
+    		
     	}
-    	else{
-    	}
+		}
+		session.setAttribute("mitgl", mitgl);
     	response.sendRedirect("Gruppenmitglieder.jsp");
 		
 
