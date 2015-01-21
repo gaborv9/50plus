@@ -109,13 +109,13 @@ public class Nachrichten extends HttpServlet {
 		
 		Nachrichten_Serialisierung nser=new Nachrichten_Serialisierung();
 
-		//holt sich Empfänger Person aus Serialisierung
+		//holt sich Empfaenger Person aus Serialisierung
 		Person p=new User();
 		Serialisierung ser=new Serialisierung();
 		p=ser.getPersonbyid(empfaenger);
 		
 		if(p==null){
-			out.println("Dieser Nutzer ist uns leider nicht bekannt! Bitte überprüfen Sie Ihre Eingabedaten!");
+			out.println("Dieser Nutzer ist uns leider nicht bekannt! Bitte ueberpruefen Sie Ihre Eingabedaten!");
 		}
 		else{
 			//erstellt neue Nachricht

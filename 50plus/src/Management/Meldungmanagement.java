@@ -58,7 +58,7 @@ public class Meldungmanagement {
 	/**
 	 * 
 	 * @param person - Person die geloescht werden soll
-	 * @param ich - Person, deren Freundschaftsanfragen auch geloescht werden sollen
+	 * @param list - Personen, deren Freundschaftsanfragen auch geloescht werden sollen
 	 */
 	public void unbefsperren(Person person,ArrayList<Person> list){
 		Serialisierung a = new Serialisierung();
@@ -78,7 +78,7 @@ public class Meldungmanagement {
 	
 	/**
 	 * 
-	 * @return sperrlisteneu - liste welche alle gemeldeten Personen und deren Melder anzeigt (hier groe§er 0)
+	 * @return sperrlisteneu - liste welche alle gemeldeten Personen und deren Melder anzeigt (hier groesser 0)
 	 */
 	public ArrayList<Person> sperrliste(){
 		Serialisierung a = new Serialisierung();

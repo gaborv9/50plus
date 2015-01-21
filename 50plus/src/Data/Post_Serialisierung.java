@@ -34,7 +34,7 @@ public class Post_Serialisierung implements PinnwandDAO
     }
 	
 	/**
-	 * Die Methode speicherePost speichert ein Post Objekt in ArrayList<Post> globalPostlist, die in der Methode setGlobalpostlist in post.ser ausschrieben werden soll
+	 * Die Methode speicherePost speichert ein Post Objekt in ArrayList globalPostlist, die in der Methode setGlobalpostlist in post.ser ausschrieben werden soll
 	 * @param p Post, der gespeichert wird
 	 * @param postNumber als wievielte der Post gepostet wurde, entweder neue Nummber oder bei vorhandenem Post seine eigene Nummer
 	 */  
@@ -190,7 +190,7 @@ public class Post_Serialisierung implements PinnwandDAO
    	}
     
 	/**
-	 * Die Methode loeschePost loescht einen Post aus einer List, ArrayList<Post> globalPostlist, die in der Methode setGlobalpostlist in post.ser ausschrieben werden soll
+	 * Die Methode loeschePost loescht einen Post aus einer List, ArrayList globalPostlist, die in der Methode setGlobalpostlist in post.ser ausschrieben werden soll
 	 * @param postNumber Post mit dieser Nummer wird geloescht
 	 *
 	 */    

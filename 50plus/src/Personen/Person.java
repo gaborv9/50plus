@@ -229,6 +229,7 @@ public abstract class Person implements Serializable {
 	/**
 	 * @param role
 	 *            the role to set
+	 * @return rolle
 	 */
 	public int setRole(int role) {
 		if (role > 3 || role < 1){

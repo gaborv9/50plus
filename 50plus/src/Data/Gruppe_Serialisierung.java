@@ -163,9 +163,9 @@ public class Gruppe_Serialisierung implements GruppeDAO
    	}
     
     /**
-     * Der Methode wird ein Gruppenname übergeben und sie liefert das Gruppen-Objekt zurück.
-     * @param gn
-     * @return
+     * Der Methode wird ein Gruppenname uebergeben und sie liefert das Gruppen-Objekt zurueck.
+     * @param gn - gruppenname der uebergeben wird
+     * @return das Gruppenobjekt
      */
     
     public GruppeClass getGruppebyName(String gn){
@@ -184,7 +184,7 @@ public class Gruppe_Serialisierung implements GruppeDAO
 
     /**
      * Der Methode wird ein Gruppenobjekt uebergeben und loescht dieses Objekt aus der Datei.
-     * @param gr
+     * @param gr das Gruppenobjekt, welches geloescht werden soll
      */
     public void loescheGruppe(GruppeClass gr) 
     {
@@ -224,7 +224,7 @@ public class Gruppe_Serialisierung implements GruppeDAO
     
     /**
      * Der Methode wird ein Username uebergeben und sie liefert alle Gruppen des Users zurueck.
-     * @param username
+     * @param username 
      * @return ownGruppen
      */
     public ArrayList<GruppeClass> getOwnGruppenlist(String username)

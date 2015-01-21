@@ -18,7 +18,7 @@ public class GruppePostManagement{
 
     /**Gibt alle eigenen Gruppen-Objekte einer Person zurueck.
      * 
-     * @param username Username eines Person-Objekts
+     * @param gn - Username eines Person-Objekts
      * @return ArrayList mit Gruppen-Objekten
      */
     public ArrayList<GruppePost> getGroupPostlist(String gn) {

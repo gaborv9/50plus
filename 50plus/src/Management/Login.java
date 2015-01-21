@@ -150,7 +150,7 @@ public class Login extends HttpServlet {
 			catch (Exception e)
 			{
 				out.println("<br><br>Falsche Eingabe.<br><br>");
-				out.println("<a href=\"/50plus/index.jsp\">Hier klicken, um zur Startseite zurückzukommen.</a>");
+				out.println("<a href=\"/50plus/index.jsp\">Hier klicken, um zur Startseite zurueckzukommen.</a>");
 			}
 		
 

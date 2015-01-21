@@ -19,7 +19,7 @@ public class FreundeManagement {
 	/**
 	 * 
 	 * @param request - Aktuelle Daten der eingeloggten Person
-	 * @param response - sendet Daten zurück an das Objekt
+	 * @param response - sendet Daten zurueck an das Objekt
 	 * @throws IOException - bei fehler wird Exception geworfen
 	 * 
 	 * in dieser Methode wird eine Freundschaftsanfrage an den Freund gesendet
@@ -80,7 +80,7 @@ public class FreundeManagement {
 	 /**
 	  * 
 	  * @param request - Aktuelle Daten der eingeloggten Person
-	  * @param response - sendet Daten zurück an das Objekt
+	  * @param response - sendet Daten zurueck an das Objekt
 	  * @throws IOException - bei fehler wird Exception geworfen
 	  * 
 	  * in dieser Methode wird ein Freund entfernt
@@ -135,7 +135,7 @@ public class FreundeManagement {
 	 /**
 	  * 
 	  * @param request - Aktuelle Daten der eingeloggten Person
-	  * @param response - sendet Daten zurück an das Objekt
+	  * @param response - sendet Daten zurueck an das Objekt
 	  * @throws IOException - bei fehler wird Exception geworfen
 	  * 
 	  * in dieser methode wird entschieden, ob eine Person als Freund hinzugefuegt wird oder nicht
