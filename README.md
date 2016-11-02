@@ -1,5 +1,6 @@
 # 50plus
 Man ist nie zu alt für neue Freunde - social network for people who are 50+ years old
+
 Közösségi portál a Bécsi Egyetem Software Engineering (SWE) órájára
 
 A Dokumentumokban találhatóak a programhoz tartozó leírások:
