@@ -12,3 +12,4 @@ A Dokumentumokban mappában találhatóak a programhoz tartozó leírások:
 - Designmodell_2.pdf: osztálydizájn leírása, Use Case megvalósítás osztály és szekvencia diagramokkal, osztálydigramok, komponens és deployment diagramok német nyelven
 
 
+Használt technológiák: Java SE, Java Server Pages, Servlets, JSTL, EL, Eclipse, Tomcat, HTML, CSS, Bootstrap
